@@ -1,0 +1,64 @@
+stages:
+  - php_build
+  - js_build
+  - deploy
+
+php_build:
+  stage: php_build
+  image: composer
+  script:
+    - composer install -on --ignore-platform-reqs --no-progress --no-dev
+    - composer dump-autoload --optimize
+  artifacts:
+    paths:
+      - vendor/
+    when: on_success
+    expire_in: 1h
+  only:
+    - develop
+    - master
+
+js_build:
+  stage: js_build
+  image: node:8.11.2
+  script:
+    - npm install apidoc -g
+    - apidoc -i docs/ -o public/apidoc/
+  artifacts:
+    paths:
+      - public/apidoc/
+    when: on_success
+    expire_in: 1h
+  only:
+    - develop
+
+deploy:develop:
+  stage: deploy
+  script:
+    - apt-get update && apt-get install -y
+      ssh
+      rsync
+
+    - mkdir -p ~/.ssh
+    - echo -e "$SSH_PRIVATE_KEY_DEV" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+
+    - echo "$ENV_DEV" > ./.env
+
+    - cp docker-compose.development.yml docker-compose.yml
+    - rm docker-compose.yml.*
+
+    - rm -f ./public/storage
+    - ln -s ../storage/app/public/ ./public/storage
+
+    - rm -rf ./.git
+    - rm -rf ./node_modules
+    - rm -rf ./tests
+    - rm -rf ./docs
+
+    - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "mkdir -p /var/www/scrapbook"
+
+    - rsync -az --exclude-from=.gitlab-ci-exclude --no-perms --no-owner --no-group --delete-during -e "ssh -o StrictHostKeyChecking=no" . $SSH_USER_DEV@$SERVER_HOST_DEV:/var/www/scrapbook
+    - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "cd /var/www/scrapbook && docker-compose up -d --force-recreate --remove-orphans && docker exec scrapbook_php /bin/bash /var/www/init_dev.sh"
+  only:
+    - develop
