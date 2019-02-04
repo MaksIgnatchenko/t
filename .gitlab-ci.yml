@@ -56,9 +56,9 @@ deploy:develop:
     - rm -rf ./tests
     - rm -rf ./docs
 
-    - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "mkdir -p /var/www/scrapbook"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "mkdir -p /var/www/tagit"
 
-    - rsync -az --exclude-from=.gitlab-ci-exclude --no-perms --no-owner --no-group --delete-during -e "ssh -o StrictHostKeyChecking=no" . $SSH_USER_DEV@$SERVER_HOST_DEV:/var/www/scrapbook
-    - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "cd /var/www/scrapbook && docker-compose up -d --force-recreate --remove-orphans && docker exec scrapbook_php /bin/bash /var/www/init_dev.sh"
+    - rsync -az --exclude-from=.gitlab-ci-exclude --no-perms --no-owner --no-group --delete-during -e "ssh -o StrictHostKeyChecking=no" . $SSH_USER_DEV@$SERVER_HOST_DEV:/var/www/tagit
+    - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "cd /var/www/tagit && docker-compose up -d --force-recreate --remove-orphans && docker exec tagit_php /bin/bash /var/www/init_dev.sh"
   only:
     - develop
