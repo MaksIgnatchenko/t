@@ -19,7 +19,7 @@ services:
     volumes:
       - pg-primary-vol:/pgdata
     ports:
-      - "5432"
+      - "5434:5432"
     networks:
       - crunchynet
     deploy:
@@ -45,7 +45,7 @@ services:
     volumes:
       - pg-replica-vol:/pgdata
     ports:
-      - "5432"
+      - "5435:5432"
     networks:
       - crunchynet
     deploy:

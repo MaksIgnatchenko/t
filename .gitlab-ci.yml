@@ -45,6 +45,11 @@ deploy:develop:
 
     - echo "$ENV_DEV" > ./.env
 
+    - mkdir ./ssl
+    - echo "$SSL_CERTIFICATE" > ./ssl/certificate.crt
+    - echo "$SSL_PRIVATE_KEY" > ./ssl/private.key
+
+
     - cp docker-compose.development.yml docker-compose.yml
     - rm docker-compose.yml.*
 
