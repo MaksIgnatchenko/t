@@ -64,6 +64,6 @@ deploy:develop:
     - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "mkdir -p /var/www/tagit"
 
     - rsync -az --exclude-from=.gitlab-ci-exclude --no-perms --no-owner --no-group --delete-during -e "ssh -o StrictHostKeyChecking=no" . $SSH_USER_DEV@$SERVER_HOST_DEV:/var/www/tagit
-    - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "cd /var/www/tagit && docker-compose up -d --force-recreate --remove-orphans && docker exec tagit_php /bin/bash /var/www/init_dev.sh"
+    - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "cd /var/www/tagit && docker-compose up -d --force-recreate --remove-orphans && sleep 60 && docker exec tagit_php /bin/bash /var/www/init_dev.sh"
   only:
     - develop
