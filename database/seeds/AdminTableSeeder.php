@@ -12,8 +12,8 @@ class AdminTableSeeder extends \Illuminate\Database\Seeder
      */
     public function run(): void
     {
-        DB::table('admin')->insert([
-            'name' => 'admin',
+        DB::table('admins')->insert([
+            'username' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin'),
             'remember_token' => str_random(10),

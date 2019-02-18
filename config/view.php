@@ -15,6 +15,9 @@ return [
 
     'paths' => [
         resource_path('views'),
+        app_path('Modules/Users/Admin/Resources/views'),
+        app_path('Modules/Users/User/Resources/views'),
+        app_path('Modules/Content/Resources/views'),
     ],
 
     /*

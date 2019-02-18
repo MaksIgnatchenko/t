@@ -8,8 +8,22 @@ window._ = require('lodash');
  */
 
 try {
-    window.Popper = require('popper.js').default;
+    // window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
+    window.tether = require('tether');
+    window.slimscroll = require('jquery-slimscroll');
+    window.detect = require('detect-browser');
+    window.fastclick = require('fastclick');
+    window.blockUi = require('block-ui');
+    window.nicescroll = require('jquery.nicescroll');
+    window.scrollTo = require('scrollTo');
+
+
+    // include('node_modules/admin-lte/dist/js/app.min.js');
+
+    // TODO not working
+    // window.modernizr = require('modernizr');
+    // window.waves = require('waves.js');
 
     require('bootstrap');
 } catch (e) {}

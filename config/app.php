@@ -179,7 +179,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Modules\Users\Admin\Providers\RouteServiceProvider::class,
+        App\Modules\Users\User\Providers\ApiRouteServiceProvider::class,
+        App\Modules\Users\User\Providers\WebRouteServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        App\Modules\Content\Providers\ContentAdminRouteServiceProvider::class,
+        App\Modules\Content\Providers\ContentApiRouteServiceProvider::class,
     ],
 
     /*
@@ -234,6 +239,10 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Flash' => Laracasts\Flash\Flash::class,
         'Carbon' => \Carbon\Carbon::class,
+        /*
+         * Application Aliases...
+         */
+        'ActiveLink' => App\Helpers\ActiveLink::class,
 
     ],
 
