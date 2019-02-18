@@ -18,7 +18,7 @@ php_build:
     - develop
     - master
 
-js_build:
+apidoc_build:
   stage: js_build
   image: node:8.11.2
   script:
@@ -27,6 +27,21 @@ js_build:
   artifacts:
     paths:
       - public/apidoc/
+    when: on_success
+    expire_in: 1h
+  only:
+    - develop
+
+js_build:
+  stage: js_build
+  image: node:11.2
+  script:
+    - npm install
+    - npm run prod
+  artifacts:
+    paths:
+      - public/build/
+      - public/fonts/
     when: on_success
     expire_in: 1h
   only:
