@@ -40,7 +40,7 @@ class ResetPasswordMail extends ResetPassword
         $appName = config('app.name');
         return (new MailMessage)
             ->subject(Lang::getFromJson('Reset Password Notification'))
-            ->greeting("Hi, {$this->user->fisrt_name}")
+            ->greeting("Hi, {$this->user->first_name}")
             ->line(Lang::getFromJson("You recently requested to reset your password for {$appName}."))
             ->line(Lang::getFromJson('You are receiving this email because we received a password reset request for your account.'))
             ->line(Lang::getFromJson('Click the button  below to reset it:'))

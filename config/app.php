@@ -182,6 +182,7 @@ return [
         App\Modules\Users\Admin\Providers\RouteServiceProvider::class,
         App\Modules\Users\User\Providers\ApiRouteServiceProvider::class,
         App\Modules\Users\User\Providers\WebRouteServiceProvider::class,
+        App\Modules\Users\User\Providers\AuthyApiServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         App\Modules\Content\Providers\ContentAdminRouteServiceProvider::class,
         App\Modules\Content\Providers\ContentApiRouteServiceProvider::class,

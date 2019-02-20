@@ -5,6 +5,7 @@
 
 Route::group([
     'prefix' => 'auth',
+    'middleware' => 'api',
 ], function () {
 
     Route::post('login', 'AuthController@login');
@@ -12,8 +13,9 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::get('me', 'AuthController@me');
 
-    Route::post('register', 'RegisterController@register');
-    Route::post('login/{service}', 'AuthController@socialLogin')->where(['service' => '^(facebook|google)$']);
+    Route::post('start', 'RegisterController@startVerification');
+    Route::post('verify', 'RegisterController@verifyCode');
+    Route::post('profile', 'RegisterController@updateProfile')->middleware('auth:api');
 
 });
 

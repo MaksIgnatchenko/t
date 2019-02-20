@@ -1,6 +1,9 @@
 <?php
 /**
- * Created by Artem Petrov, Appus Studio LP on 06.11.2017
+ * Created by PhpStorm.
+ * User: artem.petrov
+ * Date: 2019-02-19
+ * Time: 14:30
  */
 
 namespace App\Modules\Users\User\Http\Requests;
@@ -8,8 +11,9 @@ namespace App\Modules\Users\User\Http\Requests;
 use App\Rules\PasswordRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class VerifyCodeRequest extends FormRequest
 {
+
     /**
      * @return bool
      */
@@ -24,14 +28,14 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|min:2|max:50',
-            'last_name' => 'required|min:2|max:50',
-            'email' => 'required|email|max:100|unique:users|unique:admins',
+            'country_code' => 'required|string|max:3',
+            'phone_number' => 'required|string|max:10|unique:users,phone_number',
+            'code' => 'required|string|max:4',
             'password' => [
                 'required',
-                'confirmed',
                 'min:6',
                 'max:50',
+                'confirmed',
                 new PasswordRule(),
             ]
         ];

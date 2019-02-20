@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "authy/php": "^3.0",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
         "infyomlabs/adminlte-templates": "5.7.x-dev",
@@ -16,6 +17,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.7.0",
+        "twilio/sdk": "^5.28",
         "tymon/jwt-auth": "1.0.0-rc.3",
         "yajra/laravel-datatables-buttons": "^4.5",
         "yajra/laravel-datatables-oracle": "^8.13"

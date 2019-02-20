@@ -3,12 +3,12 @@
 namespace App\Modules\Users\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Users\User\Http\Requests\LoginSocialRequest;
-use App\Modules\Users\User\Services\SocialServiceFactory;
-use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
+    use AuthResponseTrait;
+
     /**
      * Create a new AuthController instance.
      *
@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'socialLogin']]);
+        $this->middleware('auth:api', ['except' => ['login']]);
     }
 
     /**
@@ -26,35 +26,13 @@ class AuthController extends Controller
      */
     public function login()
     {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['phone_number', 'password', 'country_code']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'No such user or email'], 401);
+            return response()->json(['error' => 'No such user or phone number'], 401);
         }
 
         return $this->respondWithToken($token);
-    }
-
-    /**
-     * @param LoginSocialRequest $request
-     * @param string $service
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \App\Modules\Users\User\Services\SocialServiceException
-     * @throws \Facebook\Exceptions\FacebookSDKException
-     */
-    public function socialLogin(LoginSocialRequest $request, string $service)
-    {
-        $token = $request->get('token');
-        $device = $request->get('device');
-
-        $social = SocialServiceFactory::get($service, $token, $device);
-
-        $userData = $social->getUserData();
-        $user = $social->findOrCreateUser($userData);
-
-        $jwtToken = Auth::login($user);
-
-        return $this->respondWithToken($jwtToken);
     }
 
     /**
@@ -87,21 +65,5 @@ class AuthController extends Controller
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
     }
 }

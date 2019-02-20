@@ -39,5 +39,8 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
+    'authy' => [
+        'api_key' => env('AUTHY_API_KEY', '')
+    ]
 
 ];

@@ -6,6 +6,7 @@ use App\Modules\Users\User\Mails\ResetPasswordMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -18,12 +19,22 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'full_name',
         'email',
         'password',
-        'facebook_id',
-        'login_type',
+        'phone_number',
+        'country_code',
+        'is_registration_completed',
+        'avatar',
+        'birthday',
+        'sex',
+        'country',
+        'city',
+    ];
+
+    protected $casts = [
+        'is_registration_completed' => 'boolean',
+        'birthday' => 'datetime',
     ];
 
     /**
@@ -75,5 +86,27 @@ class User extends Authenticatable implements JWTSubject
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordMail($token, $this));
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatarAttribute($value): ?string
+    {
+        return $value ? storage_path($value) : null;
+    }
+
+    /**
+     * @param $attribute
+     */
+    public function setAvatarAttribute($attribute)
+    {
+        $file = Storage::put('avatars', $attribute);
+
+        if (null !== $this->avatar) {
+            Storage::delete($this->avatar);
+        }
+
+        $this->attributes['avatar'] = $file;
     }
 }
