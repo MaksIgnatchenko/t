@@ -7,6 +7,8 @@ namespace App\Modules\Users\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ForgotPasswordController extends Controller
 {
@@ -50,5 +52,21 @@ class ForgotPasswordController extends Controller
     protected function sendResetLinkFailedResponse()
     {
         return response()->json(['message' => 'No such email'])->setStatusCode(422);
+    }
+
+    /**
+     * @param Request $request
+     */
+    protected function validateEmail(Request $request)
+    {
+        $request->validate([
+            'email' => [
+                'required',
+                'email',
+                Rule::exists('users')->where(function ($query) {
+                    $query->where('is_registration_completed', true);
+                }),
+            ],
+        ]);
     }
 }
