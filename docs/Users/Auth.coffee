@@ -48,12 +48,20 @@ HTTP/1.1 200 OK
 @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK
 {
-    "id": 1,
-    "first_name": "Artem",
-    "last_name": "Petrov",
-    "email": "artem.petrov@appus.me",
-    "created_at": "2019-02-15 10:33:53",
-    "updated_at": "2019-02-15 10:33:53"
+    "id": 12,
+    "email": "dsfg@sdf.asdf",
+    "created_at": "2019-02-20 13:05:44",
+    "updated_at": "2019-02-20 14:45:49",
+    "phone_number": "0667069066",
+    "country_code": "+38",
+    "is_registration_completed": true,
+    "avatar": "https://tagit.appus.work/storage/avatars/4APXBAmi7KWJRKOlimBem5VyJ1qOwQ66XdHwWwKw.png", // can be null
+    "birthday": "2018-01-01 00:00:00",
+    "sex": "dsfgdsf",
+    "country": "gdsfg",
+    "city": "Kharkiv",
+    "company": null,
+    "full_name": "deg"
 }
 ###
 

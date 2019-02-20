@@ -46,6 +46,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'remember_token',
         'facebook_id',
+        'email_verified_at'
     ];
 
     /**
@@ -93,7 +94,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getAvatarAttribute($value): ?string
     {
-        return $value ? storage_path($value) : null;
+        return $value ? Storage::url($value) : null;
     }
 
     /**
