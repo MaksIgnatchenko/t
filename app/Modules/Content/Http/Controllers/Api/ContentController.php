@@ -7,18 +7,17 @@ namespace App\Modules\Content\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Content\Models\Content;
-use Illuminate\Http\JsonResponse;
+use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use Symfony\Component\HttpFoundation\Response;
 
 class ContentController extends Controller
 {
     /**
      * @param Content $content
-     * @return \Illuminate\Http\JsonResponse
+     * @return Response
      */
-    public function get(Content $content): JsonResponse
+    public function get(Content $content) : Response
     {
-        return response()->json([
-            'content' => $content,
-        ]);
+        return ResponseBuilder::success($content);
     }
 }

@@ -14,5 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/test', function (Request $request) {
-    return ['success' => true];
+    return \MarcinOrlowski\ResponseBuilder\ResponseBuilder::success();
 });

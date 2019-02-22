@@ -5,10 +5,13 @@
 
 namespace App\Modules\Users\User\Http\Controllers;
 
+use App\Helpers\ApiCode;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use Symfony\Component\HttpFoundation\Response;
 
 class ForgotPasswordController extends Controller
 {
@@ -36,22 +39,21 @@ class ForgotPasswordController extends Controller
     /**
      * Get the response for a successful password reset link.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return Response
      */
     protected function sendResetLinkResponse()
     {
-
-        return response()->json(['success' => true]);
+        return ResponseBuilder::success();
     }
 
     /**
      * Get the response for a failed password reset link.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return Response
      */
     protected function sendResetLinkFailedResponse()
     {
-        return response()->json(['message' => 'No such email'])->setStatusCode(422);
+        return ResponseBuilder::error(ApiCode::NO_SUCH_EMAIL);
     }
 
     /**
