@@ -17,6 +17,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.7.0",
+        "marcin-orlowski/laravel-api-response-builder": "^4.1",
         "twilio/sdk": "^5.28",
         "tymon/jwt-auth": "1.0.0-rc.3",
         "yajra/laravel-datatables-buttons": "^4.5",

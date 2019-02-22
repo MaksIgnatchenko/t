@@ -2,6 +2,7 @@
 
 namespace App\Modules\Users\User\Http\Controllers;
 
+use App\Helpers\ApiCode;
 use App\Http\Controllers\Controller;
 use App\Modules\Users\User\Enums\LoginTypeEnum;
 use App\Modules\Users\User\Http\Requests\StartVerificationRequest;
@@ -14,6 +15,8 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use \Exception;
+use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class RegisterController extends Controller
@@ -44,7 +47,7 @@ class RegisterController extends Controller
 
     /**
      * @param StartVerificationRequest $request
-     * @return JsonResponse
+     * @return Response
      */
     public function startVerification(StartVerificationRequest $request)
     {
@@ -54,15 +57,15 @@ class RegisterController extends Controller
         $result = $this->authyApi->phoneVerificationStart($phoneNumber, $countryCode);
 
         if (!$result->ok()) {
-            return $this->twilioErrorResponse($result);
+            return ResponseBuilder::error(ApiCode::TWILIO_SEND_SMS_ERROR);
         }
 
-        return response()->json(['success' => true]);
+        return ResponseBuilder::success();
     }
 
     /**
      * @param VerifyCodeRequest $request
-     * @return JsonResponse
+     * @return Response
      */
     public function verifyCode(VerifyCodeRequest $request)
     {
@@ -73,7 +76,7 @@ class RegisterController extends Controller
         $result = $this->authyApi->phoneVerificationCheck($phoneNumber, $countryCode, $code);
 
         if (!$result->ok()) {
-            return $this->twilioErrorResponse($result);
+            return ResponseBuilder::error(ApiCode::TWILIO_WRONG_VERIFICATION_CODE);
         }
 
         $user = app(User::class);
@@ -83,14 +86,14 @@ class RegisterController extends Controller
         $credentials = $request->only('phone_number', 'password');
         $token = $this->guard('api')->attempt($credentials);
 
-        return $this->respondWithToken($token);
+        return ResponseBuilder::success($this->getTokenStructure($token));
     }
 
     /**
      * @param UpdateProfileRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return Response
      */
-    public function updateProfile(UpdateProfileRequest $request): JsonResponse
+    public function updateProfile(UpdateProfileRequest $request): Response
     {
         $user = Auth::user();
 
@@ -101,9 +104,7 @@ class RegisterController extends Controller
         $user->fill($userData);
         $user->save();
 
-        return response()->json([
-            'success' => true,
-        ]);
+        return ResponseBuilder::success();
     }
 
     /**
@@ -119,5 +120,4 @@ class RegisterController extends Controller
             ],
         ], 400);
     }
-
 }

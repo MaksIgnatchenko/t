@@ -2,7 +2,10 @@
 
 namespace App\Modules\Users\User\Http\Controllers;
 
+use App\Helpers\ApiCode;
 use App\Http\Controllers\Controller;
+use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class AuthController extends Controller
@@ -22,48 +25,49 @@ class AuthController extends Controller
     /**
      * Get a JWT via given credentials.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return Response
      */
     public function login()
     {
         $credentials = request(['phone_number', 'password', 'country_code']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'No such user or phone number'], 401);
+            return ResponseBuilder::error(ApiCode::NO_SUCH_USER);
         }
-
-        return $this->respondWithToken($token);
+        return ResponseBuilder::success($this->respondWithToken($token));
     }
 
     /**
      * Get the authenticated User.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return Response
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return ResponseBuilder::success(auth()->user());
     }
 
     /**
      * Log the user out (Invalidate the token).
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return Response
      */
     public function logout()
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return ResponseBuilder::success();
     }
 
     /**
      * Refresh a token.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return Response
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return ResponseBuilder::success(
+            $this->getTokenStructure(auth()->refresh())
+        );
     }
 }
