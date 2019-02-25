@@ -8,11 +8,13 @@
 
 namespace App\Modules\Users\User\Http\Requests;
 
-
+use App\Services\ResponseBuilder\ValidationErrorsApiMessagesTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProfileRequest extends FormRequest
 {
+    use ValidationErrorsApiMessagesTrait;
+
     /**
      * @return bool
      */

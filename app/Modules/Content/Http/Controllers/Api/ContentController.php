@@ -7,7 +7,7 @@ namespace App\Modules\Content\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Content\Models\Content;
-use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContentController extends Controller
@@ -18,6 +18,6 @@ class ContentController extends Controller
      */
     public function get(Content $content) : Response
     {
-        return ResponseBuilder::success($content);
+        return CustomResponseBuilder::success($content);
     }
 }

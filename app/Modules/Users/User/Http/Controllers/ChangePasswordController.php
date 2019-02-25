@@ -5,13 +5,13 @@
 
 namespace App\Modules\Users\User\Http\Controllers;
 
-use App\Helpers\ApiCode;
 use App\Http\Controllers\Controller;
 use App\Modules\Users\User\Http\Requests\ChangePasswordRequest;
+use App\Services\ResponseBuilder\ApiCode;
+use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 
 class ChangePasswordController extends Controller
 {
@@ -34,12 +34,12 @@ class ChangePasswordController extends Controller
         $user = Auth::user();
 
         if (!Hash::check($request->get('old_password'), $user->password)) {
-            return ResponseBuilder::error(ApiCode::WRONG_OLD_PASSWORD);
+            return CustomResponseBuilder::error(ApiCode::WRONG_OLD_PASSWORD);
         }
 
         $user->password = $request->get('new_password');
         $user->save();
 
-        return ResponseBuilder::success();
+        return CustomResponseBuilder::success();
     }
 }

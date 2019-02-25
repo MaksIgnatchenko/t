@@ -8,15 +8,17 @@
 @apiParam {String} email
 
 @apiSuccessExample Success-Response:
-HTTP/1.1 200 OK
 {
-    'success': 'true'
+    "success": true,
+    "code": 0,
+    "data": null
 }
 
 @apiErrorExample Error-Response:
-HTTP/1.1 401 Error
 {
-    "message":"No such email",
+    "success": false,
+    "code": 5,
+    "data": null
 }
 ###
 
@@ -32,14 +34,17 @@ HTTP/1.1 401 Error
 @apiParam {String} new_password_confirmation Same as new_password
 
 @apiSuccessExample Success-Response:
-HTTP/1.1 200 OK
 {
-    'message': 'Password changed successfully'
+    "success": true,
+    "code": 0,
+    "data": null
 }
 
 @apiErrorExample Error-Response:
 HTTP/1.1 400 Error
 {
-    "message":"Wrong old password. Please try again",
+    "success": false,
+    "code": 4,
+    "data": null
 }
 ###
