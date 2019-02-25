@@ -38,8 +38,8 @@ services:
       - PG_PRIMARY_PORT=5432
       - PG_PRIMARY_USER=primaryuser
       - PG_PRIMARY_PASSWORD=password
-      - PG_DATABASE=database
-      - PG_USER=user
+      - PG_DATABASE=testdb
+      - PG_USER=testuser
       - PG_PASSWORD=password
       - PG_ROOT_PASSWORD=password
     volumes:

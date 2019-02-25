@@ -2,9 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Services\ResponseBuilder\CustomExceptionHandlerHelper;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
@@ -44,12 +46,12 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function render($request, Exception $exception)
     {
-        if ($request->isJson()) {
-            return ExceptionHandlerHelper::render($request, $exception);
+        if ($request->wantsJson()) {
+            return CustomExceptionHandlerHelper::render($request, $exception);
         }
 
         if ($exception instanceof MethodNotAllowedHttpException) {

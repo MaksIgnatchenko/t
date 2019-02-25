@@ -6,9 +6,10 @@
 @apiVersion 0.1.0
 
 @apiSuccessExample Success-Response:
-HTTP/1.1 200 OK
 {
-    "content": {
+    "success": false,
+    "code": 1,
+    "data": {
         "key": "terms_and_conditions",
         "title": "Terms & Conditions",
         "value": "Terms & Conditions text",

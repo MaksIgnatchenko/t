@@ -2,20 +2,18 @@
 
 namespace App\Modules\Users\User\Http\Controllers;
 
-use App\Helpers\ApiCode;
 use App\Http\Controllers\Controller;
-use App\Modules\Users\User\Enums\LoginTypeEnum;
 use App\Modules\Users\User\Http\Requests\StartVerificationRequest;
 use App\Modules\Users\User\Http\Requests\UpdateProfileRequest;
 use App\Modules\Users\User\Http\Requests\VerifyCodeRequest;
 use App\Modules\Users\User\Models\User;
+use App\Services\ResponseBuilder\ApiCode;
+use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Authy\AuthyApi;
 use Authy\AuthyResponse;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use \Exception;
-use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -57,10 +55,10 @@ class RegisterController extends Controller
         $result = $this->authyApi->phoneVerificationStart($phoneNumber, $countryCode);
 
         if (!$result->ok()) {
-            return ResponseBuilder::error(ApiCode::TWILIO_SEND_SMS_ERROR);
+            return CustomResponseBuilder::error(ApiCode::TWILIO_SEND_SMS_ERROR);
         }
 
-        return ResponseBuilder::success();
+        return CustomResponseBuilder::success();
     }
 
     /**
@@ -76,7 +74,7 @@ class RegisterController extends Controller
         $result = $this->authyApi->phoneVerificationCheck($phoneNumber, $countryCode, $code);
 
         if (!$result->ok()) {
-            return ResponseBuilder::error(ApiCode::TWILIO_WRONG_VERIFICATION_CODE);
+            return CustomResponseBuilder::error(ApiCode::TWILIO_WRONG_VERIFICATION_CODE);
         }
 
         $user = app(User::class);
@@ -86,7 +84,7 @@ class RegisterController extends Controller
         $credentials = $request->only('phone_number', 'password');
         $token = $this->guard('api')->attempt($credentials);
 
-        return ResponseBuilder::success($this->getTokenStructure($token));
+        return CustomResponseBuilder::success($this->getTokenStructure($token));
     }
 
     /**
@@ -104,7 +102,7 @@ class RegisterController extends Controller
         $user->fill($userData);
         $user->save();
 
-        return ResponseBuilder::success();
+        return CustomResponseBuilder::success();
     }
 
     /**

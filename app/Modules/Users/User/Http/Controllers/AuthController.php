@@ -2,9 +2,9 @@
 
 namespace App\Modules\Users\User\Http\Controllers;
 
-use App\Helpers\ApiCode;
 use App\Http\Controllers\Controller;
-use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use App\Services\ResponseBuilder\ApiCode;
+use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -32,9 +32,9 @@ class AuthController extends Controller
         $credentials = request(['phone_number', 'password', 'country_code']);
 
         if (!$token = auth()->attempt($credentials)) {
-            return ResponseBuilder::error(ApiCode::NO_SUCH_USER);
+            return CustomResponseBuilder::error(ApiCode::NO_SUCH_USER);
         }
-        return ResponseBuilder::success($this->respondWithToken($token));
+        return CustomResponseBuilder::success($this->getTokenStructure($token));
     }
 
     /**
@@ -44,7 +44,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return ResponseBuilder::success(auth()->user());
+        return CustomResponseBuilder::success(auth()->user());
     }
 
     /**
@@ -56,7 +56,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return ResponseBuilder::success();
+        return CustomResponseBuilder::success();
     }
 
     /**
@@ -66,7 +66,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return ResponseBuilder::success(
+        return CustomResponseBuilder::success(
             $this->getTokenStructure(auth()->refresh())
         );
     }

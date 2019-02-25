@@ -10,17 +10,21 @@
 @apiParam {String} password Min 6. Max 50. At least one letter, one digit, one special symbol
 
 @apiSuccessExample Success-Response:
-HTTP/1.1 200 OK
 {
-    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMTIvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTAyMjcyNjcsImV4cCI6MTU1ODAwMzI2NywibmJmIjoxNTUwMjI3MjY3LCJqdGkiOiJpN0lySTJzeGRKdVVNTzh3Iiwic3ViIjoxLCJwcnYiOiI2NDE5NWY5NTkwY2UwZWE0NzRkYjlkN2IwMDQ4NzFiNzY5OTFlN2IxIn0.8BVhHRcw4CXF-gDpdo7t2Qu7FG-qglYWFLjA52xkdks",
-    'token_type': 'bearer',
-    'expires_in': 7776000, // 3 month session lifetime
+    "success": true,
+    "code": 0,
+    "data": {
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMTIvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTAyMjcyNjcsImV4cCI6MTU1ODAwMzI2NywibmJmIjoxNTUwMjI3MjY3LCJqdGkiOiJpN0lySTJzeGRKdVVNTzh3Iiwic3ViIjoxLCJwcnYiOiI2NDE5NWY5NTkwY2UwZWE0NzRkYjlkN2IwMDQ4NzFiNzY5OTFlN2IxIn0.8BVhHRcw4CXF-gDpdo7t2Qu7FG-qglYWFLjA52xkdks",
+      'token_type': 'bearer',
+      'expires_in': 7776000, // 3 month session lifetime
+  }
 }
 
 @apiErrorExample Wrong params:
-HTTP/1.1 401 Unauthorized
 {
-    "error": "No such user or phone number"
+    "success": false,
+    "code": 1,
+    "data": null
 }
 ###
 
@@ -32,9 +36,10 @@ HTTP/1.1 401 Unauthorized
 @apiVersion 0.1.0
 
 @apiSuccessExample Success-Response:
-HTTP/1.1 200 OK
 {
-    "message": "Successfully logged out"
+    "success": true,
+    "code": 0,
+    "data": null
 }
 ###
 
@@ -46,22 +51,25 @@ HTTP/1.1 200 OK
 @apiVersion 0.1.0
 
 @apiSuccessExample Success-Response:
-HTTP/1.1 200 OK
 {
-    "id": 12,
-    "email": "dsfg@sdf.asdf",
-    "created_at": "2019-02-20 13:05:44",
-    "updated_at": "2019-02-20 14:45:49",
-    "phone_number": "0667069066",
-    "country_code": "+38",
-    "is_registration_completed": true,
-    "avatar": "https://tagit.appus.work/storage/avatars/4APXBAmi7KWJRKOlimBem5VyJ1qOwQ66XdHwWwKw.png", // can be null
-    "birthday": "2018-01-01 00:00:00",
-    "sex": "dsfgdsf",
-    "country": "gdsfg",
-    "city": "Kharkiv",
-    "company": null,
-    "full_name": "deg"
+    "success": true,
+    "code": 0,
+    "data": {
+        "id": 12,
+        "email": "dsfg@sdf.asdf",
+        "created_at": "2019-02-20 13:05:44",
+        "updated_at": "2019-02-20 14:45:49",
+        "phone_number": "0667069066",
+        "country_code": "+38",
+        "is_registration_completed": true,
+        "avatar": "https://tagit.appus.work/storage/avatars/4APXBAmi7KWJRKOlimBem5VyJ1qOwQ66XdHwWwKw.png", // can be null
+        "birthday": "2018-01-01 00:00:00",
+        "sex": "dsfgdsf",
+        "country": "gdsfg",
+        "city": "Kharkiv",
+        "company": null,
+        "full_name": "deg"
+    }
 }
 ###
 
@@ -73,11 +81,14 @@ HTTP/1.1 200 OK
 @apiVersion 0.1.0
 
 @apiSuccessExample Success-Response:
-HTTP/1.1 200 OK
 {
-    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMTIvYXBpL2F1dGgvcmVmcmVzaCIsImlhdCI6MTU1MDIyNzQ2OSwiZXhwIjoxNTU4MDAzODY4LCJuYmYiOjE1NTAyMjc4NjgsImp0aSI6InhaSkF4MWNkS2NqSmlNckoiLCJzdWIiOjEsInBydiI6IjY0MTk1Zjk1OTBjZTBlYTQ3NGRiOWQ3YjAwNDg3MWI3Njk5MWU3YjEifQ.2AJGB4Z21w6kGRBG_8YsxYdrbs3s5Et8wM2pYjUN9K0",
-    "token_type": "bearer",
-    "expires_in": 7776000
+  "success": true,
+  "code": 0,
+  "data": {
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMTIvYXBpL2F1dGgvcmVmcmVzaCIsImlhdCI6MTU1MDIyNzQ2OSwiZXhwIjoxNTU4MDAzODY4LCJuYmYiOjE1NTAyMjc4NjgsImp0aSI6InhaSkF4MWNkS2NqSmlNckoiLCJzdWIiOjEsInBydiI6IjY0MTk1Zjk1OTBjZTBlYTQ3NGRiOWQ3YjAwNDg3MWI3Njk5MWU3YjEifQ.2AJGB4Z21w6kGRBG_8YsxYdrbs3s5Et8wM2pYjUN9K0",
+      "token_type": "bearer",
+      "expires_in": 7776000
+  }
 }
 ###
 
@@ -92,20 +103,17 @@ HTTP/1.1 200 OK
 @apiParam {String} phone_number Max 10 symbols
 
 @apiSuccessExample Success-Response:
-HTTP/1.1 200 OK
 {
-    "success": true
+    "success": true,
+    "code": 0,
+    "data": null
 }
 
 @apiErrorExample Twilio error:
-HTTP/1.1 400 Bad request
 {
-    "message": "Twilio error",
-    "errors": {
-        "twilio": [
-            "Cannot send SMS to landline phone numbers"
-        ]
-    }
+    "success": false,
+    "code": 3,
+    "data": null
 }
 ###
 
@@ -125,30 +133,32 @@ HTTP/1.1 400 Bad request
 @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK
 {
-    "token": token,
-    "token_type": "bearer",
-    "expires_in": 7776000 // 3 month life
+    "success": false,
+    "code": 2,
+    "data": {
+      "token": token,
+      "token_type": "bearer",
+      "expires_in": 7776000 // 3 month life
+  }
 }
 
 @apiErrorExample Wrong verification code:
-HTTP/1.1 400 Bad request
 {
-    "message": "Twilio error",
-    "errors": {
-        "twilio": [
-            "No pending verifications for {number} found."
-        ]
-    }
+    "success": false,
+    "code": 2,
+    "data": null
 }
 
 @apiErrorExample Wrong phone number:
-HTTP/1.1 422 Unprocessable Entity
 {
-    "message": "The given data was invalid.",
-    "errors": {
-        "phone_number": [
-            "The phone number has already been taken."
-        ]
+    "success": false,
+    "code": 15,
+    "data": {
+        "messages": {
+            "phone_number": [
+                1002
+            ]
+        }
     }
 }
 ###
@@ -176,13 +186,15 @@ HTTP/1.1 200 OK
 }
 
 @apiErrorExample Wrong phone number:
-HTTP/1.1 422 Unprocessable Entity
 {
-    "message": "The given data was invalid.",
-    "errors": {
-        "email": [
-            "The email has already been taken."
-        ]
+    "success": false,
+    "code": 15,
+    "data": {
+        "messages": {
+            "city": [
+                1002
+            ]
+        }
     }
 }
 ###

@@ -9,10 +9,13 @@
 namespace App\Modules\Users\User\Http\Requests;
 
 use App\Rules\PasswordRule;
+use App\Rules\PasswordRuleApi;
+use App\Services\ResponseBuilder\ValidationErrorsApiMessagesTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class VerifyCodeRequest extends FormRequest
 {
+    use ValidationErrorsApiMessagesTrait;
 
     /**
      * @return bool
@@ -36,7 +39,7 @@ class VerifyCodeRequest extends FormRequest
                 'min:6',
                 'max:50',
                 'confirmed',
-                new PasswordRule(),
+                new PasswordRuleApi(),
             ]
         ];
     }

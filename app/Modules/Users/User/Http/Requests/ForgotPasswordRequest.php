@@ -1,17 +1,16 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: artem.petrov
- * Date: 2019-02-19
- * Time: 14:30
+ * Created by Maksym Ignatchenko, Appus Studio LP on 25.02.19
+ *
  */
 
 namespace App\Modules\Users\User\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Services\ResponseBuilder\ValidationErrorsApiMessagesTrait;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StartVerificationRequest extends FormRequest
+class ForgotPasswordRequest extends FormRequest
 {
     use ValidationErrorsApiMessagesTrait;
 
@@ -29,13 +28,11 @@ class StartVerificationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'country_code' => 'required|string|max:3',
-            'phone_number' => [
-                'required',
-                'string',
-                'max:10',
-                'unique:users,phone_number',
+            'email' => ['required', 'email', Rule::exists('users')->where(function ($query) {
+                $query->where('is_registration_completed', true);
+                }),
             ],
         ];
     }
+
 }

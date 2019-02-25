@@ -5,12 +5,12 @@
 
 namespace App\Modules\Users\User\Http\Controllers;
 
-use App\Helpers\ApiCode;
 use App\Http\Controllers\Controller;
+use App\Modules\Users\User\Http\Requests\ForgotPasswordRequest;
+use App\Services\ResponseBuilder\ApiCode;
+use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
+use Illuminate\Support\Facades\Password;
 use Symfony\Component\HttpFoundation\Response;
 
 class ForgotPasswordController extends Controller
@@ -43,7 +43,7 @@ class ForgotPasswordController extends Controller
      */
     protected function sendResetLinkResponse()
     {
-        return ResponseBuilder::success();
+        return CustomResponseBuilder::success();
     }
 
     /**
@@ -53,22 +53,26 @@ class ForgotPasswordController extends Controller
      */
     protected function sendResetLinkFailedResponse()
     {
-        return ResponseBuilder::error(ApiCode::NO_SUCH_EMAIL);
+        return CustomResponseBuilder::error(ApiCode::NO_SUCH_EMAIL);
     }
 
     /**
-     * @param Request $request
+     * Send a reset link to the given user.
+     *
+     * @param  ForgotPasswordRequest  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function validateEmail(Request $request)
+    public function sendResetLinkEmail(ForgotPasswordRequest $request)
     {
-        $request->validate([
-            'email' => [
-                'required',
-                'email',
-                Rule::exists('users')->where(function ($query) {
-                    $query->where('is_registration_completed', true);
-                }),
-            ],
-        ]);
+        // We will send the password reset link to this user. Once we have attempted
+        // to send the link, we will examine the response then see the message we
+        // need to show to the user. Finally, we'll send out a proper response.
+        $response = $this->broker()->sendResetLink(
+            $request->only('email')
+        );
+
+        return $response == Password::RESET_LINK_SENT
+            ? $this->sendResetLinkResponse($request, $response)
+            : $this->sendResetLinkFailedResponse($request, $response);
     }
 }

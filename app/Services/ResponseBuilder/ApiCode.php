@@ -4,7 +4,7 @@
  *
  */
 
-namespace App\Helpers;
+namespace App\Services\ResponseBuilder;
 
 class ApiCode
 {
@@ -13,4 +13,6 @@ class ApiCode
     public const TWILIO_SEND_SMS_ERROR = 3; // Cannot send SMS to landline phone numbers
     public const WRONG_OLD_PASSWORD = 4; // Wrong old password. Please try again
     public const NO_SUCH_EMAIL = 5; // No such email
+    public const METHOD_NOT_ALLOWED = 12;
+    public const VALIDATION_ERRORS = 15;
 }

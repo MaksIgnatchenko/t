@@ -9,10 +9,14 @@
 namespace App\Modules\Users\User\Http\Requests;
 
 use App\Rules\PasswordRule;
+use App\Rules\PasswordRuleApi;
+use App\Services\ResponseBuilder\ValidationErrorsApiMessagesTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ChangePasswordRequest extends FormRequest
 {
+    use ValidationErrorsApiMessagesTrait;
+
     /**
      * Get the password reset validation rules.
      *
@@ -25,14 +29,14 @@ class ChangePasswordRequest extends FormRequest
                 'required',
                 'min:6',
                 'max:50',
-                new PasswordRule(),
+                new PasswordRuleApi(),
             ],
             'new_password' => [
                 'required',
                 'confirmed',
                 'min:6',
                 'max:50',
-                new PasswordRule(),
+                new PasswordRuleApi(),
             ],
         ];
     }
