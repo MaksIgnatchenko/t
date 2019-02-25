@@ -23,3 +23,5 @@ yarn-error.log
 /public/fonts
 /public/mix-manifest.json
 /public/apidoc
+/package-lock.json
+/resources/js/bootstrap.js
