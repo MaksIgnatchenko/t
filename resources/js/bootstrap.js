@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -16,17 +15,25 @@ try {
     window.fastclick = require('fastclick');
     window.blockUi = require('block-ui');
     window.nicescroll = require('jquery.nicescroll');
-    window.scrollTo = require('scrollTo');
 
+    require('bootstrap');
 
-    // include('node_modules/admin-lte/dist/js/app.min.js');
+    require('datatables.net');
+    require('datatables.net-bs');
+    require('datatables.net-buttons');
+    require('datatables.net-buttons-bs');
+    require('datatables.net-buttons/js/buttons.colVis.js');
+    require('datatables.net-buttons/js/buttons.html5.js');
+    require('datatables.net-buttons/js/buttons.flash.js');
+    require('datatables.net-buttons/js/buttons.print.js');
 
     // TODO not working
     // window.modernizr = require('modernizr');
     // window.waves = require('waves.js');
+    // window.scrollTo = require('scrollTo');
 
-    require('bootstrap');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
