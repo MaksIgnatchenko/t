@@ -6,6 +6,7 @@
 
 namespace App\Services\ResponseBuilder;
 
+use Illuminate\Auth\AuthenticationException;
 use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
 use Exception;
@@ -129,5 +130,18 @@ class CustomExceptionHandlerHelper extends ExceptionHandlerHelper
         return array_map(function ($field) {
             return array_map('intval', $field);
         }, $fields);
+    }
+
+    /**
+     * Convert an authentication exception into an unauthenticated response.
+     *
+     * @param  \Illuminate\Http\Request                 $request
+     * @param  \Illuminate\Auth\AuthenticationException $exception
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return static::error($exception, 'authentication_exception', BaseApiCodes::EX_AUTHENTICATION_EXCEPTION);
     }
 }

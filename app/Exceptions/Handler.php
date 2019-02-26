@@ -2,10 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Services\ResponseBuilder\ApiCode;
 use App\Services\ResponseBuilder\CustomExceptionHandlerHelper;
+use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
@@ -51,6 +55,12 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($request->wantsJson()) {
+            if ($exception instanceof ModelNotFoundException || $exception instanceof QueryException) {
+                return CustomResponseBuilder::error(ApiCode::NO_SUCH_ITEM);
+            }
+            if ($exception instanceof AuthenticationException) {
+                return CustomResponseBuilder::error(ApiCode::UNAUTHENTICATED);
+            }
             return CustomExceptionHandlerHelper::render($request, $exception);
         }
 

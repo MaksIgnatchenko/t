@@ -41,7 +41,6 @@
 }
 
 @apiErrorExample Error-Response:
-HTTP/1.1 400 Error
 {
     "success": false,
     "code": 4,

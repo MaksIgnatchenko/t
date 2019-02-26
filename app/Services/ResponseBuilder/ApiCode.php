@@ -15,4 +15,6 @@ class ApiCode
     public const NO_SUCH_EMAIL = 5; // No such email
     public const METHOD_NOT_ALLOWED = 12;
     public const VALIDATION_ERRORS = 15;
+    public const NO_SUCH_ITEM = 16;
+    public const UNAUTHENTICATED = 17;
 }

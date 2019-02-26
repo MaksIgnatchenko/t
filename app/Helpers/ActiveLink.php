@@ -5,6 +5,8 @@
 
 namespace App\Helpers;
 
+use App\Modules\Challenges\Http\Controllers\Admin\ChallengeController;
+use App\Modules\Companies\Http\Controllers\Admin\CompanyController;
 use App\Modules\Content\Http\Controllers\Admin\ContentController;
 use App\Modules\Users\Admin\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Request;
@@ -29,6 +31,26 @@ class ActiveLink
         $controller = self::getControllerInstance();
 
         return $controller instanceof ContentController;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function checkCompany(): bool
+    {
+        $controller = self::getControllerInstance();
+
+        return $controller instanceof CompanyController;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function checkChallenge(): bool
+    {
+        $controller = self::getControllerInstance();
+
+        return $controller instanceof ChallengeController;
     }
 
     /**

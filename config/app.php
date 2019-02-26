@@ -186,6 +186,9 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         App\Modules\Content\Providers\ContentAdminRouteServiceProvider::class,
         App\Modules\Content\Providers\ContentApiRouteServiceProvider::class,
+        App\Modules\Challenges\Providers\ChallengeAdminRouteServiceProvider::class,
+        App\Modules\Challenges\Providers\ChallengeApiRouteServiceProvider::class,
+        App\Modules\Companies\Providers\CompanyAdminRouteServiceProvider::class,
     ],
 
     /*

@@ -34,7 +34,9 @@ class User extends Authenticatable implements JWTSubject
 
     protected $casts = [
         'is_registration_completed' => 'boolean',
-        'birthday' => 'datetime',
+        'birthday' => 'date:U',
+        'created_at' => 'date:U',
+        'updated_at' => 'date:U',
     ];
 
     /**
