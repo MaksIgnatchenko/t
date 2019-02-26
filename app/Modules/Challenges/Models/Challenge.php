@@ -26,6 +26,13 @@ class Challenge extends Model
         'end_date'
     ];
 
+    protected $casts = [
+        'start_date' => 'date:U',
+        'end_date' => 'date:U',
+        'created_at' => 'date:U',
+        'updated_at' => 'date:U',
+    ];
+
     /**
      * @param $attribute
      */

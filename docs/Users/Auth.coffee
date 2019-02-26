@@ -57,13 +57,13 @@
     "data": {
         "id": 12,
         "email": "dsfg@sdf.asdf",
-        "created_at": "2019-02-20 13:05:44",
-        "updated_at": "2019-02-20 14:45:49",
+        "created_at": "1551108193",
+        "updated_at": "1551203477",
         "phone_number": "0667069066",
         "country_code": "+38",
         "is_registration_completed": true,
         "avatar": "https://tagit.appus.work/storage/avatars/4APXBAmi7KWJRKOlimBem5VyJ1qOwQ66XdHwWwKw.png", // can be null
-        "birthday": "2018-01-01 00:00:00",
+        "birthday": "604508113",
         "sex": "dsfgdsf",
         "country": "gdsfg",
         "city": "Kharkiv",
@@ -172,7 +172,7 @@ HTTP/1.1 200 OK
 
 @apiParam {File} [avatar] Image. Max 5mb, png, jpeg
 @apiParam {String} full_name Max 100
-@apiParam {Date} birthday Example: 2018-01-01
+@apiParam {Date} birthday Example: 604508113 (timestamp)
 @apiParam {String} sex Max 50.
 @apiParam {String} country]Max 50
 @apiParam {String} [city] Max 50.

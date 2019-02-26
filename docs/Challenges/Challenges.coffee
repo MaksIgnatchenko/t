@@ -22,10 +22,10 @@
                 "city": "Mecca",
                 "participants_limit": 100,
                 "proof_type": "photo",
-                "start_date": "2019-02-27 00:00:00",
-                "end_date": "2019-02-28 00:00:00",
-                "created_at": "2019-02-26 16:03:58",
-                "updated_at": "2019-02-26 16:03:58"
+                "start_date": "1551225600",
+                "end_date": "1551312000",
+                "created_at": "1551197038",
+                "updated_at": "1551197038"
             },
             {
                 "id": 3,
@@ -38,10 +38,10 @@
                 "city": "Dubai",
                 "participants_limit": 100,
                 "proof_type": "photo",
-                "start_date": "2019-02-27 00:00:00",
-                "end_date": "2019-02-28 00:00:00",
-                "created_at": "2019-02-26 16:08:12",
-                "updated_at": "2019-02-26 16:08:12"
+                "start_date": "1551225600",
+                "end_date": "1551312000",
+                "created_at": "1551197292",
+                "updated_at": "1551197292"
             },
             {
                 "id": 4,
@@ -54,10 +54,10 @@
                 "city": "Dubai",
                 "participants_limit": 100,
                 "proof_type": "photo",
-                "start_date": "2019-02-27 00:00:00",
-                "end_date": "2019-02-28 00:00:00",
-                "created_at": "2019-02-26 16:45:54",
-                "updated_at": "2019-02-26 16:45:54"
+                "start_date": "1551225600",
+                "end_date": "1551312000",
+                "created_at": "1551199554",
+                "updated_at": "1551199554"
             }
         ]
     }
@@ -79,17 +79,17 @@
         "id": 1,
         "company_id": null,
         "name": "Challenge1",
-        "image": "challenges/y9SS0d4YRDnwKY2WsDfdj7e4FdxcIKOEcYwZthp2.jpeg",
+        "image": "http://localhost/storage/challenges/y9SS0d4YRDnwKY2WsDfdj7e4FdxcIKOEcYwZthp2.jpeg",
         "description": "test challenge",
         "link": "https://google.com",
         "country": "Saudi arabia",
         "city": "Mecca",
         "participants_limit": 100,
         "proof_type": "photo",
-        "start_date": "2019-02-27 00:00:00",
-        "end_date": "2019-02-28 00:00:00",
-        "created_at": "2019-02-26 16:03:58",
-        "updated_at": "2019-02-26 16:03:58"
+        "start_date": "1551225600",
+        "end_date": "1551312000",
+        "created_at": "1551197038",
+        "updated_at": "1551197038"
     }
 }
 

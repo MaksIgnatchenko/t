@@ -31,7 +31,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'avatar' => 'file|image|mimes:jpeg,png,jpg|max:' . 1024 * 1024 * 5,
             'full_name' => 'required|string|max:100',
-            'birthday' => 'required|date',
+            'birthday' => 'required|date_format:U',
             'sex' => 'required|string|max:50',
             'country' => 'required|string|max:50',
             'city' => 'string|max:50',
