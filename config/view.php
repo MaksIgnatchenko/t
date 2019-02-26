@@ -18,6 +18,8 @@ return [
         app_path('Modules/Users/Admin/Resources/views'),
         app_path('Modules/Users/User/Resources/views'),
         app_path('Modules/Content/Resources/views'),
+        app_path('Modules/Companies/Resources/views'),
+        app_path('Modules/Challenges/Resources/views'),
     ],
 
     /*

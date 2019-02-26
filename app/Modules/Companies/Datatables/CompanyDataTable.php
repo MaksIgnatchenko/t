@@ -1,0 +1,91 @@
+<?php
+/**
+ * Created by Maksym Ignatchenko, Appus Studio LP on 26.02.19
+ *
+ */
+
+namespace App\Modules\Companies\Datatables;
+
+use App\Modules\Challenges\Models\Company;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as YajraBuilder;
+
+class CompanyDataTable extends DataTable
+{
+    /**
+     * Build DataTable class.
+     *
+     * @param mixed $query Result from query() method.
+     * @return EloquentDataTable
+     */
+    public function dataTable($query): EloquentDataTable
+    {
+        $dataTable = new EloquentDataTable($query);
+        return $dataTable
+            ->editColumn('logo', function ($query) {
+                return ($query->image ? ("<img height='50' src=" . $query->image) . " />" : (''));
+            })
+            ->rawColumns(['logo']);
+    }
+
+    /**
+     * Get query source of dataTable.
+     *
+     * @param Company $model
+     * @return Company
+     */
+    public function query(Company $model): Company
+    {
+        return $model->newQuery();
+    }
+
+    /**
+     * Optional method if you want to use html builder.
+     *
+     * @return YajraBuilder
+     */
+    public function html(): YajraBuilder
+    {
+        return $this->builder()
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->parameters([
+                'dom'     => 'frtip',
+                'order'   => [[0, 'desc']],
+                'responsive' => true,
+            ]);
+    }
+
+    /**
+     * Get columns.
+     *
+     * @return array
+     */
+    protected function getColumns(): array
+    {
+        return [
+            [
+                'name' => 'name',
+                'data' => 'name',
+                'title' => 'Name',
+                'width' => '20%',
+            ],
+            [
+                'data' => 'logo',
+                'title' => 'Logo',
+                'width' => '20%',
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'info',
+                'data' => 'info',
+                'title' => 'Info',
+                'width' => '60%',
+                'orderable' => false,
+                'searchable' => false,
+            ],
+        ];
+    }
+}

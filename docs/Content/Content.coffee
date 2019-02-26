@@ -7,8 +7,8 @@
 
 @apiSuccessExample Success-Response:
 {
-    "success": false,
-    "code": 1,
+    "success": true,
+    "code": o,
     "data": {
         "key": "terms_and_conditions",
         "title": "Terms & Conditions",
