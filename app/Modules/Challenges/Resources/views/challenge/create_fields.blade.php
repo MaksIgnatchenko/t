@@ -14,7 +14,7 @@
     <p>
         {{ Form::label('image', 'Image: ') }}
     </p>
-    {!! Form::file('image', false, ['class' => 'form-control']) !!}
+    {!! Form::file('image', ['class' => 'form-control file']) !!}
     @if ($errors->has('image'))
         <div class="text-red">{{ $errors->first('image') }}</div>
     @endif
@@ -125,26 +125,6 @@
     {!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-
 <script>
-    var imageSizeLimit = {!! config('custom.challenge_logo_max_size') !!}
-    var image = document.getElementById('image');
-    var options={
-        format: 'mm/dd/yyyy',
-        todayHighlight: true,
-        autoclose: true,
-    };
-    jQuery(function($){
-        $('.dateField').datepicker(options);
-    });
-    image.addEventListener('change', function() {
-        if (this.files[0].size > imageSizeLimit) {
-            alert("The image should be no more than " + imageSizeLimit / 1024 + "Kb");
-            this.value = '';
-        }
-    });
+    const imageSizeLimit = {!! config('custom.challenge_logo_max_size') !!}
 </script>

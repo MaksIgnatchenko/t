@@ -14,7 +14,7 @@
     <p>
         {{ Form::label('logo', 'Logo: ') }}
     </p>
-    {!! Form::file('logo', false, ['class' => 'form-control imageField']) !!}
+    {!! Form::file('logo', ['class' => 'form-control file']) !!}
     @if ($errors->has('logo'))
         <div class="text-red">{{ $errors->first('logo') }}</div>
     @endif
@@ -37,12 +37,5 @@
 </div>
 
 <script>
-    var imageSizeLimit = {!! config('custom.company_logo_max_size') !!}
-    var image = document.getElementById('logo');
-    image.addEventListener('change', function() {
-        if (this.files[0].size > imageSizeLimit) {
-            alert("The image should be no more than " + imageSizeLimit / 1024 + "Kb");
-            this.value = '';
-        }
-    });
+    const imageSizeLimit = {!! config('custom.company_logo_max_size') !!}
 </script>

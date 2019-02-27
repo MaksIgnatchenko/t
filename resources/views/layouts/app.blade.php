@@ -21,6 +21,9 @@
 
 <body class="fixed-left">
 
+<script src="{{ URL::asset('build/js/vendor.js') }}"></script>
+<script src="{{ URL::asset('build/js/app.js') }}"></script>
+
 <div id="preloader">
     <div id="status">
         <div class="spinner"></div>
@@ -45,9 +48,6 @@
     </div>
 
 </div>
-
-<script src="{{ URL::asset('build/js/vendor.js') }}"></script>
-<script src="{{ URL::asset('build/js/app.js') }}"></script>
 
 @yield('script')
 
