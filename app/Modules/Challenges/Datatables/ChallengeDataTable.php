@@ -96,7 +96,7 @@ class ChallengeDataTable extends DataTable
             [
                 'name' => 'participants_limit',
                 'data' => 'participants_limit',
-                'title' => 'participants_limit',
+                'title' => 'Participants limit',
                 'width' => '15%',
             ],
             [
