@@ -6,6 +6,8 @@
  */
 
 require('./bootstrap');
+require('./custom/datepicker');
+require('./custom/fileSizeLimit');
 
 // window.Vue = require('vue');
 

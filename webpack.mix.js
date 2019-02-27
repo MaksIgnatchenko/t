@@ -24,5 +24,7 @@ mix.js([
     .styles([
         'resources/css/app.css',
         'resources/css/admiry/*',
+        'resources/css/custom.css',
+        'node_modules/js-datepicker/datepicker.css',
     ], 'public/build/css/app.css')
     .copyDirectory('resources/images', 'public/build/images');
