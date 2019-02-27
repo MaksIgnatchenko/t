@@ -14,5 +14,14 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/test', function (Request $request) {
-    return \MarcinOrlowski\ResponseBuilder\ResponseBuilder::success();
+    return \App\Services\ResponseBuilder\CustomResponseBuilder::success();
 });
+
+if (\App\Enums\AppEnvironmentEnum::LOCAL === env('APP_ENV')
+    || \App\Enums\AppEnvironmentEnum::DEVELOP) {
+    Route::post('wipe', function() {
+        \Illuminate\Support\Facades\DB::table('users')->delete();
+        return \App\Services\ResponseBuilder\CustomResponseBuilder::success();
+    });
+}
+

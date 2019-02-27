@@ -15,8 +15,11 @@ try {
     window.fastclick = require('fastclick');
     window.blockUi = require('block-ui');
     window.nicescroll = require('jquery.nicescroll');
+    window.datepicker = require('js-datepicker');
 
     require('bootstrap');
+    require('bootstrap-datepicker/dist/js/bootstrap-datepicker.min');
+    require('jquery-ui');
 
     require('datatables.net');
     require('datatables.net-bs');

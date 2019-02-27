@@ -9,6 +9,7 @@ namespace App\Modules\Companies\Datatables;
 use App\Modules\Challenges\Models\Company;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Html\Builder as YajraBuilder;
 
 class CompanyDataTable extends DataTable
@@ -24,7 +25,7 @@ class CompanyDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
         return $dataTable
             ->editColumn('logo', function ($query) {
-                return ($query->image ? ("<img height='50' src=" . $query->image) . " />" : (''));
+                return ($query->logo ? ("<img height='50' src=" . $query->logo) . " />" : (''));
             })
             ->rawColumns(['logo']);
     }
@@ -35,7 +36,7 @@ class CompanyDataTable extends DataTable
      * @param Company $model
      * @return Company
      */
-    public function query(Company $model): Company
+    public function query(Company $model): Builder
     {
         return $model->newQuery();
     }
@@ -72,6 +73,7 @@ class CompanyDataTable extends DataTable
                 'width' => '20%',
             ],
             [
+                'name' => 'logo',
                 'data' => 'logo',
                 'title' => 'Logo',
                 'width' => '20%',
