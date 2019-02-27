@@ -9,6 +9,6 @@ namespace App\Enums;
 class AppEnvironmentEnum
 {
     public const LOCAL = 'local';
-    public const DEVELOP = 'develop';
+    public const DEVELOP = 'development';
     public const PRODUCTION = 'prod';
 }
