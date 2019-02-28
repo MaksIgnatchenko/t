@@ -11,7 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(AdminTableSeeder::class);
-         $this->call(ContentTableSeeder::class);
+//         $this->call(AdminTableSeeder::class);
+//         $this->call(ContentTableSeeder::class);
+
+         factory(\App\Modules\Challenges\Models\Challenge::class, 200)->create();
     }
 }
