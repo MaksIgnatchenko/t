@@ -5,5 +5,5 @@
  */
 
 Route::group(['middleware' => 'auth:admin'], function () {
-    Route::resource('company', 'CompanyController')->only(['index', 'create', 'store']);
+    Route::resource('company', 'CompanyController')->only(['index', 'show', 'create', 'store']);
 });

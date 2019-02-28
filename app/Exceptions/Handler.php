@@ -59,6 +59,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($request->wantsJson()) {
+            dd($exception);
             if ($exception instanceof ModelNotFoundException || $exception instanceof QueryException) {
                 return CustomResponseBuilder::error(ApiCode::NO_SUCH_ITEM);
             }
