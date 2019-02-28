@@ -36,7 +36,8 @@
                 "start_date": "1551398400",
                 "end_date": "1552003200",
                 "created_at": "1551344002",
-                "updated_at": "1551344002"
+                "updated_at": "1551344002",
+                "participants_count": 0
             },
             {
                 "id": 203,
@@ -53,6 +54,7 @@
                 "end_date": "1552734162",
                 "created_at": "1551351835",
                 "updated_at": "1551351835"
+                "participants_count": 0
             },
             {
                 "id": 204,
@@ -68,7 +70,8 @@
                 "start_date": "1551351762",
                 "end_date": "1552820562",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 205,
@@ -84,7 +87,8 @@
                 "start_date": "1551351762",
                 "end_date": "1552993362",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 206,
@@ -100,7 +104,8 @@
                 "start_date": "1551351763",
                 "end_date": "1552734163",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 207,
@@ -116,7 +121,8 @@
                 "start_date": "1551351763",
                 "end_date": "1552993363",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 208,
@@ -132,7 +138,8 @@
                 "start_date": "1551351764",
                 "end_date": "1552906964",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 209,
@@ -148,7 +155,8 @@
                 "start_date": "1551351764",
                 "end_date": "1553770964",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 210,
@@ -164,7 +172,8 @@
                 "start_date": "1551351765",
                 "end_date": "1553770965",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 211,
@@ -180,7 +189,8 @@
                 "start_date": "1551351765",
                 "end_date": "1552561365",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 212,
@@ -196,7 +206,8 @@
                 "start_date": "1551351766",
                 "end_date": "1552215766",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 213,
@@ -212,7 +223,8 @@
                 "start_date": "1551351766",
                 "end_date": "1552215766",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 214,
@@ -228,7 +240,8 @@
                 "start_date": "1551351766",
                 "end_date": "1553684566",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 215,
@@ -244,7 +257,8 @@
                 "start_date": "1551351767",
                 "end_date": "1553598167",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             },
             {
                 "id": 216,
@@ -260,7 +274,8 @@
                 "start_date": "1551351767",
                 "end_date": "1553598167",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
+                "updated_at": "1551351835",
+                "participants_count": 0
             }
         ]
     }
