@@ -7,7 +7,7 @@
 namespace App\Modules\Challenges\DTO;
 
 
-class ChallengeDTO
+class CreateChallengeDTO
 {
     /**
      * @var array

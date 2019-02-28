@@ -33,11 +33,11 @@ class StoreChallengeRequest extends FormRequest
         return [
             'company_id' => 'nullable|exists:companies,id',
             'name' => 'required|string|max:50',
-            'logo' => 'file|image|mimes:jpeg,png,jpg|max:' . config('custom.company_logo_max_size'),
+            'image' => 'required|file|image|mimes:jpeg,png,jpg|max:' . config('custom.challenge_logo_max_size'),
             'description' => 'required|string|max:1000',
             'link' => 'required|url|max:255',
             'country' => ['required', 'string', 'max:100', Rule::in(CountryEnum::getAll())],
-            'city' => 'string|max:100',
+            'city' => 'nullable|string|max:100',
             'participants_limit' => 'int|max:10000',
             'proof_type' => ['required', 'string', 'max:100', Rule::in(ProofTypeEnum::getAll())],
             'start_date' => 'required|date|after:yesterday',

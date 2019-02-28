@@ -26,6 +26,17 @@ class CompanyController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Company $company
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Company $company)
+    {
+        return view('company.show', ['company' => $company]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

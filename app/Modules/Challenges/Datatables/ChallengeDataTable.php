@@ -25,6 +25,7 @@ class ChallengeDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
         return $dataTable
+            ->addColumn('action', 'challenge.datatables_actions')
             ->editColumn('image', function ($query) {
                 return ($query->image ? ("<img height='50' src=" . $query->image) . " />" : (''));
             })
@@ -34,7 +35,7 @@ class ChallengeDataTable extends DataTable
             ->editColumn('end_date', function($query) {
                 return Carbon::parse($query->start_date)->toDateString();
             })
-            ->rawColumns(['image']);
+            ->rawColumns(['image', 'action']);
     }
 
     /**
@@ -58,6 +59,7 @@ class ChallengeDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->addAction(['width' => '10%'])
             ->parameters([
                 'dom'     => 'frtip',
                 'order'   => [[0, 'desc']],
@@ -77,13 +79,13 @@ class ChallengeDataTable extends DataTable
                 'name' => 'name',
                 'data' => 'name',
                 'title' => 'Name',
-                'width' => '20%',
+                'width' => '15%',
             ],
             [
                 'name' => 'image',
                 'data' => 'image',
                 'title' => 'Image',
-                'width' => '20%',
+                'width' => '15%',
                 'searchable' => false,
                 'orderable' => false,
             ],
@@ -96,7 +98,7 @@ class ChallengeDataTable extends DataTable
             [
                 'name' => 'participants_limit',
                 'data' => 'participants_limit',
-                'title' => 'participants_limit',
+                'title' => 'Participants limit',
                 'width' => '15%',
             ],
             [

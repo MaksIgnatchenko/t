@@ -5,5 +5,5 @@
  */
 
 Route::group(['middleware' => 'auth:admin'], function () {
-    Route::resource('challenge', 'ChallengeController')->only(['index', 'create', 'store']);
+    Route::resource('challenge', 'ChallengeController')->only(['index', 'show', 'create', 'store']);
 });

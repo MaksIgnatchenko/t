@@ -24,10 +24,11 @@ class CompanyDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
         return $dataTable
+            ->addColumn('action', 'company.datatables_actions')
             ->editColumn('logo', function ($query) {
                 return ($query->logo ? ("<img height='50' src=" . $query->logo) . " />" : (''));
             })
-            ->rawColumns(['logo']);
+            ->rawColumns(['logo', 'action']);
     }
 
     /**
@@ -51,6 +52,7 @@ class CompanyDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->addAction(['width' => '10%'])
             ->parameters([
                 'dom'     => 'frtip',
                 'order'   => [[0, 'desc']],
@@ -84,7 +86,7 @@ class CompanyDataTable extends DataTable
                 'name' => 'info',
                 'data' => 'info',
                 'title' => 'Info',
-                'width' => '60%',
+                'width' => '50%',
                 'orderable' => false,
                 'searchable' => false,
             ],

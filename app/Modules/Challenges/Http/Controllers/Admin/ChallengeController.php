@@ -8,7 +8,8 @@ namespace App\Modules\Challenges\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Challenges\Datatables\ChallengeDataTable;
-use App\Modules\Challenges\DTO\ChallengeDTO;
+use App\Modules\Challenges\DTO\CreateChallengeDTO;
+use App\Modules\Challenges\DTO\ShowChallengeDTO;
 use App\Modules\Challenges\Enums\CountryEnum;
 use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Challenges\Http\Requests\Admin\StoreChallengeRequest;
@@ -30,6 +31,19 @@ class ChallengeController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Challenge $challenge
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Challenge $challenge)
+    {
+        $dto = new ShowChallengeDTO($challenge);
+        return view('challenge.show', ['dto' => $dto]);
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -39,7 +53,7 @@ class ChallengeController extends Controller
         $companies = Company::all()->pluck('name', 'id')->toArray();
         $countries = array_combine(CountryEnum::getAll(), CountryEnum::getAll());
         $proofTypes = array_combine(ProofTypeEnum::getAll(), ProofTypeEnum::getAll());
-        $dto = new ChallengeDTO($companies, $countries, $proofTypes);
+        $dto = new CreateChallengeDTO($companies, $countries, $proofTypes);
         return view('challenge.create', ['dto' => $dto]);
     }
 
