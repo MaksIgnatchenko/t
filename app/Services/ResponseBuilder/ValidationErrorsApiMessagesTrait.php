@@ -22,6 +22,7 @@ trait ValidationErrorsApiMessagesTrait
             'image' => ValidationErrorCode::IMAGE,
             'mimes' => ValidationErrorCode::MIMES,
             'date' => ValidationErrorCode::DATE,
+            'date_format'=> ValidationErrorCode::DATE,
             'email' => ValidationErrorCode::EMAIL,
             'exists' => ValidationErrorCode::EXISTS,
         ];
