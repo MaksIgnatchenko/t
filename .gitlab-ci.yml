@@ -7,7 +7,7 @@ php_build:
   stage: php_build
   image: composer
   script:
-    - composer install -on --ignore-platform-reqs --no-progress --no-dev
+    - composer install -on --ignore-platform-reqs --no-progress
     - composer dump-autoload --optimize
   artifacts:
     paths:
