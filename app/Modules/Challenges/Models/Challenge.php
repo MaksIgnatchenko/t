@@ -26,6 +26,10 @@ class Challenge extends Model
         'end_date'
     ];
 
+    protected $appends = [
+        'participants_count',
+    ];
+
     protected $casts = [
         'start_date' => 'date:U',
         'end_date' => 'date:U',
@@ -54,6 +58,16 @@ class Challenge extends Model
     public function getImageAttribute($value) : ?string
     {
         return $value ? Storage::url($value) : null;
+    }
+
+
+    // TODO REFACTOR AFTER ADDING CHALLENGES - USERS relation
+    /**
+     * @return int
+     */
+    public function getParticipantsCountAttribute() : int
+    {
+        return 0;
     }
 
 }

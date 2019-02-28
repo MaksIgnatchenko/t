@@ -18,7 +18,7 @@ class ChallengeController extends Controller
      */
     public function index() : Response
     {
-        $challenges = Challenge::all();
+        $challenges = Challenge::paginate();
         return CustomResponseBuilder::success($challenges);
     }
 
