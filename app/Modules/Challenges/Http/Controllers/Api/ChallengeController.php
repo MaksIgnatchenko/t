@@ -8,17 +8,25 @@ namespace App\Modules\Challenges\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Challenges\Models\Challenge;
+use App\Modules\Users\User\Http\Requests\IndexRequest;
 use App\Services\ResponseBuilder\CustomResponseBuilder;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ChallengeController extends Controller
 {
     /**
+     * @param IndexRequest $request
      * @return Response
      */
-    public function index() : Response
+    public function index(IndexRequest $request): Response
     {
-        $challenges = Challenge::paginate();
+        $user = Auth::user();
+        $search = $request->get('search');
+        $limit = (int)$request->get('limit');
+
+        $challenges = Challenge::search($user, $search, $limit);
+
         return CustomResponseBuilder::success($challenges);
     }
 
@@ -26,9 +34,8 @@ class ChallengeController extends Controller
      * @param Challenge $challenge
      * @return Response
      */
-    public function show(Challenge $challenge) : Response
+    public function show(Challenge $challenge): Response
     {
         return CustomResponseBuilder::success($challenge);
     }
-
 }

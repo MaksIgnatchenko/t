@@ -6,11 +6,15 @@
 
 namespace App\Modules\Challenges\Models;
 
+use App\Modules\Users\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class Challenge extends Model
 {
+
+    protected const DEFAULT_LIMIT = 15;
+
     /** @var array */
     public $fillable = [
         'company_id',
@@ -23,7 +27,7 @@ class Challenge extends Model
         'participants_limit',
         'proof_type',
         'start_date',
-        'end_date'
+        'end_date',
     ];
 
     protected $appends = [
@@ -55,19 +59,42 @@ class Challenge extends Model
      * @param $value
      * @return string|null
      */
-    public function getImageAttribute($value) : ?string
+    public function getImageAttribute($value): ?string
     {
         return $value ? Storage::url($value) : null;
     }
 
 
     // TODO REFACTOR AFTER ADDING CHALLENGES - USERS relation
+
     /**
      * @return int
      */
-    public function getParticipantsCountAttribute() : int
+    public function getParticipantsCountAttribute(): int
     {
         return 0;
     }
 
+    public function getIsJoinedAttribute(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @param User $user
+     * @param string|null $search
+     * @param int|null $limit
+     * @return iterable
+     */
+    public static function search(User $user, ?string $search, ?int $limit): iterable
+    {
+        $query = Challenge::orderBy('start_date', 'DESC')
+            ->where('country', '=', $user->country);
+
+        if ($search) {
+            $query = $query::where('name', 'like', "%{$search}%");
+        }
+
+        return $query->paginate($limit ?? self::DEFAULT_LIMIT);
+    }
 }

@@ -27,7 +27,6 @@ class CustomExceptionHandlerHelper extends ExceptionHandlerHelper
     protected static function error(Exception $exception, $exception_type,
                                     $default_api_code, $default_http_code = ResponseBuilder::DEFAULT_HTTP_CODE_ERROR)
     {
-//        dd($exception->validator->errors()->messages());
         $base_config = 'response_builder.exception_handler.exception';
 
         $api_code = Config::get("{$base_config}.{$exception_type}.code", $default_api_code);

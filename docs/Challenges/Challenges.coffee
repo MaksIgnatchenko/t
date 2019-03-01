@@ -5,6 +5,10 @@
 @apiPermission User
 @apiVersion 0.1.0
 
+@apiParam {Integer} [limit] Max 20. Default 15
+@apiParam {Integer} [page] Default 1
+@apiParam {String} [search] Max 50 symbols
+
 @apiSuccessExample Success-Response:
 {
     "success": true,
