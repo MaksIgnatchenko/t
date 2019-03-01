@@ -8,6 +8,7 @@ namespace App\Modules\Challenges\Models;
 
 use App\Modules\Users\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class Challenge extends Model
@@ -32,6 +33,7 @@ class Challenge extends Model
 
     protected $appends = [
         'participants_count',
+        'is_participated',
     ];
 
     protected $casts = [
@@ -64,20 +66,31 @@ class Challenge extends Model
         return $value ? Storage::url($value) : null;
     }
 
-
-    // TODO REFACTOR AFTER ADDING CHALLENGES - USERS relation
-
     /**
      * @return int
      */
     public function getParticipantsCountAttribute(): int
     {
-        return 0;
+        return $this->participants->count();
     }
 
-    public function getIsJoinedAttribute(): bool
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function participants()
     {
-        return false;
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsParticipatedAttribute(): bool
+    {
+        return $this->participants()
+            ->wherePivot('user_id', Auth::id())
+            ->get()
+            ->isNotEmpty();
     }
 
     /**
@@ -97,4 +110,6 @@ class Challenge extends Model
 
         return $query->paginate($limit ?? self::DEFAULT_LIMIT);
     }
+
+
 }

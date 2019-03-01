@@ -2,6 +2,7 @@
 
 namespace App\Modules\Users\User\Models;
 
+use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Users\User\Mails\ResetPasswordMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -57,7 +58,8 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'remember_token',
         'facebook_id',
-        'email_verified_at'
+        'email_verified_at',
+        'pivot',
     ];
 
     /**
@@ -120,5 +122,13 @@ class User extends Authenticatable implements JWTSubject
         }
 
         $this->attributes['avatar'] = $file;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function challenges()
+    {
+        return $this->belongsToMany(Challenge::class)->withTimestamps();
     }
 }

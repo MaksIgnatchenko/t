@@ -22,6 +22,7 @@ class ChallengeController extends Controller
     public function index(IndexRequest $request): Response
     {
         $user = Auth::user();
+
         $search = $request->get('search');
         $limit = (int)$request->get('limit');
 
