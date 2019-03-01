@@ -5,6 +5,7 @@ stages:
   - deploy
 
 sast:
+  stage: sast
   image: docker:stable
   variables:
     DOCKER_DRIVER: overlay2
