@@ -11,6 +11,7 @@ namespace App\Modules\Challenges\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Modules\Challenges\Http\Requests\ParticipateRequest;
 use App\Modules\Challenges\Models\Challenge;
+use App\Services\ResponseBuilder\ApiCode;
 use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Illuminate\Support\Facades\Auth;
 use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
@@ -35,8 +36,15 @@ class ChallengeParticipationController extends Controller
      */
     public function store(ParticipateRequest $request, Challenge $challenge)
     {
+        // TODO добавить проверку на кол-во участников!
         $participate = (bool)$request->get('participate', true);
         if ($participate) {
+
+            $participantsCount = $challenge->participants->count();
+            if ($challenge->participants_limit <= $participantsCount) {
+                return ResponseBuilder::error(ApiCode::PARTICIPANTS_LIMIT_EXCEEDED);
+            }
+
             $challenge->participants()->sync([Auth::id()]);
             return ResponseBuilder::success();
         }

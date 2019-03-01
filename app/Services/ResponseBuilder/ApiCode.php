@@ -17,4 +17,5 @@ class ApiCode
     public const VALIDATION_ERRORS = 15;
     public const NO_SUCH_ITEM = 16;
     public const UNAUTHENTICATED = 17;
+    public const PARTICIPANTS_LIMIT_EXCEEDED = 18;
 }

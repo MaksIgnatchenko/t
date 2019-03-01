@@ -62,6 +62,15 @@
     "message": "OK",
     "data": null
 }
+
+@apiErrorExample Participation limit exceeded:
+{
+    "success": false,
+    "code": 18,
+    "locale": "en",
+    "message": "Error #18",
+    "data": null
+}
 ###
 
 
