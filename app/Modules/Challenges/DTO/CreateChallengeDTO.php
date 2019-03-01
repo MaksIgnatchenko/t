@@ -25,6 +25,7 @@ class CreateChallengeDTO
      * ChallengeDTO constructor.
      * @param array $companies
      * @param array $countries
+     * @param array $proofTypes
      */
     public function __construct(array $companies, array $countries, array $proofTypes)
     {
@@ -36,7 +37,7 @@ class CreateChallengeDTO
     /**
      * @return array
      */
-    public function getCompanies() : array
+    public function getCompanies(): array
     {
         return $this->companies;
     }

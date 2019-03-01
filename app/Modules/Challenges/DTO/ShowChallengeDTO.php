@@ -7,6 +7,7 @@
 namespace App\Modules\Challenges\DTO;
 
 use App\Modules\Challenges\Models\Challenge;
+use Carbon\Carbon;
 
 class ShowChallengeDTO
 {
@@ -27,7 +28,7 @@ class ShowChallengeDTO
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->challenge->name;
     }
@@ -35,7 +36,7 @@ class ShowChallengeDTO
     /**
      * @return string|null
      */
-    public function getImageUrl() : ?string
+    public function getImageUrl(): ?string
     {
         return $this->challenge->image;
     }
@@ -43,7 +44,7 @@ class ShowChallengeDTO
     /**
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->challenge->description;
     }
@@ -51,7 +52,7 @@ class ShowChallengeDTO
     /**
      * @return string
      */
-    public function getLink() : string
+    public function getLink(): string
     {
         return $this->challenge->link;
     }
@@ -59,7 +60,7 @@ class ShowChallengeDTO
     /**
      * @return string
      */
-    public function getCountry() : string
+    public function getCountry(): string
     {
         return $this->challenge->country;
     }
@@ -67,7 +68,7 @@ class ShowChallengeDTO
     /**
      * @return string|null
      */
-    public function getCity() : ?string
+    public function getCity(): ?string
     {
         return $this->challenge->city;
     }
@@ -75,7 +76,7 @@ class ShowChallengeDTO
     /**
      * @return string|null
      */
-    public function getCompanyName() : ?string
+    public function getCompanyName(): ?string
     {
         if ($company = $this->challenge->company) {
             return $company->name;
@@ -86,7 +87,7 @@ class ShowChallengeDTO
     /**
      * @return string
      */
-    public function getProofType() : string
+    public function getProofType(): string
     {
         return $this->challenge->proof_type;
     }
@@ -94,7 +95,7 @@ class ShowChallengeDTO
     /**
      * @return int
      */
-    public function getParticipantsLimit() : int
+    public function getParticipantsLimit(): int
     {
         return $this->challenge->participants_limit;
     }
@@ -102,16 +103,16 @@ class ShowChallengeDTO
     /**
      * @return string
      */
-    public function getStartDate() : string
+    public function getStartDate(): string
     {
-        return $this->challenge->start_date;
+        return Carbon::parse($this->challenge->start_date)->toDateString();
     }
 
     /**
      * @return string
      */
-    public function getEndDate() : string
+    public function getEndDate(): string
     {
-        return $this->challenge->end_date;
+        return Carbon::parse($this->challenge->end_date)->toDateString();
     }
 }
