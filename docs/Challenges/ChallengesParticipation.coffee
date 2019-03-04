@@ -71,6 +71,15 @@
     "message": "Error #18",
     "data": null
 }
+
+@apiErrorExample Not enough coins:
+{
+    "success": false,
+    "code": 19,
+    "locale": "en",
+    "message": "Error #19",
+    "data": null
+}
 ###
 
 
