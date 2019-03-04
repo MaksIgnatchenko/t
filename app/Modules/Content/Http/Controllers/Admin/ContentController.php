@@ -28,7 +28,7 @@ class ContentController extends Controller
     {
         $contents = $this->content->all();
 
-        return view('index')
+        return view('content.index')
             ->with('contents', $contents);
     }
 
