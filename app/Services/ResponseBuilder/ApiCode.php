@@ -18,4 +18,6 @@ class ApiCode
     public const NO_SUCH_ITEM = 16;
     public const UNAUTHENTICATED = 17;
     public const PARTICIPANTS_LIMIT_EXCEEDED = 18;
+    public const NOT_ENOUGH_COINS = 19;
+
 }

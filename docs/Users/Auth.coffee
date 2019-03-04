@@ -68,7 +68,8 @@
         "country": "gdsfg",
         "city": "Kharkiv",
         "company": null,
-        "full_name": "deg"
+        "full_name": "deg",
+        "coins": 100
     }
 }
 ###

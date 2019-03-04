@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Challenge extends Model
 {
-
+    public const PARTICIPATION_COST = 10;
     protected const DEFAULT_LIMIT = 15;
 
     /** @var array */
@@ -111,5 +111,11 @@ class Challenge extends Model
         return $query->paginate($limit ?? self::DEFAULT_LIMIT);
     }
 
-
+    /**
+     * @return bool
+     */
+    public function enoughFreePlaces(): bool
+    {
+        return $this->participants_limit > $this->participants->count();
+    }
 }

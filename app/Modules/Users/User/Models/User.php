@@ -12,6 +12,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
+    protected const DEFAULT_COINS_AMOUNT = 100;
+
     use Notifiable;
 
     /**
@@ -21,6 +23,10 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $dates = [
         'birthday',
+    ];
+
+    protected $attributes = [
+        'coins' => self::DEFAULT_COINS_AMOUNT,
     ];
 
     /**
@@ -40,6 +46,7 @@ class User extends Authenticatable implements JWTSubject
         'sex',
         'country',
         'city',
+        'coins',
     ];
 
     protected $casts = [
@@ -130,5 +137,13 @@ class User extends Authenticatable implements JWTSubject
     public function challenges()
     {
         return $this->belongsToMany(Challenge::class)->withTimestamps();
+    }
+
+    /**
+     * @return bool
+     */
+    public function enoughCoinsToParticipateChallenge(): bool
+    {
+        return $this->coins >= Challenge::PARTICIPATION_COST;
     }
 }
