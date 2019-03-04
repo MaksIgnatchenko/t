@@ -9,6 +9,7 @@ use App\Modules\Challenges\Http\Controllers\Admin\ChallengeController;
 use App\Modules\Companies\Http\Controllers\Admin\CompanyController;
 use App\Modules\Content\Http\Controllers\Admin\ContentController;
 use App\Modules\Users\Admin\Http\Controllers\DashboardController;
+use App\Modules\Users\User\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Request;
 
 class ActiveLink
@@ -31,6 +32,16 @@ class ActiveLink
         $controller = self::getControllerInstance();
 
         return $controller instanceof ContentController;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function checkUser(): bool
+    {
+        $controller = self::getControllerInstance();
+
+        return $controller instanceof UserController;
     }
 
     /**

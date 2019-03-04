@@ -2,6 +2,9 @@
     <a href="{{route('admin')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
 </li>
 
+<li class="{{ActiveLink::checkUser() ? 'active' : ''}}">
+    <a href="{{route('users.index')}}"><i class="fa fa-user"></i> <span>Users</span></a>
+</li>
 
 <li class="{{ActiveLink::checkChallenge() ? 'active' : ''}}">
     <a href="{{route('challenge.index')}}"><i class="fa fa-globe"></i> <span>Challenges</span></a>

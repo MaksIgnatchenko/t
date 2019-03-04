@@ -3,16 +3,15 @@
  * Created by Andrei Podgornyi, Appus Studio LP on 08.10.2018
  */
 
-namespace App\Modules\Users\Customer\DataTables;
+namespace App\Modules\Users\User\DataTables;
 
-use App\Helpers\DateConverter;
-use App\Modules\Users\Customer\Models\Customer;
+use App\Modules\Users\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder as DataTablesBuilder;
 
-class CustomerDataTable extends DataTable
+class UserDataTable extends DataTable
 {
 
     /**
@@ -25,19 +24,31 @@ class CustomerDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'customers.admin.datatables_actions')
-            ->editColumn('created_at', function (Customer $customer) {
-                return DateConverter::date($customer->created_at);
-            });
+        $dataTable->editColumn('country', function ($user) {
+            return $user->country ?? "<span class='text-danger'>Empty</span>";
+        });
+        $dataTable->editColumn('email', function ($user) {
+            return $user->email ?? "<span class='text-danger'>Empty</span>";
+        });
+        $dataTable->editColumn('full_name', function ($user) {
+            return $user->full_name ?? "<span class='text-danger'>Empty</span>";
+        });
+        $dataTable->editColumn('phone_number', function ($user) {
+            return $user->country_code . $user->phone_number;
+        });
+
+
+        return $dataTable->addColumn('action', 'datatables_actions')
+            ->rawColumns(['country', 'email', 'full_name', 'action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param Customer $model
+     * @param User $model
      * @return Builder
      */
-    public function query(Customer $model): Builder
+    public function query(User $model): Builder
     {
         return $model->newQuery();
     }
@@ -54,8 +65,8 @@ class CustomerDataTable extends DataTable
             ->minifiedAjax()
             ->addAction(['width' => '80px'])
             ->parameters([
-                'dom'     => 'frtip',
-                'order'   => [[0, 'desc']],
+                'dom' => 'frtip',
+                'order' => [[0, 'desc']],
             ]);
     }
 
@@ -68,14 +79,9 @@ class CustomerDataTable extends DataTable
     {
         return [
             [
-                'name' => 'first_name',
-                'data' => 'first_name',
-                'title' => 'First name'
-            ],
-            [
-                'name' => 'last_name',
-                'data' => 'last_name',
-                'title' => 'Last name'
+                'name' => 'full_name',
+                'data' => 'full_name',
+                'title' => 'Full name'
             ],
             [
                 'name' => 'email',
@@ -83,9 +89,14 @@ class CustomerDataTable extends DataTable
                 'title' => 'Email'
             ],
             [
-                'name' => 'created_at',
-                'data' => 'created_at',
-                'title' => 'Registered'
+                'name' => 'phone_number',
+                'data' => 'phone_number',
+                'title' => 'Phone number'
+            ],
+            [
+                'name' => 'country',
+                'data' => 'country',
+                'title' => 'Country'
             ],
         ];
     }
@@ -97,6 +108,6 @@ class CustomerDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'customersdatatable_' . time();
+        return 'userdatatable_' . time();
     }
 }

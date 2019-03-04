@@ -7,29 +7,30 @@ namespace App\Modules\Users\User\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Users\User\Models\User;
+use App\Modules\Users\User\DataTables\UserDataTable;
 use Illuminate\View\View;
 
-class CustomerController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the Customer.
      *
-     * @param UserDataTable $customerDataTable
+     * @param UserDataTable $userDataTable
      * @return mixed
      */
-    public function index(UserDataTable $customerDataTable)
+    public function index(UserDataTable $userDataTable)
     {
-        return $customerDataTable->render('admin.index');
+        return $userDataTable->render('index');
     }
 
     /**
      * Display the specified Customer.
      *
-     * @param Customer $customer
+     * @param User $user
      * @return \Illuminate\Contracts\View\Factory|View
      */
     public function show(User $user)
     {
-        return view('admin.show')->with('user', $user);
+        return view('show')->with('user', $user);
     }
 }

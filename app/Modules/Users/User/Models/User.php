@@ -118,6 +118,22 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * @return string
+     */
+    public function getAvatarWithDefaultAttribute($value): ?string
+    {
+        return $value ? Storage::url($value) : '/assets/images/default_avatar.svg';
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullPhoneNumberAttribute(): string
+    {
+        return $this->country_code . $this->phone_number;
+    }
+
+    /**
      * @param $attribute
      */
     public function setAvatarAttribute($attribute)
