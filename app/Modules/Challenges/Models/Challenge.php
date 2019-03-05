@@ -101,7 +101,7 @@ class Challenge extends Model
      */
     public static function search(User $user, ?string $search, ?int $limit): iterable
     {
-        $query = Challenge::orderBy('start_date', 'DESC')
+        $query = self::orderBy('start_date', 'DESC')
             ->where('country', '=', $user->country);
 
         if ($search) {
@@ -116,6 +116,6 @@ class Challenge extends Model
      */
     public function enoughFreePlaces(): bool
     {
-        return $this->participants_limit > $this->participants->count();
+        return ($this->participants_limit === 0) || ($this->participants_limit > $this->participants_count);
     }
 }
