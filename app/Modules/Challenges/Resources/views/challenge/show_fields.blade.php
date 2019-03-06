@@ -64,7 +64,7 @@
 <!-- Participants limit limit Field -->
 <div class="form-group">
     <p>
-        {{ Form::label('participants_limit', 'Participants limit: ') }}
+        {{ Form::label('participants_limit', 'Participants limit (0 - without limit): ') }}
         {{ $dto->getParticipantsLimit() }}
     </p>
 </div>
