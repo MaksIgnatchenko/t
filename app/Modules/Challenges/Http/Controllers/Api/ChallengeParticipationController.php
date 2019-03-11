@@ -39,10 +39,10 @@ class ChallengeParticipationController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $participate = (bool)$request->get('participate', true);
+        $participate = (bool)$request->get('participate', false);
 
         if (!$participate) {
-            $challenge->participants()->detach([Auth::id()]);
+            $challenge->participants()->detach(Auth::id());
             return ResponseBuilder::success();
         }
 
@@ -54,7 +54,7 @@ class ChallengeParticipationController extends Controller
             return ResponseBuilder::error(ApiCode::PARTICIPANTS_LIMIT_EXCEEDED);
         }
 
-        $challenge->participants()->sync([Auth::id()]);
+        $challenge->participants()->attach(Auth::id());
         $user->coins -= Challenge::PARTICIPATION_COST;
 
         return ResponseBuilder::success();
