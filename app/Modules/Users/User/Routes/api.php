@@ -16,7 +16,6 @@ Route::group([
     Route::post('start', 'RegisterController@startVerification');
     Route::post('verify', 'RegisterController@verifyCode');
     Route::post('profile', 'RegisterController@updateProfile')->middleware('auth:api');
-
 });
 
 $this->group([

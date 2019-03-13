@@ -19,5 +19,5 @@ class ApiCode
     public const UNAUTHENTICATED = 17;
     public const PARTICIPANTS_LIMIT_EXCEEDED = 18;
     public const NOT_ENOUGH_COINS = 19;
-
+    public const USER_IS_ALREADY_PARTICIPATING = 20;
 }

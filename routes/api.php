@@ -18,10 +18,18 @@ Route::get('/test', function (Request $request) {
 });
 
 if (\App\Enums\AppEnvironmentEnum::LOCAL === env('APP_ENV')
-    || \App\Enums\AppEnvironmentEnum::DEVELOP) {
+    || (\App\Enums\AppEnvironmentEnum::DEVELOP == env('APP_ENV'))) {
     Route::post('wipe', function() {
         \Illuminate\Support\Facades\DB::table('users')->delete();
         return \App\Services\ResponseBuilder\CustomResponseBuilder::success();
     });
+
+    Route::post('user/coins', function(\App\Modules\Users\User\Http\Requests\CoinRequest $request) {
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $user->coins += $request->amount;
+        $user->save();
+        return \App\Services\ResponseBuilder\CustomResponseBuilder::success();
+    })->middleware('auth:api');
 }
+
 

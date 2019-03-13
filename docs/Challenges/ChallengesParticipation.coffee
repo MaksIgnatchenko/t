@@ -58,8 +58,6 @@
 {
     "success": true,
     "code": 0,
-    "locale": "en",
-    "message": "OK",
     "data": null
 }
 
@@ -67,8 +65,6 @@
 {
     "success": false,
     "code": 18,
-    "locale": "en",
-    "message": "Error #18",
     "data": null
 }
 
@@ -76,9 +72,14 @@
 {
     "success": false,
     "code": 19,
-    "locale": "en",
-    "message": "Error #19",
     "data": null
+}
+
+@apiErrorExample User is already participating:
+{
+  "success": false,
+  "code": 20,
+  "data": null
 }
 ###
 
