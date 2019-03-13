@@ -21,6 +21,7 @@ class ValidationErrorCode
     public const DATE = 1010; // Unsupported date format
     public const EMAIL = 1011;
     public const EXISTS = 1012;
+    public const INTEGER = 1013;
 }
 
 

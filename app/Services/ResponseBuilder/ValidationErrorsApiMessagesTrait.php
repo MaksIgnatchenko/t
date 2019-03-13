@@ -25,6 +25,7 @@ trait ValidationErrorsApiMessagesTrait
             'date_format'=> ValidationErrorCode::DATE,
             'email' => ValidationErrorCode::EMAIL,
             'exists' => ValidationErrorCode::EXISTS,
+            'integer' => ValidationErrorCode::INTEGER,
         ];
     }
 }
