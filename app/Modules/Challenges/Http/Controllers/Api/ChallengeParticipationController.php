@@ -15,7 +15,6 @@ use App\Modules\Users\User\Models\User;
 use App\Services\ResponseBuilder\ApiCode;
 use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Illuminate\Support\Facades\Auth;
-use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 
 class ChallengeParticipationController extends Controller
 {
@@ -43,21 +42,25 @@ class ChallengeParticipationController extends Controller
 
         if (!$participate) {
             $challenge->participants()->detach(Auth::id());
-            return ResponseBuilder::success();
+            return CustomResponseBuilder::success();
+        }
+
+        if ($challenge->participants->contains($user->id)) {
+            return CustomResponseBuilder::error(ApiCode::USER_IS_ALREADY_PARTICIPATING);
         }
 
         if (!$user->enoughCoinsToParticipateChallenge()) {
-            return ResponseBuilder::error(ApiCode::NOT_ENOUGH_COINS);
+            return CustomResponseBuilder::error(ApiCode::NOT_ENOUGH_COINS);
         }
 
         if (!$challenge->enoughFreePlaces()) {
-            return ResponseBuilder::error(ApiCode::PARTICIPANTS_LIMIT_EXCEEDED);
+            return CustomResponseBuilder::error(ApiCode::PARTICIPANTS_LIMIT_EXCEEDED);
         }
 
         $challenge->participants()->attach(Auth::id());
         $user->coins -= Challenge::PARTICIPATION_COST;
 
-        return ResponseBuilder::success();
+        return CustomResponseBuilder::success();
 
     }
 }
