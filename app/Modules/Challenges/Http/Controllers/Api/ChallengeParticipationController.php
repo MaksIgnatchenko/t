@@ -59,8 +59,11 @@ class ChallengeParticipationController extends Controller
 
         $challenge->participants()->attach(Auth::id());
         $user->coins -= Challenge::PARTICIPATION_COST;
+        $user->save();
 
-        return CustomResponseBuilder::success();
+        return CustomResponseBuilder::success([
+            'coins' => $user->coins
+        ]);
 
     }
 }
