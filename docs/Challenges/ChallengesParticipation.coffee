@@ -58,7 +58,9 @@
 {
     "success": true,
     "code": 0,
-    "data": null
+    "data": {
+        "coins": 470
+    }
 }
 
 @apiErrorExample Participation limit exceeded:

@@ -34,6 +34,7 @@ class Challenge extends Model
     protected $appends = [
         'participants_count',
         'is_participated',
+        'participation_cost'
     ];
 
     protected $casts = [
@@ -72,6 +73,14 @@ class Challenge extends Model
     public function getParticipantsCountAttribute(): int
     {
         return $this->participants->count();
+    }
+
+    /**
+     * @return int
+     */
+    public function getParticipationCostAttribute(): int
+    {
+        return self::PARTICIPATION_COST;
     }
 
     /**

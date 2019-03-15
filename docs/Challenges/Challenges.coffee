@@ -41,7 +41,10 @@
                 "end_date": "1552003200",
                 "created_at": "1551344002",
                 "updated_at": "1551344002",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 203,
@@ -57,8 +60,11 @@
                 "start_date": "1551351762",
                 "end_date": "1552734162",
                 "created_at": "1551351835",
-                "updated_at": "1551351835"
-                "participants_count": 0
+                "updated_at": "1551351835",
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 204,
@@ -75,7 +81,10 @@
                 "end_date": "1552820562",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 205,
@@ -92,7 +101,10 @@
                 "end_date": "1552993362",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 206,
@@ -109,7 +121,10 @@
                 "end_date": "1552734163",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 207,
@@ -126,7 +141,10 @@
                 "end_date": "1552993363",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 208,
@@ -143,7 +161,10 @@
                 "end_date": "1552906964",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 209,
@@ -160,7 +181,10 @@
                 "end_date": "1553770964",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 210,
@@ -177,7 +201,10 @@
                 "end_date": "1553770965",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 211,
@@ -194,7 +221,10 @@
                 "end_date": "1552561365",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 212,
@@ -211,7 +241,10 @@
                 "end_date": "1552215766",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 213,
@@ -228,7 +261,10 @@
                 "end_date": "1552215766",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 214,
@@ -245,7 +281,10 @@
                 "end_date": "1553684566",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 215,
@@ -262,7 +301,10 @@
                 "end_date": "1553598167",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             },
             {
                 "id": 216,
@@ -279,7 +321,10 @@
                 "end_date": "1553598167",
                 "created_at": "1551351835",
                 "updated_at": "1551351835",
-                "participants_count": 0
+                "participants_count": 0,
+                "is_participated": false,
+                "participation_cost": 10,
+                "participants": []
             }
         ]
     }
@@ -311,7 +356,46 @@
         "start_date": "1551225600",
         "end_date": "1551312000",
         "created_at": "1551197038",
-        "updated_at": "1551197038"
+        "updated_at": "1551197038",
+        "participants_count": 2,
+        "is_participated": true,
+        "participation_cost": 10,
+        "participants": [
+          {
+              "id": 4,
+              "email": "foecunditate@gmail.com",
+              "created_at": "1552302801",
+              "updated_at": "1552314551",
+              "phone_number": "0507337257",
+              "country_code": "+38",
+              "is_registration_completed": true,
+              "avatar": "http://localhost/storage/avatars/J18DD54mrjLKX71CioZmZEPdRRUdYJ5tNRtUtcfb.jpeg",
+              "birthday": "604508113",
+              "sex": "male",
+              "country": "Saudi arabia",
+              "city": "Mecca",
+              "company": null,
+              "full_name": "Test2",
+              "coins": 100
+          },
+          {
+              "id": 3,
+              "email": "myfuns1989@gmail.com",
+              "created_at": "1552301679",
+              "updated_at": "1552488810",
+              "phone_number": "0630383034",
+              "country_code": "+38",
+              "is_registration_completed": true,
+              "avatar": "http://localhost/storage/avatars/dvK9tRueOfxSoPNASZzl0I7qmgZIkGfCQqXi8QAC.jpeg",
+              "birthday": "604508113",
+              "sex": "male",
+              "country": "Saudi arabia",
+              "city": "Mecca",
+              "company": null,
+              "full_name": "Test",
+              "coins": 480
+          }
+      ]
     }
 }
 
