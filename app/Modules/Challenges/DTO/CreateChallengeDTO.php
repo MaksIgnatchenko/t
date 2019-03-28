@@ -7,6 +7,8 @@
 namespace App\Modules\Challenges\DTO;
 
 
+use App\Helpers\PrettyNameHelper;
+
 class CreateChallengeDTO
 {
     /**
@@ -19,19 +21,29 @@ class CreateChallengeDTO
      */
     private $countries;
 
+    /**
+     * @var array
+     */
     private $proofTypes;
 
     /**
-     * ChallengeDTO constructor.
+     * @var array
+     */
+    private $videoLengthTypes;
+
+    /**
+     * CreateChallengeDTO constructor.
      * @param array $companies
      * @param array $countries
      * @param array $proofTypes
+     * @param array $videoLengthTypes
      */
-    public function __construct(array $companies, array $countries, array $proofTypes)
+    public function __construct(array $companies, array $countries, array $proofTypes, array $videoLengthTypes)
     {
         $this->companies = $companies;
         $this->countries = $countries;
         $this->proofTypes = $proofTypes;
+        $this->videoLengthTypes = $videoLengthTypes;
     }
 
     /**
@@ -55,6 +67,16 @@ class CreateChallengeDTO
      */
     public function getProofTypes(): array
     {
-        return $this->proofTypes;
+        return array_map(function($proofName) {
+            return PrettyNameHelper::transform($proofName);
+        }, $this->proofTypes);
+    }
+
+    /**
+     * @return array
+     */
+    public function getVideoLengthTypes(): array
+    {
+        return $this->videoLengthTypes;
     }
 }

@@ -27,6 +27,8 @@ class Challenge extends Model
         'city',
         'participants_limit',
         'proof_type',
+        'items_count_in_proof',
+        'video_duration',
         'start_date',
         'end_date',
     ];
@@ -43,20 +45,6 @@ class Challenge extends Model
         'created_at' => 'date:U',
         'updated_at' => 'date:U',
     ];
-
-    /**
-     * @param $attribute
-     */
-    public function setImageAttribute($attribute)
-    {
-        $file = Storage::put('challenges', $attribute);
-
-        if (null !== $this->image) {
-            Storage::delete($this->image);
-        }
-
-        $this->attributes['image'] = $file;
-    }
 
     /**
      * @param $value

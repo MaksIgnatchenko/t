@@ -2,6 +2,7 @@
 @section('title', 'Create challenge')
 
 @section('content')
+    @include('challenge.proof_types')
     <section class="content">
         <div class="clearfix"></div>
 
