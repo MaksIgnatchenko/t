@@ -4,7 +4,6 @@
 @section('content')
     <section class="content">
         <div class="clearfix"></div>
-
         @include('flash::message')
         {!! Form::open(['route' => 'challenge.store', 'method' => 'POST', 'files' => true]) !!}
         <div class="row">

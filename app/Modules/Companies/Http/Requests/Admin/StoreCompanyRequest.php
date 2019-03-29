@@ -24,8 +24,8 @@ class StoreCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:50',
-            'logo' => 'file|image|mimes:jpeg,png,jpg|max:' . config('custom.company_logo_max_size'),
+            'name' => 'required|string|max:50|unique:companies,name',
+            'logo' => 'nullable|string|max:100',
             'info' => 'required|string|max:1000',
         ];
     }

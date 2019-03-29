@@ -27,6 +27,8 @@ class Challenge extends Model
         'city',
         'participants_limit',
         'proof_type',
+        'items_count_in_proof',
+        'video_duration',
         'start_date',
         'end_date',
     ];
@@ -45,26 +47,32 @@ class Challenge extends Model
     ];
 
     /**
-     * @param $attribute
-     */
-    public function setImageAttribute($attribute)
-    {
-        $file = Storage::put('challenges', $attribute);
-
-        if (null !== $this->image) {
-            Storage::delete($this->image);
-        }
-
-        $this->attributes['image'] = $file;
-    }
-
-    /**
      * @param $value
      * @return string|null
      */
     public function getImageAttribute($value): ?string
     {
         return $value ? Storage::url($value) : null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageWithDefaultAttribute($value): ?string
+    {
+        return $value ? Storage::url($value) : '/assets/images/default_challenge.svg';
+    }
+
+    /**
+     * @param $attribute
+     */
+    public function setImageAttribute($attribute)
+    {
+        if (null !== $this->image) {
+            Storage::delete($this->image);
+        }
+
+        $this->attributes['image'] = $attribute;
     }
 
     /**

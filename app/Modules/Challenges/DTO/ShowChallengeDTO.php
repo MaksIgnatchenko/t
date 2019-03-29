@@ -6,8 +6,10 @@
 
 namespace App\Modules\Challenges\DTO;
 
+use App\Helpers\PrettyNameHelper;
 use App\Modules\Challenges\Models\Challenge;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ShowChallengeDTO
 {
@@ -38,7 +40,7 @@ class ShowChallengeDTO
      */
     public function getImageUrl(): ?string
     {
-        return $this->challenge->image;
+        return $this->challenge->image ?? $this->challenge->image_with_default;
     }
 
     /**
@@ -89,7 +91,7 @@ class ShowChallengeDTO
      */
     public function getProofType(): string
     {
-        return $this->challenge->proof_type;
+        return PrettyNameHelper::transform($this->challenge->proof_type);
     }
 
     /**
@@ -114,5 +116,29 @@ class ShowChallengeDTO
     public function getEndDate(): string
     {
         return Carbon::parse($this->challenge->end_date)->toDateString();
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequiredProofItems() : int
+    {
+        return $this->challenge->items_count_in_proof;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getVideoDuration() : ?int
+    {
+        return $this->challenge->video_duration;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMultipleProofItems() : bool
+    {
+        return $this->challenge->items_count_in_proof > 1;
     }
 }

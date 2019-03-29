@@ -190,6 +190,7 @@ return [
         App\Modules\Challenges\Providers\ChallengeAdminRouteServiceProvider::class,
         App\Modules\Challenges\Providers\ChallengeApiRouteServiceProvider::class,
         App\Modules\Companies\Providers\CompanyAdminRouteServiceProvider::class,
+        App\Modules\Files\Providers\FilesAdminRouteServiceProvider::class,
     ],
 
     /*

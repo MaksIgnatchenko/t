@@ -12,6 +12,7 @@ use App\Modules\Challenges\DTO\CreateChallengeDTO;
 use App\Modules\Challenges\DTO\ShowChallengeDTO;
 use App\Modules\Challenges\Enums\CountryEnum;
 use App\Modules\Challenges\Enums\ProofTypeEnum;
+use App\Modules\Challenges\Enums\VideoLengthEnum;
 use App\Modules\Challenges\Http\Requests\Admin\StoreChallengeRequest;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Company;
@@ -53,7 +54,8 @@ class ChallengeController extends Controller
         $companies = Company::all()->pluck('name', 'id')->toArray();
         $countries = array_combine(CountryEnum::getAll(), CountryEnum::getAll());
         $proofTypes = array_combine(ProofTypeEnum::getAll(), ProofTypeEnum::getAll());
-        $dto = new CreateChallengeDTO($companies, $countries, $proofTypes);
+        $videoLengthTypes = array_combine(VideoLengthEnum::getAll(), VideoLengthEnum::getAll());
+        $dto = new CreateChallengeDTO($companies, $countries, $proofTypes, $videoLengthTypes);
         return view('challenge.create', ['dto' => $dto]);
     }
 

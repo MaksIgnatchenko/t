@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 require('./custom/datepicker');
-require('./custom/fileSizeLimit');
+require('./dropzone');
 
 // window.Vue = require('vue');
 
