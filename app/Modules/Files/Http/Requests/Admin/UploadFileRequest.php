@@ -33,6 +33,7 @@ class UploadFileRequest extends FormRequest
         return [
             'sign' => ['required', 'string', 'max:100', Rule::in(FileSignTypeEnum::getAll())],
             'file' => 'required|file|max:' . FileMaxSize::getMaxSize($this),
+            'path' => 'nullable|string|max:20',
         ];
     }
 }

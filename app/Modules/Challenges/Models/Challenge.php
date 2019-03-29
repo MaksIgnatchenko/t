@@ -56,6 +56,26 @@ class Challenge extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getImageWithDefaultAttribute($value): ?string
+    {
+        return $value ? Storage::url($value) : '/assets/images/default_challenge.svg';
+    }
+
+    /**
+     * @param $attribute
+     */
+    public function setImageAttribute($attribute)
+    {
+        if (null !== $this->image) {
+            Storage::delete($this->image);
+        }
+
+        $this->attributes['image'] = $attribute;
+    }
+
+    /**
      * @return int
      */
     public function getParticipantsCountAttribute(): int

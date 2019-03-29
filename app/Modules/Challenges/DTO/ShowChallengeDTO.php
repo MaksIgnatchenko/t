@@ -9,6 +9,7 @@ namespace App\Modules\Challenges\DTO;
 use App\Helpers\PrettyNameHelper;
 use App\Modules\Challenges\Models\Challenge;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ShowChallengeDTO
 {
@@ -39,7 +40,7 @@ class ShowChallengeDTO
      */
     public function getImageUrl(): ?string
     {
-        return $this->challenge->image;
+        return $this->challenge->image ?? $this->challenge->image_with_default;
     }
 
     /**

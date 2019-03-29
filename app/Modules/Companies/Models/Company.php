@@ -33,16 +33,22 @@ class Company extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getLogoWithDefaultAttribute($value): ?string
+    {
+        return $value ? Storage::url($value) : '/assets/images/default_company.svg';
+    }
+
+    /**
      * @param $attribute
      */
     public function setLogoAttribute($attribute)
     {
-        $file = Storage::put('companies', $attribute);
-
         if (null !== $this->logo) {
             Storage::delete($this->logo);
         }
 
-        $this->attributes['logo'] = $file;
+        $this->attributes['logo'] = $attribute;
     }
 }

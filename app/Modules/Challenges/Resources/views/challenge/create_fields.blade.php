@@ -166,7 +166,7 @@
                 <div class="form-group">
                     {!! Form::label('cover-image', 'Cover image') !!}
                 </div>
-                <div class="form-group dropzone challenge-logo-dropzone dz-clickable" sign="challenge-logo" max-size="{{ config('custom.challenge_logo_max_size') }}">
+                <div class="form-group dropzone challenge-logo-dropzone dz-clickable">
                 </div>
                 @if ($errors->has('image'))
                     <div class="alert alert-danger" role="alert">
@@ -212,11 +212,6 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="form-group" hidden>
-    {!! Form::text('img_url', old('img_url'), ['class' => 'form-control']) !!}
 </div>
 
 <!-- Description field -->

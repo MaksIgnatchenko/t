@@ -2,10 +2,8 @@
 @section('title', 'Create challenge')
 
 @section('content')
-    @include('challenge.proof_types')
     <section class="content">
         <div class="clearfix"></div>
-
         @include('flash::message')
         {!! Form::open(['route' => 'challenge.store', 'method' => 'POST', 'files' => true]) !!}
         <div class="row">

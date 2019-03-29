@@ -1,5 +1,5 @@
 <div class="media">
-    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="{{$user->avatar_with_default}}"
+    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="{{$user->avatar ?? $user->avatar_with_default}}"
          alt="Generic placeholder image">
     <div class="media-body">
         <h5 class="mt-0 font-18 mb-1">{{$user->full_name}}</h5>

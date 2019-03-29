@@ -25,6 +25,8 @@
 <script src="{{ URL::asset('build/js/vendor.js') }}"></script>
 <script src="{{ URL::asset('build/js/app.js') }}"></script>
 
+@include('js_variables')
+
 <div id="preloader">
     <div id="status">
         <div class="spinner"></div>
