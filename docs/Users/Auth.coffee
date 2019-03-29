@@ -173,12 +173,12 @@ HTTP/1.1 200 OK
 
 @apiParam {File} [avatar] Image. Max 5mb, png, jpeg
 @apiParam {String} full_name Max 100
-@apiParam {Date} birthday Example: 604508113 (timestamp)
-@apiParam {String} sex Max 50.
-@apiParam {String} country]Max 50
+@apiParam {Date} [birthday] Example: 604508113 (timestamp)
+@apiParam {String} [sex] Max 50.
+@apiParam {String} country Max 50
 @apiParam {String} [city] Max 50.
 @apiParam {String} [company] Max 50
-@apiParam {String} email Max 50. Must be unique
+@apiParam {String} [email] Max 50. Must be unique
 
 @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK

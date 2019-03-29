@@ -36,7 +36,7 @@ class UpdateProfileRequest extends FormRequest
             'country' => 'required|string|max:50',
             'city' => 'string|max:50',
             'company' => 'string|max:50',
-            'email' => "required|email|max:50|unique:users,email,{$this->user()->id}",
+            'email' => "nullable|email|max:50|unique:users,email,{$this->user()->id}",
         ];
     }
 }
