@@ -5,6 +5,7 @@
 
 namespace App\Modules\Challenges\Providers;
 
+use App\Modules\Challenges\Models\Challenge;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +31,12 @@ class ChallengeApiRouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(__DIR__ . './../Routes/api.php');
+    }
+
+    public function boot()
+    {
+        parent::boot();
+
+        Route::model('challenge', Challenge::class);
     }
 }

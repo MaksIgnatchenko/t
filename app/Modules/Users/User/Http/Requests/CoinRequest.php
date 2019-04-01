@@ -8,8 +8,6 @@
 
 namespace App\Modules\Users\User\Http\Requests;
 
-use App\Rules\PasswordRule;
-use App\Rules\PasswordRuleApi;
 use App\Services\ResponseBuilder\ValidationErrorsApiMessagesTrait;
 use Illuminate\Foundation\Http\FormRequest;
 

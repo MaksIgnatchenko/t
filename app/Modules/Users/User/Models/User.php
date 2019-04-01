@@ -2,7 +2,10 @@
 
 namespace App\Modules\Users\User\Models;
 
+use App\Modules\Challenges\Enums\ProofStatusEnum;
+use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Challenges\Models\Challenge;
+use App\Modules\Challenges\Models\Proof;
 use App\Modules\Users\User\Mails\ResetPasswordMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -156,10 +159,31 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function proofs()
+    {
+        return $this->hasMany(Proof::class);
+    }
+
+    /**
      * @return bool
      */
     public function enoughCoinsToParticipateChallenge(): bool
     {
         return $this->coins >= Challenge::PARTICIPATION_COST;
+    }
+
+    /**
+     * @param Challenge $challenge
+     * @return bool
+     */
+    public function isAbleToSendProof(Challenge $challenge) : bool
+    {
+        return Proof::where('challenge_id', $challenge->id)
+            ->where('user_id', $this->id)
+            ->whereIn('status', [ProofStatusEnum::PENDING, ProofStatusEnum::ACCEPTED])
+            ->count();
+
     }
 }
