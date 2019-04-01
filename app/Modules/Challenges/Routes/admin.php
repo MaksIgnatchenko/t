@@ -6,4 +6,5 @@
 
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::resource('challenge', 'ChallengeController')->only(['index', 'show', 'create', 'store']);
+    Route::get('challenge/{challenge}/proof', 'ProofController@index');
 });
