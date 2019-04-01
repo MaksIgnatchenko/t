@@ -41,7 +41,7 @@ class ProofController extends Controller
         $proof->challenge_id = $challenge->id;
         $proof->user_id = $user->id;
         $proof->status = ProofStatusEnum::PENDING;
-        $proof->items = [$request->items[0]];
+        $proof->items = $request->items;
         $proof->save();
         return CustomResponseBuilder::success();
     }
@@ -54,9 +54,6 @@ class ProofController extends Controller
      */
     public function destroy(Challenge $challenge, Proof $proof) : Response
     {
-        if ($proof->user_id !== Auth::id()) {
-            return CustomResponseBuilder::error(ApiCode::USER_IS_NOT_OWNER_OF_PROOF);
-        }
         if ($proof->challenge_id !== $challenge->id) {
             return CustomResponseBuilder::error(ApiCode::PROOF_DOES_NOT_BELONG_TO_THIS_CHALLENGE);
         }

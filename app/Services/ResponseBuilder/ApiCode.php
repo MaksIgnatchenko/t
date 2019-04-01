@@ -24,7 +24,7 @@ class ApiCode
     public const USER_HAS_PENDING_PROOF = 22;
     public const CHALLENGE_NOT_ACTIVE = 23;
     public const USER_HAS_PENDING_OR_ACCEPTED_PROOF = 24;
-    public const USER_IS_NOT_OWNER_OF_PROOF = 25;
+    public const UNAUTHORISED_ACTION = 25;
     public const PROOF_DOES_NOT_BELONG_TO_THIS_CHALLENGE = 26;
     public const PROOF_CANNOT_BE_REMOVED = 27;
 

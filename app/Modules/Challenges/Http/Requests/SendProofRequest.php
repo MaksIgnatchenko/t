@@ -33,7 +33,7 @@ class SendProofRequest extends FormRequest
         $challenge = $this->route('challenge');
         return [
             'type' => ['required', 'equal:' . $challenge->getRequiredProofsType()],
-            'items' => ['required', 'array', 'items_count:' . $challenge->getRequiredProofsCount()],
+            'items' => ['required', 'array', 'size:' . $challenge->getRequiredProofsCount()],
             'items.*' => ['file', 'mimes:' . implode(',', $challenge->getAvailableProofItemsMimeType()), 'max:' . $challenge->getMaxSizeProofItemsMimeType()],
         ];
     }

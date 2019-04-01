@@ -17,17 +17,11 @@ class MaxSizeProofItemHelper
     public static function get(string $proofType) : int
     {
         switch ($proofType) {
-            case ProofTypeEnum::PHOTO :
-                return self::getImageMaxSize();
-            case ProofTypeEnum::MULTIPLE_PHOTOS :
-                return self::getImageMaxSize();
             case ProofTypeEnum::VIDEO :
                 return self::getVideoMaxSize();
             case ProofTypeEnum::MULTIPLE_VIDEOS :
                 return self::getVideoMaxSize();
-            case ProofTypeEnum::SCREENSHOT :
-                return self::getImageMaxSize();
-            case ProofTypeEnum::MULTIPLE_SCREENSHOTS :
+            default :
                 return self::getImageMaxSize();
         }
     }
@@ -37,7 +31,7 @@ class MaxSizeProofItemHelper
      */
     private static function getImageMaxSize() : int
     {
-        return config('custom.max_size_proof_image', 1024 * 1024 * 5);
+        return config('custom.max_size_proof_image', 1024 * 5);
     }
 
     /**
@@ -45,6 +39,6 @@ class MaxSizeProofItemHelper
      */
     private static function getVideoMaxSize() : int
     {
-        return config('custom.max_size_proof_video', 1024 * 1024 * 10);
+        return config('custom.max_size_proof_video', 1024 * 10);
     }
 }
