@@ -10,9 +10,9 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Illuminate\Auth\Access\AuthorizationException as UnauthorizedActionException;
 
 class Handler extends ExceptionHandler
 {
@@ -60,6 +60,9 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($request->wantsJson()) {
+            if ($exception instanceof UnauthorizedActionException) {
+                return CustomResponseBuilder::error(ApiCode::UNAUTHORISED_ACTION);
+            }
             if ($exception instanceof ModelNotFoundException || $exception instanceof QueryException) {
                 return CustomResponseBuilder::error(ApiCode::NO_SUCH_ITEM);
             }

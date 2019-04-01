@@ -22,14 +22,6 @@ class ChallengeServiceProvider extends ServiceProvider
     {
         Proof::observe(ProofObserver::class);
 
-        Validator::extend('items_count', function ($attribute, $value, $parameters, $validator) {
-            $requiredCount = (int) $parameters[0];
-            if (is_array($value)) {
-                return count($value) === $requiredCount;
-            }
-            return false;
-        });
-
         Validator::extend('equal', function ($attribute, $value, $parameters, $validator) {
             $requiredValue = $parameters[0];
             return $requiredValue == $value;

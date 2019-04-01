@@ -12,5 +12,5 @@ Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => 'challenge'], fun
     Route::post('/{challenge}/participation', 'ChallengeParticipationController@store');
 
     Route::post('/{challenge}/proof', 'ProofController@store');
-    Route::delete('/{challenge}/proof/{proof}', 'ProofController@destroy');
+    Route::delete('/{challenge}/proof/{proof}', 'ProofController@destroy')->middleware('can:destroy,proof');
 });
