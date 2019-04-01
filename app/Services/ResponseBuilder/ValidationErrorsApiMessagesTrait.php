@@ -26,6 +26,8 @@ trait ValidationErrorsApiMessagesTrait
             'email' => ValidationErrorCode::EMAIL,
             'exists' => ValidationErrorCode::EXISTS,
             'integer' => ValidationErrorCode::INTEGER,
+            'items_count' => ValidationErrorCode::ITEMS_COUNT,
+            'equal' => ValidationErrorCode::EQUAL,
         ];
     }
 }

@@ -6,12 +6,17 @@
 
 namespace App\Modules\Challenges\Models;
 
+use App\Modules\Challenges\Helpers\AvailableMimeTypeForProofItemHelper;
+use App\Modules\Challenges\Helpers\MaxSizeProofItemHelper;
+use App\Modules\Challenges\Interfaces\AbleToContainProofs;
 use App\Modules\Users\User\Models\User;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class Challenge extends Model
+class Challenge extends Model implements AbleToContainProofs
 {
     public const PARTICIPATION_COST = 10;
     protected const DEFAULT_LIMIT = 15;
@@ -36,7 +41,8 @@ class Challenge extends Model
     protected $appends = [
         'participants_count',
         'is_participated',
-        'participation_cost'
+        'participation_cost',
+        'my_proof_status',
     ];
 
     protected $casts = [
@@ -100,6 +106,14 @@ class Challenge extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function proofs()
+    {
+        return $this->hasMany(Proof::class);
+    }
+
+    /**
      * @return bool
      */
     public function getIsParticipatedAttribute(): bool
@@ -108,6 +122,19 @@ class Challenge extends Model
             ->wherePivot('user_id', Auth::id())
             ->get()
             ->isNotEmpty();
+    }
+
+    public function getMyProofStatusAttribute(): ?string
+    {
+        $latestProof = $this->
+            proofs()
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desk')
+            ->first();
+        if ($latestProof) {
+            return $latestProof->status;
+        }
+        return null;
     }
 
     /**
@@ -135,4 +162,54 @@ class Challenge extends Model
     {
         return ($this->participants_limit === 0) || ($this->participants_limit > $this->participants_count);
     }
+
+    /**
+     * @return string
+     */
+    public function getRequiredProofsType(): string
+    {
+        return $this->proof_type;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequiredProofsCount(): int
+    {
+        return $this->items_count_in_proof;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getRequiredVideoDuration(): ?int
+    {
+        return $this->video_duration;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAvailableProofItemsMimeType() : array
+    {
+        return AvailableMimeTypeForProofItemHelper::get($this->proof_type);
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxSizeProofItemsMimeType() : int
+    {
+        return MaxSizeProofItemHelper::get($this->proof_type);
+    }
+
+    /**
+     * @return bool
+     */
+    public function checkForActiveStatus() : bool
+    {
+        $now = Carbon::now();
+        return $now->gt($this->start_date) && $now->lt($this->end_date);
+    }
+
 }

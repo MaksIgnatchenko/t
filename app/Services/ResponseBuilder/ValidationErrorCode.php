@@ -22,6 +22,9 @@ class ValidationErrorCode
     public const EMAIL = 1011;
     public const EXISTS = 1012;
     public const INTEGER = 1013;
+    public const ITEMS_COUNT = 1014; // Items count does not match required
+    public const EQUAL = 1015; // Item does not equal to some value
+
 }
 
 

@@ -30,6 +30,11 @@ if (\App\Enums\AppEnvironmentEnum::LOCAL === env('APP_ENV')
         $user->save();
         return \App\Services\ResponseBuilder\CustomResponseBuilder::success();
     })->middleware('auth:api');
+
+    Route::get('test-proof', function() {
+        $proof = \App\Modules\Challenges\Models\Proof::first();
+        return \App\Services\ResponseBuilder\CustomResponseBuilder::success($proof);
+    });
 }
 
 
