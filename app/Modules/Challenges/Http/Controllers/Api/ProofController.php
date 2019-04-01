@@ -41,7 +41,6 @@ class ProofController extends Controller
         $proof->challenge_id = $challenge->id;
         $proof->user_id = $user->id;
         $proof->status = ProofStatusEnum::PENDING;
-        $proof->items = $request->items;
         $proof->save();
         return CustomResponseBuilder::success();
     }
