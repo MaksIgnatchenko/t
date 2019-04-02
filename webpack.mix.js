@@ -21,6 +21,7 @@ mix.js([
         'resources/js/menu.js',
         'resources/js/custom/dropzones.js',
         'resources/js/custom/challenges.js',
+        'resources/js/custom/proofs.js',
     ], 'public/build/js/app.js')
     .sass('resources/sass/app.scss', 'public/build/css/vendor.css')
     .styles([

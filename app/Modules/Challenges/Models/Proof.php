@@ -7,7 +7,9 @@
 namespace App\Modules\Challenges\Models;
 
 use App\Modules\Challenges\Enums\ProofStatusEnum;
+use App\Modules\Users\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 class Proof extends Model
@@ -72,5 +74,21 @@ class Proof extends Model
     public function isAbleForDeletion() : bool
     {
         return in_array($this->status, ProofStatusEnum::getAbleForDeletionStatuses());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAbleForChangeStatus() : bool
+    {
+        return ProofStatusEnum::PENDING === $this->status;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
