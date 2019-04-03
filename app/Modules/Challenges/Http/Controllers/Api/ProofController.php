@@ -19,6 +19,19 @@ use Symfony\Component\HttpFoundation\Response;
 class ProofController extends Controller
 {
     /**
+     * @param Challenge $challenge
+     * @param Proof $proof
+     * @return Response
+     */
+    public function show(Challenge $challenge, Proof $proof) : Response
+    {
+        if ($proof->challenge_id !== $challenge->id) {
+            return CustomResponseBuilder::error(ApiCode::PROOF_DOES_NOT_BELONG_TO_THIS_CHALLENGE);
+        }
+        return CustomResponseBuilder::success($proof);
+    }
+
+    /**
      * @param SendProofRequest $request
      * @return Response
      */
@@ -53,6 +66,7 @@ class ProofController extends Controller
      */
     public function destroy(Challenge $challenge, Proof $proof) : Response
     {
+        $this->authorize('destroy', $proof);
         if ($proof->challenge_id !== $challenge->id) {
             return CustomResponseBuilder::error(ApiCode::PROOF_DOES_NOT_BELONG_TO_THIS_CHALLENGE);
         }

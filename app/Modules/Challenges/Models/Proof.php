@@ -36,6 +36,8 @@ class Proof extends Model
      */
     protected $casts = [
         'items' => 'array',
+        'created_at' => 'date:U',
+        'updated_at' => 'date:U',
     ];
 
     /**
