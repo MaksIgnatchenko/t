@@ -33,7 +33,7 @@ class ChallengeDataTable extends DataTable
                 return Carbon::parse($query->start_date)->toDateString();
             })
             ->editColumn('end_date', function($query) {
-                return Carbon::parse($query->start_date)->toDateString();
+                return Carbon::parse($query->end_date)->toDateString();
             })
             ->rawColumns(['image', 'action']);
     }
