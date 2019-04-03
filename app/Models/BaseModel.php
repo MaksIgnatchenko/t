@@ -17,7 +17,7 @@ class BaseModel extends Model
         try {
             $model = $this->where('id', (int) $value)->firstOrFail();
         } catch (ModelNotFoundException $exception) {
-            $exception->setModel('challenge');
+            $exception->setModel(class_basename(static::class));
             throw $exception;
         } catch (QueryException $exception) {
             $exception = new ModelNotFoundException();
