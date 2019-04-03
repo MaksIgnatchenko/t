@@ -8,6 +8,7 @@ namespace App\Modules\Challenges\Datatables;
 
 use App\Modules\Challenges\Helpers\ProofStatusClassHelper;
 use App\Modules\Challenges\Models\Proof;
+use Carbon\Carbon;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,6 +33,9 @@ class ProofDataTable extends DataTable
             ->editColumn('status', function($query) {
                 $className = ProofStatusClassHelper::getClassName($query->status);
                 return "<span class='" . $className . "'>$query->status</span>";
+            })
+            ->editColumn('created_at', function($query) {
+                return Carbon::parse($query->created_at)->toDateString();
             })
             ->rawColumns(['action', 'status', 'user.full_name']);
     }
