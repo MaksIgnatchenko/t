@@ -6,13 +6,13 @@
 
 namespace App\Modules\Challenges\Models;
 
+use App\Models\BaseModel;
 use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Users\User\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
-class Proof extends Model
+class Proof extends BaseModel
 {
     /**
      * @var array

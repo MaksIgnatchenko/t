@@ -6,10 +6,10 @@
 
 namespace App\Modules\Challenges\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 use Illuminate\Support\Facades\Storage;
 
-class Company extends Model
+class Company extends BaseModel
 {
     /**
      * The table associated with the model.
