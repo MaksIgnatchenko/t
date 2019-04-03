@@ -1,4 +1,45 @@
 ###
+@api {get} /api/challenge/:id/proof/:id Get proof details
+@apiName Get proof details
+@apiGroup Proof
+@apiPermission User
+@apiVersion 0.1.0
+
+@apiSuccessExample Success-Response:
+{
+    "success": true,
+    "code": 0,
+    "data": {
+        "id": 4,
+        "challenge_id": 411,
+        "user_id": 7,
+        "type": "video",
+        "items": [
+            "https://tagit.appus.work/storage/proofs/cw9Ehrn47vsVWsQtnvzEg3Y4QeoHuqnW6UFxeguS.mp4"
+        ],
+        "status": "accepted",
+        "created_at": "1554128127",
+        "updated_at": "1554128127"
+    }
+}
+
+@apiErrorExample No such proof:
+{
+    "success": false,
+    "code": 16,
+    "data": null
+}
+
+@apiErrorExample Proof does not belong to this challenge:
+{
+    "success": false,
+    "code": 26,
+    "data": null
+}
+
+###
+
+###
 @api {post} /api/challenge/:id/proof Send proof
 @apiName Send proof
 @apiGroup Proof

@@ -5,6 +5,9 @@
 
 namespace App\Modules\Challenges\Providers;
 
+use App\Modules\Challenges\Models\Challenge;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 

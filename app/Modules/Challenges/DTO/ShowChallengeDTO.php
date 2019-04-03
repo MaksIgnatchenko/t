@@ -36,6 +36,15 @@ class ShowChallengeDTO
     }
 
     /**
+     * @return int
+     */
+
+    public function getChallengeId(): int
+    {
+        return $this->challenge->id;
+    }
+
+    /**
      * @return string|null
      */
     public function getImageUrl(): ?string
@@ -100,6 +109,14 @@ class ShowChallengeDTO
     public function getParticipantsLimit(): int
     {
         return $this->challenge->participants_limit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParticipantsCount(): int
+    {
+        return $this->challenge->participants_count;
     }
 
     /**

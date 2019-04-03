@@ -4,13 +4,16 @@
  *
  */
 
-Route::group(['middleware' => ['api', 'auth:api'], 'prefix' => 'challenge'], function () {
-    Route::get('/', 'ChallengeController@index');
-    Route::get('/{challenge}', 'ChallengeController@show');
+Route::group(['middleware' => ['api', 'auth:api']], function () {
+    Route::get('challenge/', 'ChallengeController@index');
+    Route::get('challenge/{challenge}', 'ChallengeController@show');
 
-    Route::get('/{challenge}/participation', 'ChallengeParticipationController@index');
-    Route::post('/{challenge}/participation', 'ChallengeParticipationController@store');
-
-    Route::post('/{challenge}/proof', 'ProofController@store');
-    Route::delete('/{challenge}/proof/{proof}', 'ProofController@destroy')->middleware('can:destroy,proof');
+    Route::get('challenge/{challenge}/participation', 'ChallengeParticipationController@index');
+    Route::post('challenge/{challenge}/participation', 'ChallengeParticipationController@store');
+    Route::resource('challenge.proof', 'ProofController', [
+        'names' => [
+            'show' => 'api.proof.show',
+            'store' => 'api.proof.store',
+            'destroy' => 'api.proof.destroy'
+        ]])->only(['show', 'store', 'destroy']);
 });

@@ -6,6 +6,7 @@
 namespace App\Helpers;
 
 use App\Modules\Challenges\Http\Controllers\Admin\ChallengeController;
+use App\Modules\Challenges\Http\Controllers\Admin\ProofController;
 use App\Modules\Companies\Http\Controllers\Admin\CompanyController;
 use App\Modules\Content\Http\Controllers\Admin\ContentController;
 use App\Modules\Users\Admin\Http\Controllers\DashboardController;
@@ -61,7 +62,8 @@ class ActiveLink
     {
         $controller = self::getControllerInstance();
 
-        return $controller instanceof ChallengeController;
+        return $controller instanceof ChallengeController
+            || $controller instanceof ProofController;
     }
 
     /**

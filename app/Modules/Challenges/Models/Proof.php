@@ -6,11 +6,13 @@
 
 namespace App\Modules\Challenges\Models;
 
+use App\Models\BaseModel;
 use App\Modules\Challenges\Enums\ProofStatusEnum;
-use Illuminate\Database\Eloquent\Model;
+use App\Modules\Users\User\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
-class Proof extends Model
+class Proof extends BaseModel
 {
     /**
      * @var array
@@ -34,6 +36,8 @@ class Proof extends Model
      */
     protected $casts = [
         'items' => 'array',
+        'created_at' => 'date:U',
+        'updated_at' => 'date:U',
     ];
 
     /**
@@ -72,5 +76,21 @@ class Proof extends Model
     public function isAbleForDeletion() : bool
     {
         return in_array($this->status, ProofStatusEnum::getAbleForDeletionStatuses());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAbleForChangeStatus() : bool
+    {
+        return ProofStatusEnum::PENDING === $this->status;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

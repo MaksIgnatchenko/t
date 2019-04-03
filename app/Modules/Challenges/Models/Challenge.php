@@ -6,17 +6,16 @@
 
 namespace App\Modules\Challenges\Models;
 
+use App\Models\BaseModel;
 use App\Modules\Challenges\Helpers\AvailableMimeTypeForProofItemHelper;
 use App\Modules\Challenges\Helpers\MaxSizeProofItemHelper;
 use App\Modules\Challenges\Interfaces\AbleToContainProofs;
 use App\Modules\Users\User\Models\User;
 use Carbon\Carbon;
-use Carbon\CarbonInterval;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class Challenge extends Model implements AbleToContainProofs
+class Challenge extends BaseModel implements AbleToContainProofs
 {
     public const PARTICIPATION_COST = 10;
     protected const DEFAULT_LIMIT = 15;
@@ -211,5 +210,4 @@ class Challenge extends Model implements AbleToContainProofs
         $now = Carbon::now();
         return $now->gt($this->start_date) && $now->lt($this->end_date);
     }
-
 }
