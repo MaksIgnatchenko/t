@@ -1,204 +1,98 @@
 <!-- Logo Field -->
-<div class="row form-justify-container">
-    <div class="col-md-12">
-        <div class="box">
-            <div class="box-body">
-                <div class="form-group dashboard-image d-flex justify-content-center">
-                    {!!  $dto->getImageUrl() ? ("<img class='show-image' src=" . $dto->getImageUrl()) . " />" : ('') !!}
-                </div>
+{{--<div class="row form-justify-container">--}}
+
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-6">
+        <a class="image-popup-no-margins" target="_blank" href="{{ $dto->getImageUrl() }}">
+            {!!  $dto->getImageUrl() ? ("<img class='dashboard-image rounded-circle' src=" . $dto->getImageUrl()) . " />" : ('') !!}
+        </a>
+    </div>
+    <div class="col-md-6">
+        <div class="card m-b-20 card-inverse text-white" style="background-color: #333; border-color: #333;">
+            <div class="card-block">
+                <h3 class="card-title font-20 mt-0">Base info</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Name</div>
+                <div class="col-md-8">{{ $dto->getName() }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Link</div>
+                <div class="col-md-8">{{ Html::link($dto->getLink(), 'Click here') }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Start date <span class="fa fa-calendar"></span></div>
+                <div class="col-md-8">{{ $dto->getStartDate() }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">End date <span class="fa fa-calendar"></span></div>
+                <div class="col-md-8">{{ $dto->getEndDate() }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card m-b-20 card-inverse text-white" style="background-color: #333; border-color: #333;">
+            <div class="card-block">
+                <h3 class="card-title font-20 mt-0">Location</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Country</div>
+                <div class="col-md-8">{{ $dto->getCountry() }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">City</div>
+                <div class="col-md-8">{{ $dto->getCity() }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card m-b-20 card-inverse text-white" style="background-color: #333; border-color: #333;">
+            <div class="card-block">
+                <h3 class="card-title font-20 mt-0">Participants</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Participants limit</div>
+                <div class="col-md-8">{{ $dto->getParticipantsLimit() }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">Participants now</div>
+                <div class="col-md-8">{{ $dto->getParticipantsCount() }}</div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row form-justify-container">
+<div class="row">
     <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <!-- Name Field -->
-                <div class="form-group">
-                    <p>
-                        {{ Form::label('name', 'Name: ') }}
-                        {{ $dto->getName() }}
-                    </p>
-                </div>
+        <div class="card m-b-20 card-inverse text-white" style="background-color: #333; border-color: #333;">
+            <div class="card-block">
+                <h3 class="card-title font-20 mt-0">Proofs</h3>
             </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <!-- Link Field -->
-                <div class="form-group">
-                    <p>
-                        {{ Form::label('link', 'Link: ') }}
-                        {{ Html::link($dto->getLink(), 'Click here') }}
-                    </p>
+            <div class="row">
+                <div class="col-md-4">Proof type</div>
+                <div class="col-md-8">{{ $dto->getProofType() }}</div>
+            </div>
+            @if($dto->isMultipleProofItems())
+                <div class="row">
+                    <div class="col-md-4">Required proof items count</div>
+                    <div class="col-md-8">{{ $dto->getRequiredProofItems() }}</div>
                 </div>
+            @endif
+            @if($dto->getVideoDuration())
+                <div class="row">
+                    <div class="col-md-4">Video duration</div>
+                    <div class="col-md-8">{{ $dto->getVideoDuration() }}</div>
+                </div>
+            @endif
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ route('challenge.proof.index', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-primary" role="button">Show proofs</a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row form-justify-container">
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <!-- Country Field -->
-                <div class="form-group">
-                    <p>
-                        {{ Form::label('country', 'Country: ') }}
-                        {{ $dto->getCountry() }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <!-- City Field -->
-                <div class="form-group">
-                    <p>
-                        {{ Form::label('city', 'City: ') }}
-                        {{ $dto->getCity() }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row form-justify-container">
-    <!-- Participants limit limit Field -->
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <div class="form-group">
-                    <p>
-                        {{ Form::label('participants_limit', 'Participants limit (0 - without limit): ') }}
-                        {{ $dto->getParticipantsLimit() }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    @if($dto->getCompanyName())
-    <!-- Company Field -->
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-body">
-                    <div class="form-group">
-                        <p>
-                            {{ Form::label('company', 'Company: ') }}
-                            {{ $dto->getCompanyName() }}
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    @endif
-</div>
-
-<div class="row form-justify-container">
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <!-- Proof type Field -->
-                <div class="form-group">
-                    <p>
-                        {{ Form::label('proof_type', 'Proof type: ') }}
-                        {{ $dto->getProofType() }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    @if($dto->isMultipleProofItems())
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-body">
-                    <!-- Items count in proof Field -->
-                    <div class="form-group">
-                        <p>
-                            {{ Form::label('items_count_in_proof', 'Required count of items for proof: ') }}
-                            {!! $dto->getRequiredProofItems() !!}
-                        </p>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    @endif
-</div>
-
-@if($dto->getVideoDuration())
-    <div class="row form-justify-container">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-body">
-                    <!-- Video duration Field -->
-                    <div class="form-group">
-                        <p>
-                            {!! Html::decode(Form::label('video_duration', 'Video duration <span class="fa fa-clock-o"></span>')) !!}
-                            {{ $dto->getVideoDuration() }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endif
-
-<div class="row form-justify-container">
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <!-- Start date Field -->
-                <div class="form-group">
-                    <p>
-                        {!! Html::decode(Form::label('start_date', 'Start date <span class="fa fa-calendar"></span>')) !!}
-                        {{ $dto->getStartDate() }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <!-- End date Field -->
-                <div class="form-group">
-                    <p>
-                        {!! Html::decode(Form::label('end_date', 'End date <span class="fa fa-calendar"></span>')) !!}
-                        {{ $dto->getEndDate() }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Description field -->
-<div class="row form-justify-container">
-    <div class="col-md-12">
-        <div class="box">
-            <div class="box-body d-flex justify-content-center">
-                {{ Form::label('description', 'Description') }}
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Description field -->
-<div class="row form-justify-container">
-    <div class="col-md-12">
-        <div class="box">
-            <div class="box-body d-flex justify-content-center">
-                {{ $dto->getDescription() }}
-            </div>
-        </div>
-    </div>
-</div>
 

@@ -72,6 +72,11 @@ class Handler extends ExceptionHandler
             return CustomExceptionHandlerHelper::render($request, $exception);
         }
 
+        if ($exception instanceof ModelNotFoundException) {
+            flash('No such ' . $exception->getModel())->error();
+            return redirect()->back();
+        }
+
         if ($exception instanceof MethodNotAllowedHttpException) {
 
             return redirect('/home');
