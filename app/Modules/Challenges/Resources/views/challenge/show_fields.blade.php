@@ -1,6 +1,3 @@
-<!-- Logo Field -->
-{{--<div class="row form-justify-container">--}}
-
 <div class="row" style="margin-bottom: 10px;">
     <div class="col-md-6">
         <a class="image-popup-no-margins" target="_blank" href="{{ $dto->getImageUrl() }}">
@@ -88,9 +85,17 @@
             @endif
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <a href="{{ route('challenge.proof.index', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-primary" role="button">Show proofs</a>
             </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card m-b-20 card-inverse text-white" style="background-color: #333; border-color: #333;">
+            <div class="card-block">
+                <h3 class="card-title font-20 mt-0">Description</h3>
+            </div>
+            <p>{{ $dto->getDescription() }}</p>
         </div>
     </div>
 </div>
