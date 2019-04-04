@@ -9,6 +9,9 @@ php_build:
   script:
     - composer install -on --ignore-platform-reqs --no-progress
     - composer dump-autoload --optimize
+  cache:
+    paths:
+      - vendor/
   artifacts:
     paths:
       - vendor/
@@ -35,6 +38,10 @@ apidoc_build:
 js_build:
   stage: js_build
   image: node:11.2
+  cache:
+    paths:
+      - node_modules/
+
   script:
     - npm install
     - npm run prod
