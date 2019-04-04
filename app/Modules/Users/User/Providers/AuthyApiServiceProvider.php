@@ -40,11 +40,10 @@ class AuthyApiServiceProvider extends ServiceProvider
             $this->app->bind(AuthyApiInterface::class, function () use ($apiKey) {
                 return new AuthyApi($apiKey);
             });
-        } else {
-            $this->app->bind(AuthyApiInterface::class, function () use ($apiKey) {
-                return new AuthyApiStub($apiKey);
-            });
         }
+        $this->app->bind(AuthyApiInterface::class, function () use ($apiKey) {
+            return new AuthyApiStub($apiKey);
+        });
 
     }
 }
