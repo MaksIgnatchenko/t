@@ -10,5 +10,5 @@ class AppEnvironmentEnum
 {
     public const LOCAL = 'local';
     public const DEVELOP = 'development';
-    public const PRODUCTION = 'prod';
+    public const PRODUCTION = 'production';
 }

@@ -8,7 +8,11 @@
 
 namespace App\Modules\Users\User\Providers;
 
-use Authy\AuthyApi;
+use App\Enums\AppEnvironmentEnum;
+use App\Modules\Users\User\Services\AuthyApi\AuthyApi;
+use App\Modules\Users\User\Services\AuthyApi\AuthyApiInterface;
+use App\Modules\Users\User\Services\AuthyApi\AuthyApiStub;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class AuthyApiServiceProvider extends ServiceProvider
@@ -32,8 +36,14 @@ class AuthyApiServiceProvider extends ServiceProvider
     {
         $apiKey = config('services.authy.api_key');
 
-        $this->app->bind('Authy\AuthyApi', function () use ($apiKey) {
-            return new AuthyApi($apiKey);
+        if (App::environment(AppEnvironmentEnum::PRODUCTION)) {
+            $this->app->bind(AuthyApiInterface::class, function () use ($apiKey) {
+                return new AuthyApi($apiKey);
+            });
+        }
+        $this->app->bind(AuthyApiInterface::class, function () use ($apiKey) {
+            return new AuthyApiStub($apiKey);
         });
+
     }
 }
