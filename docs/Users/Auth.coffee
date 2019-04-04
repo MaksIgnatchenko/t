@@ -127,7 +127,7 @@
 
 @apiParam {String} phone_number Max 10 symbols
 @apiParam {String} country_code Max 3 symbols
-@apiParam {String} code 4 symbols
+@apiParam {String} code 4 symbols (any 4 symbols for develop server)
 @apiParam {String} password Max 50.
 @apiParam {String} password_confirmation Max 50. The same as password
 

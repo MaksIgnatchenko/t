@@ -7,6 +7,7 @@ use App\Modules\Users\User\Http\Requests\StartVerificationRequest;
 use App\Modules\Users\User\Http\Requests\UpdateProfileRequest;
 use App\Modules\Users\User\Http\Requests\VerifyCodeRequest;
 use App\Modules\Users\User\Models\User;
+use App\Modules\Users\User\Services\AuthyApi\AuthyApiInterface;
 use App\Services\ResponseBuilder\ApiCode;
 use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Authy\AuthyApi;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      * RegisterController constructor.
      * @param AuthyApi $authyApi
      */
-    public function __construct(AuthyApi $authyApi)
+    public function __construct(AuthyApiInterface $authyApi)
     {
         $this->authyApi = $authyApi;
     }
