@@ -400,7 +400,18 @@
         "proof_type": "photo",
         "items_count_in_proof": 1,
         "video_duration": null,
-        "my_proof_status": "pending",
+        "my_proof": {
+            "id": 8,
+            "challenge_id": 411,
+            "user_id": 24,
+            "type": "video",
+            "items": [
+                "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+            ],
+            "status": "pending",
+            "created_at": "1554741936",
+            "updated_at": "1554741936"
+        },
         "start_date": "1551225600",
         "end_date": "1551312000",
         "created_at": "1551197038",
