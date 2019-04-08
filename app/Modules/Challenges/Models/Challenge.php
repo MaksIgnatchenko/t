@@ -41,7 +41,7 @@ class Challenge extends BaseModel implements AbleToContainProofs
         'participants_count',
         'is_participated',
         'participation_cost',
-        'my_proof_status',
+        'my_proof',
     ];
 
     protected $casts = [
@@ -123,17 +123,17 @@ class Challenge extends BaseModel implements AbleToContainProofs
             ->isNotEmpty();
     }
 
-    public function getMyProofStatusAttribute(): ?string
+    /**
+     * @return Proof|null
+     */
+    public function getMyProofAttribute(): ?Proof
     {
         $latestProof = $this->
             proofs()
             ->where('user_id', Auth::id())
             ->orderBy('created_at', 'desk')
             ->first();
-        if ($latestProof) {
-            return $latestProof->status;
-        }
-        return null;
+        return $latestProof ?? null;
     }
 
     /**

@@ -53,7 +53,11 @@
 {
     "success": true,
     "code": 0,
-    "data": null
+    "data": {
+        "id": 8,
+        "challenge_id": 411,
+        "status": "pending"
+    }
 }
 
 @apiErrorExample No such challenge:
