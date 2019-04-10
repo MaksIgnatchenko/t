@@ -36,11 +36,16 @@
 }
 
 .proof__item {
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 20px;
-    margin-bottom: 15px;
-    vertical-align: top;
+    width: 70%;
+}
+
+.proof__title {
+    text-align: center;
+}
+
+.proof__container {
+    text-align: -webkit-center;
+    text-align: center;
 }
 
 .proof__item img{
@@ -86,4 +91,17 @@
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
+}
+
+.change-proof-status-button {
+    width: 100% !important;
+}
+
+.line-no-break {
+    display: inline-block;
+}
+
+.video-format-no-supported {
+    display: none;
+    color: black !important;
 }
