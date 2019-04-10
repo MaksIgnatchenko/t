@@ -110,34 +110,12 @@ class ShowProofDTO
     }
 
     /**
-     * @param $item
-     * @return string
+     * @return bool
      */
-    public function buildItemTag($item) : string
+    public function isVideoProof() : bool
     {
-        if (ProofTypeEnum::MULTIPLE_VIDEOS === $this->proof->type
-            || ProofTypeEnum::VIDEO === $this->proof->type) {
-            return $this->buildVideoTag($item);
-        }
-        return $this->buildImageTag($item);
-    }
-
-    /**
-     * @param $item
-     * @return string
-     */
-    private function buildImageTag($item) : string
-    {
-        return "<img class='show-image' src=" . $item . " />";
-    }
-
-    /**
-     * @param $item
-     * @return string
-     */
-    private function buildVideoTag($item) : string
-    {
-        return '<video width="100%" controls><source src="' . $item . '" type="video/mp4"></video>';
+        return (ProofTypeEnum::MULTIPLE_VIDEOS === $this->proof->type)
+            || (ProofTypeEnum::VIDEO === $this->proof->type);
     }
 
     /**

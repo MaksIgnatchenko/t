@@ -36,11 +36,16 @@
 }
 
 .proof__item {
-    display: inline-block;
-    font-size: 16px;
-    margin-left: 20px;
-    margin-bottom: 15px;
-    vertical-align: top;
+    width: 70%;
+}
+
+.proof__title {
+    text-align: center;
+}
+
+.proof__container {
+    text-align: -webkit-center;
+    text-align: center;
 }
 
 .proof__item img{
@@ -56,5 +61,47 @@
     display: none;
 }
 
+.dz-image {
+    z-index: 6 !important;
+}
 
+.dz-details {
+    z-index: 8 !important;
+}
 
+.dz-progress {
+    z-index: 9 !important;
+}
+
+.dz-error-message {
+    z-index: 9 !important;
+}
+
+.dz-success-mark {
+    z-index: 7 !important;
+}
+
+.dz-error-mark {
+    z-index: 7 !important;
+}
+
+.card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.change-proof-status-button {
+    width: 100% !important;
+}
+
+.line-no-break {
+    display: inline-block;
+}
+
+.video-format-no-supported {
+    display: none;
+    color: black !important;
+}
