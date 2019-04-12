@@ -12,6 +12,7 @@ use App\Modules\Challenges\Helpers\MaxSizeProofItemHelper;
 use App\Modules\Challenges\Interfaces\AbleToContainProofs;
 use App\Modules\Users\User\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -210,5 +211,25 @@ class Challenge extends BaseModel implements AbleToContainProofs
     {
         $now = Carbon::now();
         return $now->gt($this->start_date) && $now->lt($this->end_date);
+    }
+
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeShouldBeActivated($query) : Builder
+    {
+        $now = Carbon::now()->toDateTimeString();
+        return $query->whereDate('start_date', '<=', $now)->whereDate('end_date', '>', $now);
+    }
+
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeShouldBeEnded($query) : Builder
+    {
+        $now = Carbon::now()->toDateTimeString();
+        return $query->whereDate('end_date', '<=', $now);
     }
 }

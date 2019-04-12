@@ -35,6 +35,11 @@ if (\App\Enums\AppEnvironmentEnum::LOCAL === env('APP_ENV')
         $proof = \App\Modules\Challenges\Models\Proof::first();
         return \App\Services\ResponseBuilder\CustomResponseBuilder::success($proof);
     });
+
+    Route::get('handle-proof-status', function() {
+        \App\Modules\Challenges\Jobs\HandleChallengesStatusJob::dispatch();
+        return \App\Services\ResponseBuilder\CustomResponseBuilder::success();
+    });
 }
 
 
