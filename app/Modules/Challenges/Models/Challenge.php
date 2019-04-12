@@ -35,6 +35,7 @@ class Challenge extends BaseModel implements AbleToContainProofs
         'video_duration',
         'start_date',
         'end_date',
+        'status',
     ];
 
     protected $appends = [

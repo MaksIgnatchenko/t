@@ -6,6 +6,7 @@
 
 namespace App\Modules\Challenges\Datatables;
 
+use App\Helpers\PrettyNameHelper;
 use App\Modules\Challenges\Helpers\ProofStatusClassHelper;
 use App\Modules\Challenges\Models\Proof;
 use Carbon\Carbon;
@@ -32,7 +33,8 @@ class ProofDataTable extends DataTable
             })
             ->editColumn('status', function($query) {
                 $className = ProofStatusClassHelper::getClassName($query->status);
-                return "<span class='" . $className . "'>$query->status</span>";
+                $name = PrettyNameHelper::transform($query->status);
+                return "<span class='" . $className . "'>$name</span>";
             })
             ->editColumn('created_at', function($query) {
                 return Carbon::parse($query->created_at)->toDateString();
