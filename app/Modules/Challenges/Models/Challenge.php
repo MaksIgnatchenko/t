@@ -8,13 +8,13 @@ namespace App\Modules\Challenges\Models;
 
 use App\Models\BaseModel;
 use App\Modules\Challenges\Enums\ChallengeStatusEnum;
-use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Helpers\AvailableMimeTypeForProofItemHelper;
 use App\Modules\Challenges\Helpers\MaxSizeProofItemHelper;
 use App\Modules\Challenges\Interfaces\AbleToContainProofs;
 use App\Modules\Users\User\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -220,8 +220,8 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     public function scopeShouldBeActivated($query) : Builder
     {
-        $now = Carbon::now()->toDateTimeString();
-        return $query->whereDate('start_date', '<=', $now)->whereDate('end_date', '>', $now);
+        $now = Carbon::now();
+        return $query->where('start_date', '<=', $now)->where('end_date', '>', $now)->where('status', '<>', ChallengeStatusEnum::ACTIVE);
     }
 
     /**
@@ -230,7 +230,26 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     public function scopeShouldBeEnded($query) : Builder
     {
-        $now = Carbon::now()->toDateTimeString();
-        return $query->whereDate('end_date', '<=', $now);
+        $now = Carbon::now();
+        return $query->where('end_date', '<=', $now)->where('status', '<>', ChallengeStatusEnum::END);
     }
+
+    public function handleStatuses() : void
+    {
+        $this->changeStatuses($this->shouldBeActivated()->get(), ChallengeStatusEnum::ACTIVE);
+        $this->changeStatuses($this->shouldBeEnded()->get(), ChallengeStatusEnum::END);
+    }
+
+    /**
+     * @param Collection $challenges
+     * @param string $newStatus
+     */
+    private function changeStatuses(Collection $challenges, string $newStatus) : void
+    {
+        foreach($challenges as $challenge) {
+            $challenge->status = $newStatus;
+            $challenge->save();
+        }
+    }
+
 }

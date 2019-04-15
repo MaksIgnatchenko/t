@@ -20,7 +20,7 @@ class HandleChallengesStatusJob implements ShouldQueue
 
     public function handle() : void
     {
-        Challenge::ShouldBeActivated()->update(['status' => ChallengeStatusEnum::ACTIVE]);
-        Challenge::ShouldBeEnded()->update(['status' => ChallengeStatusEnum::END]);
+        $challenge = app()[Challenge::class];
+        $challenge->handleStatuses();
     }
 }
