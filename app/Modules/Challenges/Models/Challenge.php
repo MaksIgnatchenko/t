@@ -47,10 +47,10 @@ class Challenge extends BaseModel implements AbleToContainProofs
     ];
 
     protected $casts = [
-        'start_date' => 'date:U',
-        'end_date' => 'date:U',
-        'created_at' => 'date:U',
-        'updated_at' => 'date:U',
+        'start_date' => 'datetime:U',
+        'end_date' => 'datetime:U',
+        'created_at' => 'datetime:U',
+        'updated_at' => 'datetime:U',
     ];
 
     /**
@@ -203,6 +203,17 @@ class Challenge extends BaseModel implements AbleToContainProofs
     {
         return MaxSizeProofItemHelper::get($this->proof_type);
     }
+
+//    public function setStartDateAttribute($value)
+//    {
+//        Carbon::parse($value)->timestamp;
+//        $this->attributes['start_date'] = Carbon::parse($value)->timestamp;
+//    }
+//
+//    public function setEndDateAttribute($value)
+//    {
+//        $this->attributes['end_date'] = Carbon::parse($value)->timestamp;;
+//    }
 
     /**
      * @return bool

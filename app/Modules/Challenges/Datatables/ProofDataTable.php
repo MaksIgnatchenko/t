@@ -37,7 +37,7 @@ class ProofDataTable extends DataTable
                 return "<span class='" . $className . "'>$name</span>";
             })
             ->editColumn('created_at', function($query) {
-                return Carbon::parse($query->created_at)->toDateString();
+                return Carbon::parse($query->created_at)->format('Y-m-d H:i:s');
             })
             ->rawColumns(['action', 'status', 'user.full_name']);
     }

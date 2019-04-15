@@ -124,7 +124,7 @@ class ShowChallengeDTO
      */
     public function getStartDate(): string
     {
-        return Carbon::parse($this->challenge->start_date)->toDateString();
+        return Carbon::parse($this->challenge->start_date)->format('Y-m-d H:i');
     }
 
     /**
@@ -132,7 +132,7 @@ class ShowChallengeDTO
      */
     public function getEndDate(): string
     {
-        return Carbon::parse($this->challenge->end_date)->toDateString();
+        return Carbon::parse($this->challenge->end_date)->format('Y-m-d H:i');
     }
 
     /**
