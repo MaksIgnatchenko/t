@@ -158,4 +158,12 @@ class ShowChallengeDTO
     {
         return $this->challenge->items_count_in_proof > 1;
     }
+
+    /**
+     * @return string
+     */
+    public function getStatus() : string
+    {
+        return PrettyNameHelper::transform($this->challenge->status);
+    }
 }

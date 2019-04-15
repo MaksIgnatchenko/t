@@ -19,6 +19,10 @@
                     <div class="col-md-8">{{ Html::link($dto->getLink(), 'Click here') }}</div>
                 </div>
                 <div class="row">
+                    <div class="col-md-4">Status</div>
+                    <div class="col-md-8">{{ $dto->getStatus() }}</div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">Start date <span class="fa fa-calendar"></span></div>
                     <div class="col-md-8">{{ $dto->getStartDate() }}</div>
                 </div>
