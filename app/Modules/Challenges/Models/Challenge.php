@@ -7,6 +7,8 @@
 namespace App\Modules\Challenges\Models;
 
 use App\Models\BaseModel;
+use App\Modules\Challenges\Enums\ChallengeStatusEnum;
+use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Helpers\AvailableMimeTypeForProofItemHelper;
 use App\Modules\Challenges\Helpers\MaxSizeProofItemHelper;
 use App\Modules\Challenges\Interfaces\AbleToContainProofs;
@@ -204,24 +206,12 @@ class Challenge extends BaseModel implements AbleToContainProofs
         return MaxSizeProofItemHelper::get($this->proof_type);
     }
 
-//    public function setStartDateAttribute($value)
-//    {
-//        Carbon::parse($value)->timestamp;
-//        $this->attributes['start_date'] = Carbon::parse($value)->timestamp;
-//    }
-//
-//    public function setEndDateAttribute($value)
-//    {
-//        $this->attributes['end_date'] = Carbon::parse($value)->timestamp;;
-//    }
-
     /**
      * @return bool
      */
     public function checkForActiveStatus() : bool
     {
-        $now = Carbon::now();
-        return $now->gt($this->start_date) && $now->lt($this->end_date);
+        return ChallengeStatusEnum::ACTIVE === $this->status;
     }
 
     /**
