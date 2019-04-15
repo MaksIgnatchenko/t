@@ -43,7 +43,19 @@
                 "updated_at": "1551344002",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -66,7 +78,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -89,7 +113,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -112,7 +148,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -135,7 +183,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -158,7 +218,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -181,7 +253,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -204,7 +288,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -227,7 +323,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -250,7 +358,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -273,7 +393,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -296,7 +428,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -319,7 +463,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -342,7 +498,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -365,7 +533,19 @@
                 "updated_at": "1551351835",
                 "items_count_in_proof": 1,
                 "video_duration": null,
-                "my_proof_status": "pending",
+                "status": "active",
+                "my_proof": {
+                    "id": 8,
+                    "challenge_id": 411,
+                    "user_id": 24,
+                    "type": "video",
+                    "items": [
+                        "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                    ],
+                    "status": "pending",
+                    "created_at": "1554741936",
+                    "updated_at": "1554741936"
+                },
                 "participants_count": 0,
                 "is_participated": false,
                 "participation_cost": 10,
@@ -377,11 +557,15 @@
 ###
 
 ###
-@api {get} /api/challenge/:id Get Challenge by Id (Response field - my_proof_status - available values - null, "pending", "accepted", "rejected")
+@api {get} /api/challenge/:id Get Challenge by Id
 @apiName Get Challenge by id
 @apiGroup Challenge
 @apiPermission User
 @apiVersion 0.1.0
+
+@apiSuccess {string} status Status of the challenge. Available values - waiting, active, end
+@apiSuccess {object} my_proof consist field status that can be - pending, accepted, rejected
+
 
 @apiSuccessExample Success-Response:
 {
@@ -400,6 +584,7 @@
         "proof_type": "photo",
         "items_count_in_proof": 1,
         "video_duration": null,
+        "status": "active",
         "my_proof": {
             "id": 8,
             "challenge_id": 411,
