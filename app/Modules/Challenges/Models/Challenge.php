@@ -7,11 +7,14 @@
 namespace App\Modules\Challenges\Models;
 
 use App\Models\BaseModel;
+use App\Modules\Challenges\Enums\ChallengeStatusEnum;
+use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Helpers\AvailableMimeTypeForProofItemHelper;
 use App\Modules\Challenges\Helpers\MaxSizeProofItemHelper;
 use App\Modules\Challenges\Interfaces\AbleToContainProofs;
 use App\Modules\Users\User\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,6 +38,7 @@ class Challenge extends BaseModel implements AbleToContainProofs
         'video_duration',
         'start_date',
         'end_date',
+        'status',
     ];
 
     protected $appends = [
@@ -45,10 +49,10 @@ class Challenge extends BaseModel implements AbleToContainProofs
     ];
 
     protected $casts = [
-        'start_date' => 'date:U',
-        'end_date' => 'date:U',
-        'created_at' => 'date:U',
-        'updated_at' => 'date:U',
+        'start_date' => 'datetime:U',
+        'end_date' => 'datetime:U',
+        'created_at' => 'datetime:U',
+        'updated_at' => 'datetime:U',
     ];
 
     /**
@@ -207,7 +211,26 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     public function checkForActiveStatus() : bool
     {
-        $now = Carbon::now();
-        return $now->gt($this->start_date) && $now->lt($this->end_date);
+        return ChallengeStatusEnum::ACTIVE === $this->status;
+    }
+
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeShouldBeActivated($query) : Builder
+    {
+        $now = Carbon::now()->toDateTimeString();
+        return $query->whereDate('start_date', '<=', $now)->whereDate('end_date', '>', $now);
+    }
+
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeShouldBeEnded($query) : Builder
+    {
+        $now = Carbon::now()->toDateTimeString();
+        return $query->whereDate('end_date', '<=', $now);
     }
 }

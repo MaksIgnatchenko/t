@@ -6,6 +6,8 @@
 
 namespace App\Modules\Challenges\Datatables;
 
+use App\Helpers\PrettyNameHelper;
+use App\Modules\Challenges\Helpers\ChallengeStatusClassHelper;
 use App\Modules\Challenges\Models\Challenge;
 use Carbon\Carbon;
 use Yajra\DataTables\EloquentDataTable;
@@ -29,13 +31,18 @@ class ChallengeDataTable extends DataTable
             ->editColumn('image', function ($query) {
                 return ($query->image ? ("<img height='50' src=" . $query->image) . " />" : (''));
             })
+            ->editColumn('status', function($query) {
+                $className = ChallengeStatusClassHelper::getClassName($query->status);
+                $name = PrettyNameHelper::transform($query->status);
+                return "<span class='" . $className . "'>$name</span>";
+            })
             ->editColumn('start_date', function($query) {
-                return Carbon::parse($query->start_date)->toDateString();
+                return Carbon::parse($query->start_date)->format('Y-m-d H:i');
             })
             ->editColumn('end_date', function($query) {
-                return Carbon::parse($query->end_date)->toDateString();
+                return Carbon::parse($query->end_date)->format('Y-m-d H:i');
             })
-            ->rawColumns(['image', 'action']);
+            ->rawColumns(['image', 'action', 'status']);
     }
 
     /**
@@ -90,6 +97,12 @@ class ChallengeDataTable extends DataTable
                 'orderable' => false,
             ],
             [
+                'name' => 'status',
+                'data' => 'status',
+                'title' => 'Status',
+                'width' => '15%',
+            ],
+            [
                 'name' => 'country',
                 'data' => 'country',
                 'title' => 'Country',
@@ -99,19 +112,19 @@ class ChallengeDataTable extends DataTable
                 'name' => 'participants_limit',
                 'data' => 'participants_limit',
                 'title' => 'Participants limit',
-                'width' => '15%',
+                'width' => '10%',
             ],
             [
                 'name' => 'start_date',
                 'data' => 'start_date',
                 'title' => 'Start date',
-                'width' => '15%',
+                'width' => '10%',
             ],
             [
                 'name' => 'end_date',
                 'data' => 'end_date',
                 'title' => 'End date',
-                'width' => '15%',
+                'width' => '10%',
             ],
         ];
     }

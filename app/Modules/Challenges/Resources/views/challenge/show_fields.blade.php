@@ -1,5 +1,5 @@
-<div class="row" style="margin-bottom: 10px;">
-    <div class="col-md-6">
+<div class="row">
+    <div class="col-md-6" style="margin-bottom: 20px;">
         <a class="image-popup-no-margins" target="_blank" href="{{ $dto->getImageUrl() }}">
             {!!  $dto->getImageUrl() ? ("<img class='dashboard-image rounded-circle' src=" . $dto->getImageUrl()) . " />" : ('') !!}
         </a>
@@ -17,6 +17,10 @@
                 <div class="row">
                     <div class="col-md-4">Link</div>
                     <div class="col-md-8">{{ Html::link($dto->getLink(), 'Click here') }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Status</div>
+                    <div class="col-md-8">{{ $dto->getStatus() }}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">Start date <span class="fa fa-calendar"></span></div>
@@ -93,7 +97,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-bottom: 20px;">
                 <a href="{{ route('challenge.proof.index', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-primary" role="button">Show proofs</a>
             </div>
         </div>

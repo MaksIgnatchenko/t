@@ -19,6 +19,7 @@ mix.js([
         'resources/js/admiry/app.js',
         'resources/js/admiry/buttons.server-side.js',
         'resources/js/menu.js',
+        'resources/js/datepicker.min.js',
         'resources/js/custom/dropzones.js',
         'resources/js/custom/challenges.js',
         'resources/js/custom/proofs.js',
@@ -29,6 +30,7 @@ mix.js([
         'resources/css/admiry/*',
         'resources/css/dropzone/*',
         'resources/css/custom.css',
+        'resources/css/datepicker.min.scss',
         'node_modules/js-datepicker/datepicker.css',
     ], 'public/build/css/app.css')
     .copyDirectory('resources/images', 'public/build/images')
