@@ -12,7 +12,7 @@ return [
     'default_file_max_size' => 1024 * 5,
     'max_items_in_proof' => 5,
     'proofs_files_path' => 'proofs',
-    'max_size_proof_image' => 1024 * 5,
-    'max_size_proof_video' => 1024 * 10,
+    'max_size_proof_image' => 1024 * 10,
+    'max_size_proof_video' => 1024 * 20,
     'feeds_count_per_page' => 20,
 ];
