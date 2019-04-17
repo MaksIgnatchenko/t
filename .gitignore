@@ -25,3 +25,4 @@ yarn-error.log
 /public/apidoc
 /package-lock.json
 /resources/js/bootstrap.js
+/v8-compile-cache-0
