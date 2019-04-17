@@ -28,7 +28,7 @@ class FeedsApiRouteServiceProvider extends ServiceProvider
     public function map()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware(['api', 'auth:api'])
             ->namespace($this->namespace)
             ->group(__DIR__ . './../Routes/api.php');
     }

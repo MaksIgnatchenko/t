@@ -23,7 +23,9 @@ class Challenge extends BaseModel implements AbleToContainProofs
     public const PARTICIPATION_COST = 10;
     protected const DEFAULT_LIMIT = 15;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $fillable = [
         'company_id',
         'name',
@@ -41,6 +43,9 @@ class Challenge extends BaseModel implements AbleToContainProofs
         'status',
     ];
 
+    /**
+     * @var array
+     */
     protected $appends = [
         'participants_count',
         'is_participated',
@@ -48,6 +53,9 @@ class Challenge extends BaseModel implements AbleToContainProofs
         'my_proof',
     ];
 
+    /**
+     * @var array
+     */
     protected $casts = [
         'start_date' => 'datetime:U',
         'end_date' => 'datetime:U',
@@ -89,7 +97,7 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     public function getParticipantsCountAttribute(): int
     {
-        return $this->participants->count();
+        return $this->participants()->count();
     }
 
     /**

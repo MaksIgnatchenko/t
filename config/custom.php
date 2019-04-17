@@ -14,4 +14,5 @@ return [
     'proofs_files_path' => 'proofs',
     'max_size_proof_image' => 1024 * 5,
     'max_size_proof_video' => 1024 * 10,
+    'feeds_count_per_page' => 20,
 ];

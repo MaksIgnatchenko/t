@@ -37,6 +37,6 @@ class ChallengeController extends Controller
      */
     public function show(Challenge $challenge): Response
     {
-        return CustomResponseBuilder::success($challenge);
+        return CustomResponseBuilder::success($challenge->load(['participants']));
     }
 }

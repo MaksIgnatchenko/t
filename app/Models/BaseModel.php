@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BaseModel extends Model
 {
+    use CustomPaginatorTrait;
+
     public function resolveRouteBinding($value)
     {
         try {

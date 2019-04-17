@@ -7,15 +7,44 @@
 namespace App\Modules\Feeds\Models;
 
 use App\Models\BaseModel;
-use Illuminate\Support\Facades\DB;
+use App\Modules\Challenges\Models\ChallengeWithoutAppends;
+use App\Modules\Challenges\Models\Proof;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Feed extends BaseModel
 {
     /**
-     * @param array $data
+     * @var array
      */
-    public static function insert(array $data) : void
+    protected $with = [
+        'challenge',
+        'proof',
+    ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function challenge() : BelongsTo
     {
-        DB::table('feeds')->insert($data);
+        return $this->belongsTo(ChallengeWithoutAppends::class, 'challenge_id', 'id', 'challenges');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function proof() : BelongsTo
+    {
+        return $this->belongsTo(Proof::class)->with(['user']);
+    }
+
+    /**
+     * @param $query
+     * @param $userCountry
+     * @return Builder
+     */
+    public function scopeLocal($query, $userCountry) : Builder
+    {
+        return $query->where('country', $userCountry);
     }
 }
