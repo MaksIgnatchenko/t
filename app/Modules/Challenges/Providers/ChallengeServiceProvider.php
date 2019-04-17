@@ -6,7 +6,9 @@
 
 namespace App\Modules\Challenges\Providers;
 
+use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Proof;
+use App\Modules\Challenges\Observers\ChallengeObserver;
 use App\Modules\Challenges\Observers\ProofObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -21,6 +23,7 @@ class ChallengeServiceProvider extends ServiceProvider
     public function boot()
     {
         Proof::observe(ProofObserver::class);
+        Challenge::observe(ChallengeObserver::class);
 
         Validator::extend('equal', function ($attribute, $value, $parameters, $validator) {
             $requiredValue = $parameters[0];

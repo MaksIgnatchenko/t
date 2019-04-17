@@ -8,13 +8,13 @@ namespace App\Modules\Challenges\Models;
 
 use App\Models\BaseModel;
 use App\Modules\Challenges\Enums\ChallengeStatusEnum;
-use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Helpers\AvailableMimeTypeForProofItemHelper;
 use App\Modules\Challenges\Helpers\MaxSizeProofItemHelper;
 use App\Modules\Challenges\Interfaces\AbleToContainProofs;
 use App\Modules\Users\User\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,7 +23,9 @@ class Challenge extends BaseModel implements AbleToContainProofs
     public const PARTICIPATION_COST = 10;
     protected const DEFAULT_LIMIT = 15;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $fillable = [
         'company_id',
         'name',
@@ -41,6 +43,9 @@ class Challenge extends BaseModel implements AbleToContainProofs
         'status',
     ];
 
+    /**
+     * @var array
+     */
     protected $appends = [
         'participants_count',
         'is_participated',
@@ -48,6 +53,9 @@ class Challenge extends BaseModel implements AbleToContainProofs
         'my_proof',
     ];
 
+    /**
+     * @var array
+     */
     protected $casts = [
         'start_date' => 'datetime:U',
         'end_date' => 'datetime:U',
@@ -89,7 +97,7 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     public function getParticipantsCountAttribute(): int
     {
-        return $this->participants->count();
+        return $this->participants()->count();
     }
 
     /**
@@ -220,8 +228,8 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     public function scopeShouldBeActivated($query) : Builder
     {
-        $now = Carbon::now()->toDateTimeString();
-        return $query->whereDate('start_date', '<=', $now)->whereDate('end_date', '>', $now);
+        $now = Carbon::now();
+        return $query->where('start_date', '<=', $now)->where('end_date', '>', $now)->where('status', '<>', ChallengeStatusEnum::ACTIVE);
     }
 
     /**
@@ -230,7 +238,29 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     public function scopeShouldBeEnded($query) : Builder
     {
-        $now = Carbon::now()->toDateTimeString();
-        return $query->whereDate('end_date', '<=', $now);
+        $now = Carbon::now();
+        return $query->where('end_date', '<=', $now)->where('status', '<>', ChallengeStatusEnum::END);
     }
+
+    public function handleStatuses() : void
+    {
+        $this->changeStatuses($this->shouldBeActivated()->get(), ChallengeStatusEnum::ACTIVE);
+        $this->changeStatuses($this->shouldBeEnded()->get(), ChallengeStatusEnum::END);
+    }
+
+    /**
+     * @param Collection $challenges
+     * @param string $newStatus
+     */
+    private function changeStatuses(Collection $challenges, string $newStatus) : void
+    {
+        // Sorry for db queries in loop.
+        // This makes it possible to use challenge observer to create feeds.
+        // Also, this will not cause problems with DB performance due to the low intensity of this operation.
+        foreach($challenges as $challenge) {
+            $challenge->status = $newStatus;
+            $challenge->save();
+        }
+    }
+
 }

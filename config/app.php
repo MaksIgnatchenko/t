@@ -193,6 +193,8 @@ return [
         App\Modules\Challenges\Providers\ChallengeAuthServiceProvider::class,
         App\Modules\Companies\Providers\CompanyAdminRouteServiceProvider::class,
         App\Modules\Files\Providers\FilesAdminRouteServiceProvider::class,
+        App\Modules\Feeds\Providers\FeedsApiRouteServiceProvider::class,
+        App\Modules\Feeds\Providers\FeedsEventServiceProvider::class,
     ],
 
     /*

@@ -93,4 +93,12 @@ class Proof extends BaseModel
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function challenge() : BelongsTo
+    {
+        return $this->belongsTo(Challenge::class);
+    }
 }

@@ -7,6 +7,7 @@
 namespace App\Modules\Challenges\Observers;
 
 use App\Modules\Challenges\Models\Proof;
+use App\Modules\Feeds\Events\ProofSentEvent;
 use Illuminate\Support\Facades\Storage;
 
 class ProofObserver
@@ -40,5 +41,10 @@ class ProofObserver
             $items[] = $item;
         }
         Storage::delete($items);
+    }
+
+    public function created(Proof $proof) : void
+    {
+        event(new ProofSentEvent($proof));
     }
 }

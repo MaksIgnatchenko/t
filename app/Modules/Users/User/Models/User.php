@@ -2,6 +2,7 @@
 
 namespace App\Modules\Users\User\Models;
 
+use App\Modules\Challenges\Enums\CountryEnum;
 use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Challenges\Models\Challenge;
@@ -185,5 +186,13 @@ class User extends Authenticatable implements JWTSubject
             ->whereIn('status', [ProofStatusEnum::PENDING, ProofStatusEnum::ACCEPTED])
             ->count();
 
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry() : string
+    {
+        return $this->country ?? CountryEnum::SAUDI_ARABIA;
     }
 }
