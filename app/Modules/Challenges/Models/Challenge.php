@@ -254,6 +254,9 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     private function changeStatuses(Collection $challenges, string $newStatus) : void
     {
+        // Sorry for db queries in loop.
+        // This makes it possible to use challenge observer to create feeds.
+        // Also, this will not cause problems with DB performance due to the low intensity of this operation.
         foreach($challenges as $challenge) {
             $challenge->status = $newStatus;
             $challenge->save();
