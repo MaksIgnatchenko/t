@@ -4,7 +4,7 @@
  *
  */
 
-namespace App\Modules\Feeds\Http\Requests;
+namespace App\Modules\Feeds\Http\Requests\Api;
 
 use App\Services\ResponseBuilder\ValidationErrorsApiMessagesTrait;
 use Illuminate\Foundation\Http\FormRequest;

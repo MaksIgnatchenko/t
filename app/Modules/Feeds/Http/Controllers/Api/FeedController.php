@@ -7,7 +7,7 @@
 namespace App\Modules\Feeds\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Feeds\Http\Requests\IndexFeedRequest;
+use App\Modules\Feeds\Http\Requests\Api\IndexFeedRequest;
 use App\Modules\Feeds\Models\Feed;
 use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Symfony\Component\HttpFoundation\Response;

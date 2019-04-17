@@ -23,6 +23,14 @@ class Feed extends BaseModel
     ];
 
     /**
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime:U',
+        'updated_at' => 'datetime:U',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function challenge() : BelongsTo
