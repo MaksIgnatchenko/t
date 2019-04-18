@@ -50,7 +50,26 @@
                         "company": null,
                         "full_name": "Max",
                         "coins": 40
-                      }
+                      },
+                      "challenge": {
+                        "id": 421,
+                        "company_id": null,
+                        "name": "test-cron",
+                        "image": "http://localhost/storage/challenges//uX1HyHkTlcwRQm0bJdczcIyWkLy1AuyNNnOAllEc.jpeg",
+                        "description": "hgv 3wre trwe twer t",
+                        "link": "https://google.com",
+                        "country": "Saudi arabia",
+                        "city": "Dubai",
+                        "participants_limit": 100,
+                        "proof_type": "photo",
+                        "start_date": "1555304400",
+                        "end_date": "1555578000",
+                        "created_at": "1555310725",
+                        "updated_at": "1555585205",
+                        "items_count_in_proof": 1,
+                        "video_duration": null,
+                        "status": "end"
+                    }
                   }
               },
               {
@@ -181,6 +200,8 @@
         "proof": null
     }
 }
+
+@apiSuccess {String} type Type of proof - available values ["challenge_started", "challenge_ended", "proof_sent"]
 
 @apiErrorExample No such item:
 {
