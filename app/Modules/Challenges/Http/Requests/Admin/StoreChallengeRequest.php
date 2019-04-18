@@ -9,6 +9,7 @@ namespace App\Modules\Challenges\Http\Requests\Admin;
 use App\Modules\Challenges\Enums\CountryEnum;
 use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Challenges\Enums\VideoLengthEnum;
+use App\Modules\Challenges\Rules\ChallengeStartDateTimeRule;
 use App\Modules\Challenges\Rules\MinProofItemsCount;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -44,8 +45,8 @@ class StoreChallengeRequest extends FormRequest
             'proof_type' => ['required', 'string', 'max:100', Rule::in(ProofTypeEnum::getAll())],
             'items_count_in_proof' => 'required|integer|min:' . MinProofItemsCount::get($this) . '|max:' . config('custom.max_items_in_proof'),
             'video_duration' => ['nullable', 'integer', Rule::in(VideoLengthEnum::getAll())],
-            'start_date' => 'required|date|after:yesterday',
-            'end_date' => 'required|date|after:start_date',
+            'start_date' => ['required', 'date_format:Y-m-d H:i', new ChallengeStartDateTimeRule],
+            'end_date' => 'required|date_format:Y-m-d H:i|after:start_date',
         ];
     }
 }
