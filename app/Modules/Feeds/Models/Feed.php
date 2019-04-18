@@ -43,7 +43,7 @@ class Feed extends BaseModel
      */
     public function proof() : BelongsTo
     {
-        return $this->belongsTo(Proof::class)->with(['user']);
+        return $this->belongsTo(Proof::class)->with(['user', 'challenge']);
     }
 
     /**

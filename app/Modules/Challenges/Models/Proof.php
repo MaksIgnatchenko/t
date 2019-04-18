@@ -99,6 +99,6 @@ class Proof extends BaseModel
      */
     public function challenge() : BelongsTo
     {
-        return $this->belongsTo(Challenge::class);
+        return $this->belongsTo(ChallengeWithoutAppends::class);
     }
 }
