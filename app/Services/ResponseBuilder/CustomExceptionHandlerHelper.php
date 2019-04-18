@@ -6,16 +6,59 @@
 
 namespace App\Services\ResponseBuilder;
 
+use App\Modules\Challenges\Exceptions\CustomValidationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
 use MarcinOrlowski\ResponseBuilder\ResponseBuilder;
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlerHelper;
 use Exception;
 use MarcinOrlowski\ResponseBuilder\BaseApiCodes;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CustomExceptionHandlerHelper extends ExceptionHandlerHelper
 {
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request $request   Request object
+     * @param  \Exception               $exception Exception
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public static function render($request, Exception $exception)
+    {
+        if ($exception instanceof HttpException) {
+            switch ($exception->getStatusCode()) {
+                case HttpResponse::HTTP_NOT_FOUND:
+                    $result = static::error($exception, static::TYPE_HTTP_NOT_FOUND, BaseApiCodes::EX_HTTP_NOT_FOUND);
+                    break;
+
+                case HttpResponse::HTTP_SERVICE_UNAVAILABLE:
+                    $result = static::error($exception, static::TYPE_HTTP_SERVICE_UNAVAILABLE, BaseApiCodes::EX_HTTP_SERVICE_UNAVAILABLE);
+                    break;
+
+                case HttpResponse::HTTP_UNAUTHORIZED:
+                    $result = static::error($exception, static::TYPE_HTTP_UNAUTHORIZED, BaseApiCodes::EX_AUTHENTICATION_EXCEPTION);
+                    break;
+
+                default:
+                    $result = static::error($exception, static::TYPE_DEFAULT, BaseApiCodes::EX_HTTP_EXCEPTION);
+                    break;
+            }
+        } elseif ($exception instanceof ValidationException) {
+            $result = static::error($exception, static::TYPE_VALIDATION_EXCEPTION, BaseApiCodes::EX_VALIDATION_EXCEPTION);
+        } elseif ($exception instanceof CustomValidationException) {
+            $result = static::error($exception, static::TYPE_VALIDATION_EXCEPTION, BaseApiCodes::EX_VALIDATION_EXCEPTION);
+        } else {
+            $result = static::error($exception, static::TYPE_UNCAUGHT_EXCEPTION, BaseApiCodes::EX_UNCAUGHT_EXCEPTION);
+        }
+
+        return $result;
+    }
+
     /**
      * @param Exception $exception         Exception to be processed
      * @param string    $exception_type    Category of the exception
