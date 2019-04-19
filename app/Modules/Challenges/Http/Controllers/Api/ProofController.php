@@ -14,6 +14,7 @@ use App\Modules\Challenges\Models\Proof;
 use App\Services\ResponseBuilder\ApiCode;
 use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProofController extends Controller
