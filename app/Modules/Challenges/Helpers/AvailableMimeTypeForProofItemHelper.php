@@ -51,6 +51,8 @@ class AvailableMimeTypeForProofItemHelper
     {
         return [
             'mp4',
+            'qt',
+            'bin',
         ];
     }
 }
