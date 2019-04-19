@@ -10,6 +10,7 @@ use App\Modules\Challenges\Enums\ChallengeStatusEnum;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Feeds\Events\ChallengeEndedEventListener;
 use App\Modules\Feeds\Events\ChallengeStartedEventListener;
+use Illuminate\Support\Facades\Storage;
 
 class ChallengeObserver
 {
@@ -25,6 +26,11 @@ class ChallengeObserver
                     event(new ChallengeEndedEventListener($challenge));
                     break;
             }
+        }
+
+        if ($challenge->isDirty('image')) {
+            $oldFileName = $challenge->getOriginal('image');
+            Storage::delete($oldFileName);
         }
     }
 }

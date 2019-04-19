@@ -19,6 +19,10 @@
                     <div class="col-md-8">{{ Html::link($dto->getLink(), 'Click here') }}</div>
                 </div>
                 <div class="row">
+                    <div class="col-md-4">Company</div>
+                    <div class="col-md-8">{{ $dto->getCompanyName() }}</div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">Status</div>
                     <div class="col-md-8">{{ $dto->getStatus() }}</div>
                 </div>
@@ -98,7 +102,10 @@
         </div>
         <div class="row">
             <div class="col-md-6" style="margin-bottom: 20px;">
-                <a href="{{ route('challenge.proof.index', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-primary" role="button">Show proofs</a>
+                <a href="{{ route('challenge.proof.index', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-primary btn-block" role="button">Show proofs</a>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 20px;">
+                <a href="{{ route('challenge.edit', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-success btn-block" role="button">Edit challenge</a>
             </div>
         </div>
     </div>

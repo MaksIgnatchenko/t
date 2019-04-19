@@ -93,6 +93,22 @@ class Challenge extends BaseModel implements AbleToContainProofs
     }
 
     /**
+     * @param $attribute
+     */
+    public function setStartDateAttribute($attribute)
+    {
+        $this->attributes['start_date'] = Carbon::parse($attribute)->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * @param $attribute
+     */
+    public function setEndDateAttribute($attribute)
+    {
+        $this->attributes['end_date'] = Carbon::parse($attribute)->format('Y-m-d H:i:s');
+    }
+
+    /**
      * @return int
      */
     public function getParticipantsCountAttribute(): int
@@ -122,6 +138,11 @@ class Challenge extends BaseModel implements AbleToContainProofs
     public function proofs()
     {
         return $this->hasMany(Proof::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     /**
@@ -215,6 +236,15 @@ class Challenge extends BaseModel implements AbleToContainProofs
     }
 
     /**
+     * @return int
+     */
+    public function getCurrentProofsCountAttribute() : int
+    {
+        return $this->proofs()->where('challenge_id', $this->id)->count();
+
+    }
+
+    /**
      * @return bool
      */
     public function checkForActiveStatus() : bool
@@ -263,4 +293,52 @@ class Challenge extends BaseModel implements AbleToContainProofs
         }
     }
 
+    /**
+     * @param int $newLimit
+     * @return bool
+     */
+    public function isAbleToChangeParticipantsLimit(int $newLimit) : bool
+    {
+        return $this->participants_count <= $newLimit;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAbleToChangeProofType() : bool
+    {
+        return $this->current_proofs_count === 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAbleToChangeProofsCount() : bool
+    {
+        return $this->current_proofs_count === 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAbleToChangeVideoDuration() : bool
+    {
+        return $this->current_proofs_count === 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive() : bool
+    {
+        return ChallengeStatusEnum::ACTIVE === $this->status;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnded() : bool
+    {
+        return ChallengeStatusEnum::END === $this->status;
+    }
 }

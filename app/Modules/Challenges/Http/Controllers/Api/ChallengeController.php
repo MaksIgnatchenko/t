@@ -28,6 +28,7 @@ class ChallengeController extends Controller
 
         $challenges = Challenge::search($user, $search, $limit);
 
+
         return CustomResponseBuilder::success($challenges);
     }
 
