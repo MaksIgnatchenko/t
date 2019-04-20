@@ -100,7 +100,10 @@ class EditChallengeDto extends CreateChallengeDTO
      */
     public function getCurrentCompany() : ?int
     {
-        return $this->challenge->company->id;
+        if ($company = $this->challenge->company) {
+            return $company->id;
+        }
+        return null;
     }
 
     /**

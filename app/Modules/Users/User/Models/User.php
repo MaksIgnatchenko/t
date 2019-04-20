@@ -196,4 +196,18 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->country ?? CountryEnum::SAUDI_ARABIA;
     }
+
+    /**
+     * @return User
+     */
+    public function hideForPublic() : self
+    {
+        return $this->makeHidden([
+            'updated_at_at',
+            'phone_number',
+            'country_code',
+            'is_registration_completed',
+            'coins',
+        ]);
+    }
 }

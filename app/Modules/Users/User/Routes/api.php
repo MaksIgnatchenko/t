@@ -18,6 +18,8 @@ Route::group([
     Route::post('profile', 'RegisterController@updateProfile')->middleware('auth:api');
 });
 
+Route::get('user/{user}', 'UserController@show')->middleware('auth:api');
+
 $this->group([
     'prefix' => 'password',
 ], function () {
