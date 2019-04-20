@@ -5,6 +5,7 @@
 @apiPermission User
 @apiVersion 0.1.0
 
+@apiSuccessExample Success-Response:
 {
     "success": true,
     "code": 0,
