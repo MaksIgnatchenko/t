@@ -7,6 +7,7 @@ use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Proof;
+use App\Modules\Files\Services\ImageService;
 use App\Modules\Users\User\Mails\ResetPasswordMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -143,13 +144,17 @@ class User extends Authenticatable implements JWTSubject
      */
     public function setAvatarAttribute($attribute)
     {
-        $file = Storage::put('avatars', $attribute);
+        $path = 'avatars';
+        $imageService = new ImageService($attribute);
+        $image = $imageService->orientate();
+        $fileName = $path . '/' .$attribute->hashName();
+        Storage::put($fileName, $image);
 
         if (null !== $this->avatar) {
             Storage::delete($this->avatar);
         }
 
-        $this->attributes['avatar'] = $file;
+        $this->attributes['avatar'] = $fileName;
     }
 
     /**
