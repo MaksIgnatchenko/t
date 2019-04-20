@@ -8,6 +8,7 @@ namespace App\Modules\Challenges\Observers;
 
 use App\Modules\Challenges\Models\Proof;
 use App\Modules\Feeds\Events\ProofSentEvent;
+use App\Modules\Files\Services\ImageService;
 use Illuminate\Support\Facades\Storage;
 
 class ProofObserver
@@ -18,13 +19,9 @@ class ProofObserver
     public function creating(Proof $proof) : void
     {
         if ($files = $proof->getFiles()) {
-            $path = config('custom.proofs_files_path');
             $savedItems = [];
             foreach($files as $file) {
-                $savedItems[] = $file->storeAs(
-                    $path,
-                    pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension()
-                );
+                $savedItems[] = $proof->saveItem($file);
             }
             $proof->items = $savedItems;
         }
