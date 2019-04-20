@@ -41,4 +41,17 @@ class ProofTypeEnum
             self::MULTIPLE_SCREENSHOTS
         ];
     }
+
+    /**
+     * @return array
+     */
+    public static function getImageTypes() : array
+    {
+        return [
+            self::PHOTO,
+            self::SCREENSHOT,
+            self::MULTIPLE_PHOTOS,
+            self::MULTIPLE_SCREENSHOTS
+        ];
+    }
 }

@@ -8,6 +8,8 @@ namespace App\Modules\Challenges\Models;
 
 use App\Models\BaseModel;
 use App\Modules\Challenges\Enums\ProofStatusEnum;
+use App\Modules\Challenges\Enums\ProofTypeEnum;
+use App\Modules\Files\Services\ImageService;
 use App\Modules\Users\User\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
@@ -100,5 +102,21 @@ class Proof extends BaseModel
     public function challenge() : BelongsTo
     {
         return $this->belongsTo(ChallengeWithoutAppends::class);
+    }
+
+    public function saveItem($file)
+    {
+        $path = config('custom.proofs_files_path');
+        if (in_array($this->type, ProofTypeEnum::getImageTypes())) {
+            $imageService = new ImageService($file);
+            $image = $imageService->orientate();
+            $fileName = $path . '/' .$file->hashName();
+            Storage::put($fileName, $image);
+            return $fileName;
+        }
+        return  $file->storeAs(
+            $path,
+            pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension()
+        );
     }
 }
