@@ -95,7 +95,6 @@ class RegisterController extends Controller
     public function updateProfile(UpdateProfileRequest $request): Response
     {
         $user = Auth::user();
-
         $userData = array_merge($request->all(), [
             'is_registration_completed' => true,
         ]);
