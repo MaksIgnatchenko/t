@@ -27,9 +27,8 @@ class ImageService
 
     public function orientate()
     {
-        $extension = $this->originImage->getClientOriginalExtension();
         $img = Image::make($this->originImage->getRealpath());
         $img->orientate();
-        return $img->encode($extension);
+        return $img->encode('jpg');
     }
 }
