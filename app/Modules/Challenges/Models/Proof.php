@@ -13,6 +13,7 @@ use App\Modules\Files\Services\ImageService;
 use App\Modules\Users\User\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
+use Pawlox\VideoThumbnail\Facade\VideoThumbnail;
 
 class Proof extends BaseModel
 {
@@ -29,6 +30,7 @@ class Proof extends BaseModel
         'user_id',
         'type',
         'status',
+        'preview',
     ];
 
     /**
@@ -54,6 +56,15 @@ class Proof extends BaseModel
             $items[] = Storage::url($item);
         }
         return $items;
+    }
+
+    /**
+     * @param $value
+     * @return string|null
+     */
+    public function getPreviewAttribute($value) : ?string
+    {
+        return $value ? Storage::url($value) : null;
     }
 
     /**
@@ -104,7 +115,11 @@ class Proof extends BaseModel
         return $this->belongsTo(ChallengeWithoutAppends::class);
     }
 
-    public function saveItem($file)
+    /**
+     * @param $file
+     * @return string
+     */
+    public function saveItem($file) : string
     {
         $path = config('custom.proofs_files_path');
         if (in_array($this->type, ProofTypeEnum::getImageTypes())) {
@@ -114,9 +129,23 @@ class Proof extends BaseModel
             Storage::put($fileName, $image);
             return $fileName;
         }
-        return  $file->storeAs(
+        $this->makePreview($file->path());
+        $path =  $file->storeAs(
             $path,
             pathinfo($file->hashName(), PATHINFO_FILENAME) . '.' . $file->getClientOriginalExtension()
         );
+        return $path;
+    }
+
+    /**
+     * @param $filePath
+     */
+    protected function makePreview($filePath) : void
+    {
+        if (!$this->preview) {
+            $fileName = str_random(30) . '.jpg';
+            VideoThumbnail::createThumbnail($filePath, public_path('storage/proofs'), $fileName, 1);
+            $this->preview = 'proofs/' . $fileName;
+        }
     }
 }

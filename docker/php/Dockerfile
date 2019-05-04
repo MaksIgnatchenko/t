@@ -30,7 +30,8 @@ RUN apt-get update && \
         cron \
         nano \
         mc \
-        supervisor
+        supervisor \
+        ffmpeg
 
 #####################################
 # GD:

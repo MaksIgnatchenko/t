@@ -19,6 +19,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.7.0",
         "marcin-orlowski/laravel-api-response-builder": "^4.1",
+        "pawlox/video-thumbnail": "^1.0",
         "sentry/sentry-laravel": "^1.0",
         "twilio/sdk": "^5.28",
         "tymon/jwt-auth": "1.0.0-rc.3",
