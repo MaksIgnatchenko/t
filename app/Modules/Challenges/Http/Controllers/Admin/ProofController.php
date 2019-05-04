@@ -13,6 +13,7 @@ use App\Modules\Challenges\DTO\ShowProofDTO;
 use App\Modules\Challenges\Http\Requests\Admin\UpdateProofRequest;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Proof;
+use App\Modules\Challenges\Services\RedirectToNextProof;
 
 class ProofController extends Controller
 {
@@ -52,6 +53,7 @@ class ProofController extends Controller
     {
         $proof->status = $request->status;
         $proof->save();
-        return redirect()->route('challenge.proof.index', $challenge->id);
+        $redirectService = new RedirectToNextProof($proof);
+        return $redirectService->redirect();
     }
 }
