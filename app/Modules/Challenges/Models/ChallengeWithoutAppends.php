@@ -18,5 +18,7 @@ class ChallengeWithoutAppends extends Challenge
     /**
      * @var array
      */
-    protected $appends = [];
+    protected $appends = [
+        'is_participated',
+    ];
 }
