@@ -129,7 +129,7 @@ class Challenge extends BaseModel implements AbleToContainProofs
      */
     public function participants()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class, 'challenge_user', 'challenge_id', 'user_id')->withTimestamps();
     }
 
     /**
