@@ -195,6 +195,7 @@ return [
         App\Modules\Files\Providers\FilesAdminRouteServiceProvider::class,
         App\Modules\Feeds\Providers\FeedsApiRouteServiceProvider::class,
         App\Modules\Feeds\Providers\FeedsEventServiceProvider::class,
+        Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
     ],
 
     /*
@@ -253,6 +254,7 @@ return [
          * Application Aliases...
          */
         'ActiveLink' => App\Helpers\ActiveLink::class,
+        'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class,
 
     ],
 

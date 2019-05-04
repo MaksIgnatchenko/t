@@ -19,7 +19,8 @@
         ],
         "status": "accepted",
         "created_at": "1554128127",
-        "updated_at": "1554128127"
+        "updated_at": "1554128127",
+        "preview": "https://tagit.appus.work/storage/proofs/Tgmxw4mMcV5M7o1y88lIsCOu7uejJt.jpg",
     }
 }
 

@@ -8,7 +8,6 @@ namespace App\Modules\Challenges\Observers;
 
 use App\Modules\Challenges\Models\Proof;
 use App\Modules\Feeds\Events\ProofSentEvent;
-use App\Modules\Files\Services\ImageService;
 use Illuminate\Support\Facades\Storage;
 
 class ProofObserver

@@ -34,6 +34,7 @@
                     "status": "pending",
                     "created_at": "1555346402",
                     "updated_at": "1555346402",
+                    "preview": "https://tagit.appus.work/storage/proofs/Tgmxw4mMcV5M7o1y88lIsCOu7uejJt.jpg",
                     "user": {
                         "id": 24,
                         "email": "myfuns1989@gmail.com",
