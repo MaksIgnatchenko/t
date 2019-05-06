@@ -50,7 +50,7 @@ class ProofDataTable extends DataTable
      */
     public function query(Proof $model): Builder
     {
-        return $model->with(['user'])->select('proofs.*')->newQuery();
+        return $model->orderBy('created_at', 'desc')->with(['user'])->select('proofs.*')->newQuery();
     }
 
     /**

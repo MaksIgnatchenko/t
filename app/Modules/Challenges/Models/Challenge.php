@@ -8,6 +8,7 @@ namespace App\Modules\Challenges\Models;
 
 use App\Models\BaseModel;
 use App\Modules\Challenges\Enums\ChallengeStatusEnum;
+use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Helpers\AvailableMimeTypeForProofItemHelper;
 use App\Modules\Challenges\Helpers\MaxSizeProofItemHelper;
 use App\Modules\Challenges\Interfaces\AbleToContainProofs;
@@ -340,5 +341,32 @@ class Challenge extends BaseModel implements AbleToContainProofs
     public function isEnded() : bool
     {
         return ChallengeStatusEnum::END === $this->status;
+    }
+
+    /**
+     * @param int|null $fromPosition
+     * @param int|null $limit
+     * @return Collection
+     */
+    public function getAcceptedProofs(int $fromPosition = null, int $limit = null) : Collection
+    {
+        $fromPosition = $fromPosition ? $fromPosition - 1 : 0;
+        $limit = $limit ? $limit : config('custom.results_count_per_page');
+        return $this
+            ->proofs()
+            ->accepted()
+            ->with('user')
+            ->orderBy('position')
+            ->offset($fromPosition)
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * @return Proof|null
+     */
+    public function getMyAcceptedProof() : ?Proof
+    {
+        return $this->proofs()->accepted()->my()->with('user')->first();
     }
 }

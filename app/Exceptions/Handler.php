@@ -59,6 +59,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        dd($exception);
         if ($request->wantsJson()) {
             if ($exception instanceof UnauthorizedActionException) {
                 return CustomResponseBuilder::error(ApiCode::UNAUTHORISED_ACTION);
