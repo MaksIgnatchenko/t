@@ -87,10 +87,10 @@ class ApiResultsData
     }
 
     /**
-     * @param Proof $proof
-     * @return array
+     * @param Proof|null $proof
+     * @return array|null
      */
-    private function getResultStructure(Proof $proof) : array
+    private function getResultStructure(?Proof $proof) : ?array
     {
         if (!$proof) {
             return null;
