@@ -215,4 +215,9 @@ class User extends Authenticatable implements JWTSubject
             'coins',
         ]);
     }
+
+    public function chargeReward(int $reward) : void
+    {
+        $this->coins += $reward;
+    }
 }

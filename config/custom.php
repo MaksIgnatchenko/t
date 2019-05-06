@@ -15,4 +15,5 @@ return [
     'max_size_proof_image' => 1024 * 10,
     'max_size_proof_video' => 1024 * 20,
     'feeds_count_per_page' => 20,
+    'results_count_per_page' => 20,
 ];

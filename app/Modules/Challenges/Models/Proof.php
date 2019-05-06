@@ -12,6 +12,7 @@ use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Files\Services\ImageService;
 use App\Modules\Users\User\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Pawlox\VideoThumbnail\Facade\VideoThumbnail;
 
@@ -65,6 +66,16 @@ class Proof extends BaseModel
     public function getPreviewAttribute($value) : ?string
     {
         return $value ? Storage::url($value) : null;
+    }
+
+    public function scopeAccepted($query)
+    {
+        return $query->where('status', ProofStatusEnum::ACCEPTED);
+    }
+
+    public function scopeMy($query)
+    {
+        return $query->where('user_id', Auth::id());
     }
 
     /**
@@ -147,5 +158,31 @@ class Proof extends BaseModel
             VideoThumbnail::createThumbnail($filePath, public_path('storage/proofs'), $fileName, 1);
             $this->preview = 'proofs/' . $fileName;
         }
+    }
+
+    /**
+     * @return int|null
+     */
+    public function calculatePosition() : ?int
+    {
+        if (!($this->challenge_id && ProofStatusEnum::ACCEPTED === $this->status)) {
+            return null;
+        }
+        if ($this->position) {
+            return $this->position;
+        }
+        $lastCurrentPosition = $this->where('challenge_id', $this->challenge_id)->whereNotNull('position')->max('position');
+        if ($lastCurrentPosition) {
+            return $lastCurrentPosition + 1;
+        }
+        return 1;
+    }
+
+    /**
+     * @param int $reward
+     */
+    public function attachReward(int $reward)
+    {
+        $this->reward = $reward;
     }
 }

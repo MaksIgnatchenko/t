@@ -591,7 +591,7 @@
             "user_id": 24,
             "type": "video",
             "items": [
-                "http://localhost/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
+                "https://tagit.appus.work/storage/proofs/4AiW1xM5QPJekmfK0iQ6gNL4pG1J66eRwMQiVDFJ.mp4"
             ],
             "status": "pending",
             "created_at": "1554741936",
@@ -613,7 +613,7 @@
               "phone_number": "0507337257",
               "country_code": "+38",
               "is_registration_completed": true,
-              "avatar": "http://localhost/storage/avatars/J18DD54mrjLKX71CioZmZEPdRRUdYJ5tNRtUtcfb.jpeg",
+              "avatar": "https://tagit.appus.work/storage/avatars/J18DD54mrjLKX71CioZmZEPdRRUdYJ5tNRtUtcfb.jpeg",
               "birthday": "604508113",
               "sex": "male",
               "country": "Saudi arabia",
@@ -630,7 +630,7 @@
               "phone_number": "0630383034",
               "country_code": "+38",
               "is_registration_completed": true,
-              "avatar": "http://localhost/storage/avatars/dvK9tRueOfxSoPNASZzl0I7qmgZIkGfCQqXi8QAC.jpeg",
+              "avatar": "https://tagit.appus.work/storage/avatars/dvK9tRueOfxSoPNASZzl0I7qmgZIkGfCQqXi8QAC.jpeg",
               "birthday": "604508113",
               "sex": "male",
               "country": "Saudi arabia",
@@ -640,6 +640,96 @@
               "coins": 480
           }
       ]
+    }
+}
+
+@apiErrorExample No such item:
+{
+    "success": false,
+    "code": 16,
+    "data": null
+}
+###
+
+###
+@api {get} /api/challenge/:id/result Get challenge result
+@apiName Get challenge result
+@apiGroup Challenge
+@apiPermission User
+@apiVersion 0.1.0
+
+@apiParam {Integer} [form] Show results from position Default 1
+@apiParam {Integer} [limit] Min 1 Default 20
+
+{
+    "success": true,
+    "code": 0,
+    "data": {
+        "my_result": {
+            "position": 1,
+            "reward": 100,
+            "user": {
+                "id": 24,
+                "email": "myfuns1989@gmail.com",
+                "created_at": "1554450631",
+                "updated_at": "1557131766",
+                "phone_number": "0507337257",
+                "country_code": "+38",
+                "is_registration_completed": true,
+                "avatar": "https://tagit.appus.work/storage/avatars/lanYlud1GPsALPzOD4FLzNWrQ3fpSpdqnD35VjJh.jpeg",
+                "birthday": "604508113",
+                "sex": "male",
+                "country": "United Arab Emirates",
+                "city": "Dubai",
+                "company": "Test",
+                "full_name": "Test",
+                "coins": 1270
+            }
+        },
+        "results": [
+            {
+                "position": 1,
+                "reward": 100,
+                "user": {
+                    "id": 24,
+                    "email": "myfuns1989@gmail.com",
+                    "created_at": "1554450631",
+                    "updated_at": "1557131766",
+                    "phone_number": "0507337257",
+                    "country_code": "+38",
+                    "is_registration_completed": true,
+                    "avatar": "https://tagit.appus.work/storage/avatars/lanYlud1GPsALPzOD4FLzNWrQ3fpSpdqnD35VjJh.jpeg",
+                    "birthday": "604508113",
+                    "sex": "male",
+                    "country": "United Arab Emirates",
+                    "city": "Dubai",
+                    "company": "Test",
+                    "full_name": "Test",
+                    "coins": 1270
+                }
+            },
+            {
+                "position": 2,
+                "reward": 90,
+                "user": {
+                    "id": 25,
+                    "email": "foecunditatef@gmail.com",
+                    "created_at": "1556973564",
+                    "updated_at": "1557129936",
+                    "phone_number": "0630383034",
+                    "country_code": "+38",
+                    "is_registration_completed": true,
+                    "avatar": "https://tagit.appus.work/storage/avatars/FBObPuufB4kziY1XhQGcbHI1DAkRbaugR8CtGVBZ.jpeg",
+                    "birthday": "604508113",
+                    "sex": "male",
+                    "country": "United Arab Emirates",
+                    "city": "Dubai",
+                    "company": null,
+                    "full_name": "Test2",
+                    "coins": 180
+                }
+            }
+        ]
     }
 }
 

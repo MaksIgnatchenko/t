@@ -6,7 +6,9 @@
 
 namespace App\Modules\Challenges\Observers;
 
+use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Models\Proof;
+use App\Modules\Challenges\Services\RewardService;
 use App\Modules\Feeds\Events\ProofSentEvent;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,6 +28,11 @@ class ProofObserver
         }
     }
 
+    public function created(Proof $proof) : void
+    {
+        event(new ProofSentEvent($proof));
+    }
+
     /**
      * @param Proof $proof
      */
@@ -39,8 +46,15 @@ class ProofObserver
         Storage::delete($items);
     }
 
-    public function created(Proof $proof) : void
+    /**
+     * @param Proof $proof
+     */
+    public function updating(Proof $proof) : void
     {
-        event(new ProofSentEvent($proof));
+        if (ProofStatusEnum::ACCEPTED === $proof->status) {
+            $proof->position = $proof->calculatePosition();
+            $rewardService = new RewardService($proof, $proof->user);
+            $rewardService->handle();
+        }
     }
 }
