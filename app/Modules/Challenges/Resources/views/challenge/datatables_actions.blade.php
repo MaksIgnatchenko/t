@@ -6,5 +6,6 @@
         <a class="dropdown-item" href="{{ route('challenge.show', $id) }}">Show</a>
         <a class="dropdown-item" href="{{ route('challenge.edit', $id) }}">Edit</a>
         <a class="dropdown-item" href="{{ route('challenge.proof.index', ['challenge' => $id]) }}">Show proofs</a>
+        <a class="dropdown-item" href="{{ route('result', ['challenge' => $id]) }}">Results</a>
     </div>
 </div>
