@@ -344,6 +344,20 @@ class Challenge extends BaseModel implements AbleToContainProofs
     }
 
     /**
+     * @return bool
+     */
+    public function mayHaveResults() : bool
+    {
+        return in_array(
+            $this->status,
+            [
+                ChallengeStatusEnum::ACTIVE,
+                ChallengeStatusEnum::END,
+            ]
+        );
+    }
+
+    /**
      * @param int|null $fromPosition
      * @param int|null $limit
      * @return Collection

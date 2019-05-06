@@ -101,10 +101,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6" style="margin-bottom: 20px;">
+            @if($dto->mayHaveResults())
+                <div class="col-md-12" style="margin-bottom: 20px;">
+                    <a href="{{ route('result', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-warning btn-block" role="button">Results</a>
+                </div>
+            @endif
+            <div class="col-md-12" style="margin-bottom: 20px;">
                 <a href="{{ route('challenge.proof.index', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-primary btn-block" role="button">Show proofs</a>
             </div>
-            <div class="col-md-6" style="margin-bottom: 20px;">
+            <div class="col-md-12" style="margin-bottom: 20px;">
                 <a href="{{ route('challenge.edit', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-success btn-block" role="button">Edit challenge</a>
             </div>
         </div>
