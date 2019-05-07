@@ -69,7 +69,8 @@
         "city": "Kharkiv",
         "company": null,
         "full_name": "deg",
-        "coins": 100
+        "coins": 100,
+        "referral_code": "J5R6vPcN0eJgtQ15TTonE5pLsAAU7KEO"
     }
 }
 ###

@@ -9,6 +9,8 @@
 namespace App\Modules\Users\User\Providers;
 
 use App\Enums\AppEnvironmentEnum;
+use App\Modules\Users\Observers\UserObserver;
+use App\Modules\Users\User\Models\User;
 use App\Modules\Users\User\Services\AuthyApi\AuthyApi;
 use App\Modules\Users\User\Services\AuthyApi\AuthyApiInterface;
 use App\Modules\Users\User\Services\AuthyApi\AuthyApiStub;
@@ -24,7 +26,7 @@ class AuthyApiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        User::observe(UserObserver::class);
     }
 
     /**
