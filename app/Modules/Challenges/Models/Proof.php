@@ -11,6 +11,7 @@ use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Files\Services\ImageService;
 use App\Modules\Users\User\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -68,14 +69,31 @@ class Proof extends BaseModel
         return $value ? Storage::url($value) : null;
     }
 
-    public function scopeAccepted($query)
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeAccepted($query) : Builder
     {
         return $query->where('status', ProofStatusEnum::ACCEPTED);
     }
 
-    public function scopeMy($query)
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeMy($query) : Builder
     {
         return $query->where('user_id', Auth::id());
+    }
+
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopePending($query) : Builder
+    {
+        return $query->where('status', ProofStatusEnum::PENDING);
     }
 
     /**

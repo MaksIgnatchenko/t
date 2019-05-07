@@ -2,24 +2,24 @@
 
 namespace App\Modules\Challenges\Services;
 
-use App\Modules\Challenges\Enums\ProofStatusEnum;
+use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Proof;
 use Illuminate\Http\RedirectResponse;
 
-class RedirectToNextProof
+class HandleChallengeProofs
 {
     /**
-     * @var Proof
+     * @var Challenge
      */
-    private $currentProof;
+    private $challenge;
 
     /**
-     * RedirectToNextProof constructor.
-     * @param Proof $proof
+     * HandleChallengeProofs constructor.
+     * @param Challenge $challenge
      */
-    public function __construct(Proof $proof)
+    public function __construct (Challenge $challenge)
     {
-        $this->currentProof = $proof;
+        $this->challenge = $challenge;
     }
 
     /**
@@ -31,7 +31,7 @@ class RedirectToNextProof
             return redirect()->route('challenge.proof.show', [$nextProof->challenge_id, $nextProof->id]);
         }
         flash('There are no pending proofs for this challenge')->success();
-        return redirect()->route('challenge.proof.index', $this->currentProof->challenge_id);
+        return redirect()->route('challenge.proof.index', $this->challenge->id);
     }
 
     /**
@@ -39,10 +39,6 @@ class RedirectToNextProof
      */
     protected function getNextProof() : ?Proof
     {
-        return Proof::where('challenge_id', $this->currentProof->challenge_id)
-            ->where('status', ProofStatusEnum::PENDING)
-            ->where('id', '<>', $this->currentProof->id)
-            ->oldest()
-            ->first();
+        return $this->challenge->proofs()->pending()->oldest()->first();
     }
 }

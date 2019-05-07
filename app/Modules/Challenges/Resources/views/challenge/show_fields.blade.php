@@ -101,6 +101,9 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-12" style="margin-bottom: 20px;">
+                <a href="{{ route('check', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-success btn-block" role="button">Check proofs</a>
+            </div>
             @if($dto->mayHaveResults())
                 <div class="col-md-12" style="margin-bottom: 20px;">
                     <a href="{{ route('result', ['challenge' => $dto->getChallengeId()]) }}" class="btn btn-warning btn-block" role="button">Results</a>

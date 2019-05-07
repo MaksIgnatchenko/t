@@ -3,6 +3,7 @@
         Actions
     </button>
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <a class="dropdown-item" href="{{ route('check', $id) }}">Check proofs</a>
         <a class="dropdown-item" href="{{ route('challenge.show', $id) }}">Show</a>
         <a class="dropdown-item" href="{{ route('challenge.edit', $id) }}">Edit</a>
         <a class="dropdown-item" href="{{ route('challenge.proof.index', ['challenge' => $id]) }}">Show proofs</a>
