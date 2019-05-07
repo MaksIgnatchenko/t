@@ -8,6 +8,7 @@ use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Proof;
 use App\Modules\Files\Services\ImageService;
+use App\Modules\Users\Services\ReferralCodeService\ReferralAble;
 use App\Modules\Users\User\Mails\ResetPasswordMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, ReferralAble
 {
     protected const DEFAULT_COINS_AMOUNT = 100;
 
@@ -53,6 +54,7 @@ class User extends Authenticatable implements JWTSubject
         'city',
         'coins',
         'company',
+        'referral_code',
     ];
 
     protected $casts = [
@@ -220,4 +222,17 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->coins += $reward;
     }
+
+    public function chargeRewardToReferralUser() : void
+    {
+//        $referralUser = $this->where('referral_code')->first();
+        // TODO implement reward referral user after adding gold coins functionality
+    }
+
+    public function calculateReferralCode(): void
+    {
+        $this->attributes['referral_code'] = str_random(32);
+    }
+
+
 }
