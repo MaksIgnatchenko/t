@@ -6,5 +6,7 @@
 
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::resource('challenge', 'ChallengeController')->except(['destroy']);
+    Route::get('challenge/{challenge}/result', 'ResultController@index')->name('result');
     Route::resource('challenge.proof', 'ProofController')->only(['index', 'show', 'update']);
+    Route::get('challenge/{challenge}/check', 'ProofController@check')->name('check');
 });

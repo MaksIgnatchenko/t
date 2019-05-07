@@ -166,4 +166,12 @@ class ShowChallengeDTO
     {
         return PrettyNameHelper::transform($this->challenge->status);
     }
+
+    /**
+     * @return bool
+     */
+    public function mayHaveResults() : bool
+    {
+        return $this->challenge->mayHaveResults();
+    }
 }

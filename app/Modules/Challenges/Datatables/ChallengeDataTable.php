@@ -7,6 +7,7 @@
 namespace App\Modules\Challenges\Datatables;
 
 use App\Helpers\PrettyNameHelper;
+use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Helpers\ChallengeStatusClassHelper;
 use App\Modules\Challenges\Models\Challenge;
 use Carbon\Carbon;
@@ -53,7 +54,9 @@ class ChallengeDataTable extends DataTable
      */
     public function query(Challenge $model): Builder
     {
-        return $model->newQuery();
+        return $model->withCount(['proofs as pending_proofs' => function ($query) {
+            $query->where('status', ProofStatusEnum::PENDING);
+        }]);
     }
 
     /**
@@ -87,6 +90,12 @@ class ChallengeDataTable extends DataTable
                 'data' => 'name',
                 'title' => 'Name',
                 'width' => '15%',
+            ],
+            [
+                'data' => 'pending_proofs',
+                'title' => 'Pending proofs',
+                'width' => '15%',
+                'searchable' => false,
             ],
             [
                 'name' => 'image',

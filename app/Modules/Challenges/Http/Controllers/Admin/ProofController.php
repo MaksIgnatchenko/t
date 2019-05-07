@@ -13,6 +13,7 @@ use App\Modules\Challenges\DTO\ShowProofDTO;
 use App\Modules\Challenges\Http\Requests\Admin\UpdateProofRequest;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Proof;
+use App\Modules\Challenges\Services\HandleChallengeProofs;
 use App\Modules\Challenges\Services\RedirectToNextProof;
 
 class ProofController extends Controller
@@ -28,7 +29,7 @@ class ProofController extends Controller
     {
         return $dataTable
             ->addScope(new ChallengeDataTableScope($challenge->id))
-            ->render('proof.index');
+            ->render('proof.index', ['challenge' => $challenge]);
     }
 
     /**
@@ -55,5 +56,15 @@ class ProofController extends Controller
         $proof->save();
         $redirectService = new RedirectToNextProof($proof);
         return $redirectService->redirect();
+    }
+
+    /**
+     * @param Challenge $challenge
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function check(Challenge $challenge)
+    {
+        $handleChallengeProofsService = new HandleChallengeProofs($challenge);
+        return $handleChallengeProofsService->redirect();
     }
 }
