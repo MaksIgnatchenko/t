@@ -29,7 +29,7 @@ class ProofController extends Controller
     {
         return $dataTable
             ->addScope(new ChallengeDataTableScope($challenge->id))
-            ->render('proof.index');
+            ->render('proof.index', ['challenge' => $challenge]);
     }
 
     /**
