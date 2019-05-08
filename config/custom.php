@@ -16,4 +16,5 @@ return [
     'max_size_proof_video' => 1024 * 20,
     'feeds_count_per_page' => 20,
     'results_count_per_page' => 20,
+    'referral_code_length' => 32,
 ];

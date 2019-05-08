@@ -40,7 +40,13 @@ class VerifyCodeRequest extends FormRequest
                 'max:50',
                 'confirmed',
                 new PasswordRuleApi(),
-            ]
+            ],
+            'referral_code' => [
+                'nullable',
+                'string',
+                'size:' . config('custom.referral_code_length'),
+                'exists:users,referral_code',
+            ],
         ];
     }
 }
