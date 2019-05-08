@@ -231,7 +231,9 @@ class User extends Authenticatable implements JWTSubject, ReferralAble
 
     public function calculateReferralCode(): void
     {
-        $this->attributes['referral_code'] = str_random(32);
+        do {
+            $randomCode = str_random(config('custom.referral_code_length'));
+        } while ($this->where('referral_code', $randomCode)->first());
+        $this->attributes['referral_code'] = str_random(config('custom.referral_code_length'));
     }
-
 }
