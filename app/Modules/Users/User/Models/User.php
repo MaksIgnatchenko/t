@@ -225,14 +225,13 @@ class User extends Authenticatable implements JWTSubject, ReferralAble
 
     public function chargeRewardToReferralUser() : void
     {
-//        $referralUser = $this->where('referral_code')->first();
         // TODO implement reward referral user after adding gold coins functionality
+        // $referralUser = $this->where('referral_code', $this->referral_code)->first();
     }
 
     public function calculateReferralCode(): void
     {
         $this->attributes['referral_code'] = str_random(32);
     }
-
 
 }
