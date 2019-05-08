@@ -131,6 +131,7 @@
 @apiParam {String} code 4 symbols (any 4 symbols for develop server)
 @apiParam {String} password Max 50.
 @apiParam {String} password_confirmation Max 50. The same as password
+@apiParam {String} [referral_code] Size 32. Referral code of an existing user
 
 @apiSuccessExample Success-Response:
 HTTP/1.1 200 OK
