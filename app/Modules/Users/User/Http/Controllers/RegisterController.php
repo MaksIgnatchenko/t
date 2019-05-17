@@ -82,8 +82,7 @@ class RegisterController extends Controller
         $user->fill($request->all());
         $user->save();
 
-        $credentials = $request->only('phone_number', 'password');
-        $token = $this->guard('api')->attempt($credentials);
+        $token = $user->generateToken();
 
         return CustomResponseBuilder::success($this->getTokenStructure($token));
     }

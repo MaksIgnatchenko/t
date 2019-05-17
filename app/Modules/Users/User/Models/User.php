@@ -4,7 +4,6 @@ namespace App\Modules\Users\User\Models;
 
 use App\Modules\Challenges\Enums\CountryEnum;
 use App\Modules\Challenges\Enums\ProofStatusEnum;
-use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Proof;
 use App\Modules\Files\Services\ImageService;
@@ -15,8 +14,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
-class User extends Authenticatable implements JWTSubject, ReferralAble
+class User extends Authenticatable implements JWTSubject, ReferralAble, CanGenerateJwtToken
 {
     protected const DEFAULT_COINS_AMOUNT = 100;
 
@@ -235,5 +235,13 @@ class User extends Authenticatable implements JWTSubject, ReferralAble
             $randomCode = str_random(config('custom.referral_code_length'));
         } while ($this->where('referral_code', $randomCode)->first());
         $this->attributes['referral_code'] = str_random(config('custom.referral_code_length'));
+    }
+
+    /**
+     * @return string
+     */
+    public function generateToken() : string
+    {
+        return JWTAuth::fromUser($this);
     }
 }
