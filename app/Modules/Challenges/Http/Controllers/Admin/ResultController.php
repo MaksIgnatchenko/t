@@ -18,6 +18,6 @@ class ResultController extends Controller
     {
         return $dataTable
             ->addScope(new ResultDataTableScope($challenge->id))
-            ->render('proof.index');
+            ->render('proof.index', ['challenge' => $challenge]);
     }
 }
