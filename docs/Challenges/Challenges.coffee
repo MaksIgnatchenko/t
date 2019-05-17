@@ -661,6 +661,7 @@
 @apiParam {Integer} [form] Show results from position Default 1
 @apiParam {Integer} [limit] Min 1 Default 20
 
+@apiSuccessExample Success-Response:
 {
     "success": true,
     "code": 0,
