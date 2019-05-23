@@ -49,17 +49,11 @@ class ChallengeParticipationController extends Controller
             return CustomResponseBuilder::error(ApiCode::USER_IS_ALREADY_PARTICIPATING);
         }
 
-        if (!$user->enoughCoinsToParticipateChallenge()) {
-            return CustomResponseBuilder::error(ApiCode::NOT_ENOUGH_COINS);
-        }
-
         if (!$challenge->enoughFreePlaces()) {
             return CustomResponseBuilder::error(ApiCode::PARTICIPANTS_LIMIT_EXCEEDED);
         }
 
         $challenge->participants()->attach(Auth::id());
-        $user->coins -= Challenge::PARTICIPATION_COST;
-        $user->save();
 
         return CustomResponseBuilder::success([
             'coins' => $user->coins
