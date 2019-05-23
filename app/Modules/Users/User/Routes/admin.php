@@ -5,5 +5,5 @@
  */
 
 Route::group(['middleware' => 'auth:admin'], function () {
-    Route::resource('users', 'UserController')->only(['index', 'show']);
+    Route::resource('users', 'UserController')->only(['index', 'show', 'update']);
 });

@@ -244,4 +244,10 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     {
         return JWTAuth::fromUser($this);
     }
+
+    public function resetCoins() : void
+    {
+        $this->coins = 0;
+        $this->save();
+    }
 }

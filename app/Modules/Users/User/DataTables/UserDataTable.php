@@ -98,6 +98,11 @@ class UserDataTable extends DataTable
                 'data' => 'country',
                 'title' => 'Country'
             ],
+            [
+                'name' => 'coins',
+                'data' => 'coins',
+                'title' => 'Tickets'
+            ],
         ];
     }
 

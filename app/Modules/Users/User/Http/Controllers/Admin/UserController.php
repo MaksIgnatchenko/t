@@ -8,6 +8,7 @@ namespace App\Modules\Users\User\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Modules\Users\User\Models\User;
 use App\Modules\Users\User\DataTables\UserDataTable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -32,5 +33,12 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('show')->with('user', $user);
+    }
+
+    public function update(User $user)
+    {
+        $user->resetCoins();
+        flash('Tickets have been reset');
+        return redirect()->back();
     }
 }

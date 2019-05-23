@@ -70,13 +70,6 @@
     "data": null
 }
 
-@apiErrorExample Not enough coins:
-{
-    "success": false,
-    "code": 19,
-    "data": null
-}
-
 @apiErrorExample User is already participating:
 {
   "success": false,
