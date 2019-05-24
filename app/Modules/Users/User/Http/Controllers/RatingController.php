@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Modules\Users\Services\ApiRatingData\ApiRatingData;
 use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\Response;
 
 class RatingController extends Controller
@@ -16,11 +15,7 @@ class RatingController extends Controller
      */
     public function __invoke() : Response
     {
-        $ratingDataService = new ApiRatingData(
-            Auth::user(),
-            Input::get('from'),
-            Input::get('limit')
-        );
+        $ratingDataService = new ApiRatingData(Auth::user());
         return CustomResponseBuilder::success($ratingDataService->buildData());
     }
 }

@@ -8,11 +8,9 @@ class ApiRatingData
     private $offset;
     private $limit;
 
-    public function __construct(Rankable $currentUser, ?int $offset, ?int  $limit)
+    public function __construct(Rankable $currentUser)
     {
         $this->currentUser = $currentUser;
-        $this->offset = $offset ?? 1;
-        $this->limit = $limit ?? 10;
     }
 
     /**
