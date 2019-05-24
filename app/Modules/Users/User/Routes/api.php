@@ -27,3 +27,5 @@ $this->group([
     Route::post('change', 'ChangePasswordController@change')->name('password.change');
     Route::post('email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 });
+
+Route::get('rating', 'RatingController')->middleware('auth:api');

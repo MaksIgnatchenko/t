@@ -7,16 +7,19 @@ use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Proof;
 use App\Modules\Files\Services\ImageService;
+use App\Modules\Users\Services\ApiRatingData\Rankable;
 use App\Modules\Users\Services\ReferralCodeService\ReferralAble;
 use App\Modules\Users\User\Mails\ResetPasswordMail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Pagination\AbstractPaginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class User extends Authenticatable implements JWTSubject, ReferralAble, CanGenerateJwtToken
+class User extends Authenticatable implements JWTSubject, ReferralAble, CanGenerateJwtToken, Rankable
 {
     protected const DEFAULT_COINS_AMOUNT = 100;
 
@@ -221,6 +224,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     public function chargeReward(int $reward) : void
     {
         $this->coins += $reward;
+        $this->total_reward +=  $reward;
     }
 
     public function chargeRewardToReferralUser() : void
@@ -250,4 +254,42 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         $this->coins = 0;
         $this->save();
     }
+
+    /**
+     * @return int
+     */
+    public function getCurrentPosition(): int
+    {
+        return $this->where('total_reward', '>', $this->total_reward)->count() + 1;
+    }
+
+    /**
+     * @return AbstractPaginator
+     */
+    public function getRating() : AbstractPaginator
+    {
+        return $this->select(
+            'id',
+            'full_name',
+            DB::raw('RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
+            'avatar'
+        )
+        ->paginate(config('custom.results_count_per_page'));
+    }
+
+    /**
+     * @return array
+     */
+    public function getMyPositionFormattedData(): array
+    {
+        return [
+            'id' => $this->id,
+            'full_name' => $this->full_name,
+            'position' => $this->getCurrentPosition(),
+            'total_reward' => $this->total_reward,
+            'avatar' => $this->avatar,
+        ];
+    }
+
+
 }

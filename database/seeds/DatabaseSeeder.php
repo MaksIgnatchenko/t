@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
     {
 //         $this->call(AdminTableSeeder::class);
 //         $this->call(ContentTableSeeder::class);
-         $this->call(AddReferralCodesToCurrentUsersSeeder::class);
+//         $this->call(AddReferralCodesToCurrentUsersSeeder::class);
+        $this->call(CalculateTotalRewardsForCurrentUsersSeeder::class);
 
 //         factory(\App\Modules\Challenges\Models\Challenge::class, 200)->create();
     }
