@@ -17,4 +17,5 @@ return [
     'feeds_count_per_page' => 20,
     'results_count_per_page' => 20,
     'referral_code_length' => 32,
+    'rating_results_count_per_page' => 1000,
 ];

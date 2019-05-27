@@ -5,8 +5,6 @@ namespace App\Modules\Users\Services\ApiRatingData;
 class ApiRatingData
 {
     private $currentUser;
-    private $offset;
-    private $limit;
 
     public function __construct(Rankable $currentUser)
     {
@@ -20,7 +18,7 @@ class ApiRatingData
     {
         return [
             'my_rating' => $this->currentUser->getMyPositionFormattedData(),
-            'rating' => $this->currentUser->getRating($this->offset, $this->limit),
+            'rating' => $this->currentUser->getRating(),
         ];
     }
 }
