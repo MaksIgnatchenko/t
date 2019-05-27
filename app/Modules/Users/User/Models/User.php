@@ -274,7 +274,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
             DB::raw('RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
             'avatar'
         )
-        ->paginate(config('custom.results_count_per_page'));
+        ->paginate(config('custom.rating_results_count_per_page'));
     }
 
     /**
