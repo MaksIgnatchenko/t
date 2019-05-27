@@ -12,9 +12,8 @@ use Illuminate\Contracts\Validation\Rule;
 
 class PasswordRule implements Rule
 {
-    // TODO make pattern weaker
     /** @var string*/
-    protected $pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?\d)(?=.*?[#?!@$%^&*-]).{6,}$/';
+    protected $pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/';
 
     /**
      * Determine if the validation rule passes.
@@ -35,6 +34,6 @@ class PasswordRule implements Rule
      */
     public function message()
     {
-        return 'Your password must contain at least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.';
+        return 'Your password must contain at least 1 Uppercase, 1 Lowercase, 1 Numeric character. Password length at least 8 characters';
     }
 }
