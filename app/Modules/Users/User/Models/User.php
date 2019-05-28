@@ -22,7 +22,14 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class User extends Authenticatable implements JWTSubject, ReferralAble, CanGenerateJwtToken, Rankable
 {
-    protected const DEFAULT_COINS_AMOUNT = 100;
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    protected const DEFAULT_COINS_AMOUNT = 0;
 
     use Notifiable;
 
@@ -303,5 +310,10 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     public function scopeCompletedRegistration($query): Builder
     {
         return $query->where('is_registration_completed', true);
+    }
+
+    public function resetCoinsForAllUsers() : void
+    {
+        DB::table($this->table)->update(['coins' => self::DEFAULT_COINS_AMOUNT]);
     }
 }
