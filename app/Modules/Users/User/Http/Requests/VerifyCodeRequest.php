@@ -39,7 +39,6 @@ class VerifyCodeRequest extends FormRequest
                 'min:8',
                 'max:50',
                 'confirmed',
-                new PasswordRuleApi(),
             ],
             'referral_code' => [
                 'nullable',
