@@ -13,7 +13,7 @@ use Illuminate\Contracts\Validation\Rule;
 class PasswordRule implements Rule
 {
     /** @var string*/
-    protected $pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/';
+    protected $pattern = '/^[a-zA-Z0-9]+$/';
 
     /**
      * Determine if the validation rule passes.

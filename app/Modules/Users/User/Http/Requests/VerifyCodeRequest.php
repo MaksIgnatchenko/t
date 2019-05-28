@@ -36,7 +36,7 @@ class VerifyCodeRequest extends FormRequest
             'code' => 'required|string|max:4',
             'password' => [
                 'required',
-                'min:6',
+                'min:8',
                 'max:50',
                 'confirmed',
                 new PasswordRuleApi(),
