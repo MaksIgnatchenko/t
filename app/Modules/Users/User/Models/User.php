@@ -10,6 +10,7 @@ use App\Modules\Files\Services\ImageService;
 use App\Modules\Users\Services\ApiRatingData\Rankable;
 use App\Modules\Users\Services\ReferralCodeService\ReferralAble;
 use App\Modules\Users\User\Mails\ResetPasswordMail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Pagination\AbstractPaginator;
@@ -111,7 +112,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     /**
      * Sends the password reset notification.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return void
      */
@@ -152,7 +153,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         $path = 'avatars';
         $imageService = new ImageService($attribute);
         $image = $imageService->orientate();
-        $fileName = $path . '/' .$attribute->hashName();
+        $fileName = $path . '/' . $attribute->hashName();
         Storage::put($fileName, $image);
 
         if (null !== $this->avatar) {
@@ -190,7 +191,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
      * @param Challenge $challenge
      * @return bool
      */
-    public function isAbleToSendProof(Challenge $challenge) : bool
+    public function isAbleToSendProof(Challenge $challenge): bool
     {
         return Proof::where('challenge_id', $challenge->id)
             ->where('user_id', $this->id)
@@ -202,7 +203,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     /**
      * @return string
      */
-    public function getCountry() : string
+    public function getCountry(): string
     {
         return $this->country ?? CountryEnum::SAUDI_ARABIA;
     }
@@ -210,7 +211,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     /**
      * @return User
      */
-    public function hideForPublic() : self
+    public function hideForPublic(): self
     {
         return $this->makeHidden([
             'updated_at_at',
@@ -221,13 +222,13 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         ]);
     }
 
-    public function chargeReward(int $reward) : void
+    public function chargeReward(int $reward): void
     {
         $this->coins += $reward;
-        $this->total_reward +=  $reward;
+        $this->total_reward += $reward;
     }
 
-    public function chargeRewardToReferralUser() : void
+    public function chargeRewardToReferralUser(): void
     {
         // TODO implement reward referral user after adding gold coins functionality
         // $referralUser = $this->where('referral_code', $this->referral_code)->first();
@@ -244,12 +245,12 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     /**
      * @return string
      */
-    public function generateToken() : string
+    public function generateToken(): string
     {
         return JWTAuth::fromUser($this);
     }
 
-    public function resetCoins() : void
+    public function resetCoins(): void
     {
         $this->coins = 0;
         $this->save();
@@ -260,21 +261,25 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
      */
     public function getCurrentPosition(): int
     {
-        return $this->where('total_reward', '>', $this->total_reward)->count() + 1;
+        return $this->completedRegistration()
+                ->where('total_reward', '>', $this->total_reward)
+                ->count() + 1;
     }
 
     /**
      * @return AbstractPaginator
      */
-    public function getRating() : AbstractPaginator
+    public function getRating(): AbstractPaginator
     {
-        return $this->select(
-            'id',
-            'full_name',
-            DB::raw('RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
-            'avatar'
-        )
-        ->paginate(config('custom.rating_results_count_per_page'));
+        return $this
+            ->select(
+                'id',
+                'full_name',
+                DB::raw('RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
+                'avatar'
+            )
+            ->completedRegistration()
+            ->paginate(config('custom.rating_results_count_per_page'));
     }
 
     /**
@@ -291,5 +296,12 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         ];
     }
 
-
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeCompletedRegistration($query): Builder
+    {
+        return $query->where('is_registration_completed', true);
+    }
 }
