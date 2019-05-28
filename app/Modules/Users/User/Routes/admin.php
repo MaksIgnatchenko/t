@@ -6,4 +6,5 @@
 
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::resource('users', 'UserController')->only(['index', 'show', 'update']);
+    Route::put('reset-coins', 'UserController@resetCoinsForAllUsers')->name('reset-coins');
 });

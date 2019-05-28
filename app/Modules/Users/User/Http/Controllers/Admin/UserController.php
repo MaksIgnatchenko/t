@@ -35,10 +35,24 @@ class UserController extends Controller
         return view('show')->with('user', $user);
     }
 
-    public function update(User $user)
+    /**
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function update(User $user) : RedirectResponse
     {
         $user->resetCoins();
         flash('Tickets have been reset');
+        return redirect()->back();
+    }
+
+    /**
+     * @return RedirectResponse
+     */
+    public function resetCoinsForAllUsers() : RedirectResponse
+    {
+        app()[User::class]->resetCoinsForAllUsers();
+        flash('Tickets for all users have been reset');
         return redirect()->back();
     }
 }
