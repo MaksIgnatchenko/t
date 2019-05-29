@@ -32,7 +32,7 @@ class VerifyCodeRequest extends FormRequest
     {
         return [
             'country_code' => 'required|string|max:3',
-            'phone_number' => 'required|string|max:10|unique:users,phone_number',
+            'phone_number' => 'required|string|max:10|unique_with:users,country_code',
             'code' => 'required|string|max:4',
             'password' => [
                 'required',

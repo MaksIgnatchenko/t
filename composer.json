@@ -11,6 +11,7 @@
         "php": "^7.3",
         "authy/php": "^3.0",
         "doctrine/dbal": "^2.9",
+        "felixkiss/uniquewith-validator": "^3.2",
         "fideloper/proxy": "^4.0",
         "infyomlabs/adminlte-templates": "5.7.x-dev",
         "infyomlabs/laravel-generator": "5.7.x-dev",
