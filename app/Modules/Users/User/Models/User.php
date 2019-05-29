@@ -270,6 +270,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     {
         return $this->completedRegistration()
                 ->where('total_reward', '>', $this->total_reward)
+                ->groupBy('total_reward')
                 ->count() + 1;
     }
 
@@ -282,7 +283,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
             ->select(
                 'id',
                 'full_name',
-                DB::raw('RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
+                DB::raw('DENSE_RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
                 'avatar'
             )
             ->completedRegistration()
