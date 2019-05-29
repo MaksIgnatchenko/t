@@ -16,6 +16,7 @@ trait ValidationErrorsApiMessagesTrait
             'min' => ValidationErrorCode::MIN,
             'max' => ValidationErrorCode::MAX,
             'unique' => ValidationErrorCode::UNIQUE,
+            'unique_with' => ValidationErrorCode::UNIQUE,
             'confirmed' => ValidationErrorCode::CONFIRMED,
             'password_rule' => ValidationErrorCode::PASSWORD_RULE,
             'file' => ValidationErrorCode::FILE,
