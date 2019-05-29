@@ -269,10 +269,14 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
      */
     public function getCurrentPosition(): int
     {
-        return $this->completedRegistration()
-                ->where('total_reward', '>', $this->total_reward)
-                ->groupBy('total_reward')
-                ->count() + 1;
+        $groupsCount = DB::table($this->table)
+            ->select(DB::raw('count(*) as count, total_reward'))
+            ->where('is_registration_completed', true)
+            ->where('total_reward', '>', $this->total_reward)
+            ->groupBy('total_reward')
+            ->get()
+            ->count();
+        return $groupsCount + 1;
     }
 
     /**
@@ -280,6 +284,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
      */
     public function getRating(): AbstractPaginator
     {
+        // The total_reward field is used for denormalization to improve performance.
         return $this
             ->select(
                 'id',

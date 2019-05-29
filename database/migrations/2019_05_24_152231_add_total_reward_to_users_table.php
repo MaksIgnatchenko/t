@@ -13,6 +13,7 @@ class AddTotalRewardToUsersTable extends Migration
      */
     public function up()
     {
+        // Denormalization to increase the performance
         Schema::table('users', function (Blueprint $table) {
             $table->integer('total_reward')->default(0);
         });
