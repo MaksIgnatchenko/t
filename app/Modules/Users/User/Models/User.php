@@ -257,9 +257,10 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         return JWTAuth::fromUser($this);
     }
 
-    public function resetCoins(): void
+    public function resetCoinsAndRating(): void
     {
         $this->coins = 0;
+        $this->total_reward = 0;
         $this->save();
     }
 
@@ -313,8 +314,11 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         return $query->where('is_registration_completed', true);
     }
 
-    public function resetCoinsForAllUsers() : void
+    public function resetCoinsAndRatingForAllUsers() : void
     {
-        DB::table($this->table)->update(['coins' => self::DEFAULT_COINS_AMOUNT]);
+        DB::table($this->table)->update([
+            'coins' => self::DEFAULT_COINS_AMOUNT,
+            'total_reward' => 0,
+        ]);
     }
 }

@@ -19,7 +19,7 @@
                                 onclick="return confirm('Are you sure you want reset tickets for all users?');">
                         </button>
                         {!! Form::close() !!}
-                        Reset tickets for all users
+                        Reset tickets and rating for all users
                     </a>
                 @include('table')
             </div>

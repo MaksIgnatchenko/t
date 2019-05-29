@@ -41,18 +41,18 @@ class UserController extends Controller
      */
     public function update(User $user) : RedirectResponse
     {
-        $user->resetCoins();
-        flash('Tickets have been reset');
+        $user->resetCoinsAndRating();
+        flash('Tickets and rating have been reset');
         return redirect()->back();
     }
 
     /**
      * @return RedirectResponse
      */
-    public function resetCoinsForAllUsers() : RedirectResponse
+    public function resetCoinsAndRatingForAllUsers() : RedirectResponse
     {
-        app()[User::class]->resetCoinsForAllUsers();
-        flash('Tickets for all users have been reset');
+        app()[User::class]->resetCoinsAndRatingForAllUsers();
+        flash('Tickets and rating for all users have been reset');
         return redirect()->back();
     }
 }
