@@ -72,6 +72,7 @@ deploy:develop:
     - echo "$SSL_CERTIFICATE" > ./ssl/certificate.crt
     - echo "$SSL_PRIVATE_KEY" > ./ssl/private.key
 
+    - sed -i -e "s/%server_name%/${SERVER_HOST_DEV}/g" ./docker/nginx/nginx_ssl.conf
 
     - cp docker-compose.development.yml docker-compose.yml
     - rm docker-compose.yml.*
@@ -108,6 +109,7 @@ deploy:master:
     - echo "$SSL_CERTIFICATE_PROD" > ./ssl/certificate.crt
     - echo "$SSL_PRIVATE_KEY_PROD" > ./ssl/private.key
 
+    - sed -i -e "s/%server_name%/${SERVER_HOST_PROD}/g" ./docker/nginx/nginx_ssl.conf
 
     - cp docker-compose.production.yml docker-compose.yml
     - rm docker-compose.yml.*
