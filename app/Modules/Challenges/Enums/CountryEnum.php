@@ -8,7 +8,7 @@ namespace App\Modules\Challenges\Enums;
 
 class CountryEnum
 {
-    public const SAUDI_ARABIA = 'Saudi arabia';
+    public const SAUDI_ARABIA = 'Saudi Arabia';
     public const UNITED_ARAB_EMIRATES = 'United Arab Emirates';
 
     /**
