@@ -53,6 +53,7 @@ js_build:
     expire_in: 1h
   only:
     - develop
+    - master
 
 deploy:develop:
   stage: deploy
@@ -89,3 +90,41 @@ deploy:develop:
     - ssh -o StrictHostKeyChecking=no $SSH_USER_DEV@$SERVER_HOST_DEV "cd /var/www/tagit && docker-compose up -d --build --force-recreate --remove-orphans && sleep 60 && docker exec tagit_php /bin/bash /var/www/init_dev.sh"
   only:
     - develop
+
+deploy:master:
+  stage: deploy
+  script:
+    - apt-get update && apt-get install -y
+      ssh
+      rsync
+
+    - mkdir -p ~/.ssh
+    - echo -e "$SSH_PRIVATE_KEY_PROD" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+
+    - echo "$ENV_PROD" > ./.env
+
+    - mkdir ./ssl
+    - echo "$SSL_CERTIFICATE_PROD" > ./ssl/certificate.crt
+    - echo "$SSL_PRIVATE_KEY_PROD" > ./ssl/private.key
+
+
+    - cp docker-compose.production.yml docker-compose.yml
+    - rm docker-compose.yml.*
+
+    - rm -f ./public/storage
+    - ln -s ../storage/app/public/ ./public/storage
+
+    - rm -rf ./.git
+    - rm -rf ./node_modules
+    - rm -rf ./tests
+    - rm -rf ./docs
+
+    - ssh -o StrictHostKeyChecking=no $SSH_USER_PROD@$SERVER_HOST_PROD "mkdir -p /var/www/tagit"
+
+    - rsync -az --exclude-from=.gitlab-ci-exclude --no-perms --no-owner --no-group --delete-during -e "ssh -o StrictHostKeyChecking=no" . $SSH_USER_PROD@$SERVER_HOST_PROD:/var/www/tagit
+    - ssh -o StrictHostKeyChecking=no $SSH_USER_PROD@$SERVER_HOST_PROD "cd /var/www/tagit && docker-compose up -d --build --force-recreate --remove-orphans && sleep 60 && docker exec tagit_php /bin/bash /var/www/init_prod.sh"
+  only:
+    - master
+
+

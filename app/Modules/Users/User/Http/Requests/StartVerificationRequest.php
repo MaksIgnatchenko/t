@@ -34,7 +34,7 @@ class StartVerificationRequest extends FormRequest
                 'required',
                 'string',
                 'max:10',
-                'unique:users,phone_number',
+                'unique_with:users,country_code',
             ],
         ];
     }
