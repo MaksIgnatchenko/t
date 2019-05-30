@@ -16,6 +16,7 @@ php artisan view:clear
 php artisan config:clear
 php artisan cache:clear
 php artisan package:discover
+php artisan config:cache
 
 service supervisor start
 supervisorctl reread
