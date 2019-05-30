@@ -72,9 +72,9 @@ class EditChallengeDto extends CreateChallengeDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrentCity() : string
+    public function getCurrentCity() : ?string
     {
         return $this->challenge->city;
     }
