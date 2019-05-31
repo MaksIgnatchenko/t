@@ -181,13 +181,7 @@
                     <p>
                         {!! Html::decode(Form::label('start_date', 'Start date <span class="fa fa-calendar"></span>', ['class' => 'text-muted'])) !!}
                         <input name="start_date"
-                               class="datepicker-here form-control"
-                               data-date-format='yyyy-mm-dd'
-                               data-time-format='hh:ii'
-                               data-min-minutes="0"
-                               data-max-minutes="0"
-                               data-timepicker="true"
-                               data-position="top left"
+                               class="air-datepicker form-control"
                                readonly />
                     </p>
                     @if ($errors->has('start_date'))
@@ -199,13 +193,7 @@
                     <p>
                         {!! Html::decode(Form::label('end_date', 'End date <span class="fa fa-calendar"></span>', ['class' => 'text-muted'])) !!}
                         <input name="end_date"
-                               class="datepicker-here form-control"
-                               data-date-format='yyyy-mm-dd'
-                               data-time-format='hh:ii'
-                               data-min-minutes="0"
-                               data-max-minutes="0"
-                               data-timepicker="true"
-                               data-position="top left"
+                               class="air-datepicker form-control"
                                readonly />
                     </p>
                     @if ($errors->has('end_date'))
