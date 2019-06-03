@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+
+
 @section('content')
     <h4 class="text-muted text-center font-18"><b>@lang('auth.sign_in')</b></h4>
 
@@ -32,12 +34,10 @@
 
             <div class="form-group row">
                 <div class="col-12">
-                    <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                        <input type="checkbox" class="custom-control-input"
-                               name="remember" {{ old('remember') ? 'checked' : '' }}>
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">@lang('auth.remember_me')</span>
-                    </label>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="customCheck1">@lang('auth.remember_me')</label>
+                    </div>
                 </div>
             </div>
 
