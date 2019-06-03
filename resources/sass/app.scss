@@ -13,3 +13,16 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.custom-control-label::before,
+.custom-control-label::after {
+ top: 0.4rem;
+ left: -2rem;
+ width: 1.5rem;
+ height: 1.5rem;
+}
+
+.custom-control-label {
+  margin-left: 0.5rem;
+}
+
