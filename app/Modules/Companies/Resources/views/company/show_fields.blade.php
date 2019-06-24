@@ -6,6 +6,16 @@
     </div>
 </div>
 
+<!-- Type field -->
+<div class="form-group">
+    <p>
+        {{ Form::label('type', 'Type ') }}
+        <span class="badge {{ \App\Modules\Companies\Helpers\CompanyViewHelper::getTypeContainerClass($company->type) }}">
+            {{ $company->type }}
+        </span>
+    </p>
+</div>
+
 
 <!-- Info field -->
 <div class="form-group">
