@@ -7,6 +7,7 @@
 namespace App\Modules\Challenges\Models;
 
 use App\Models\BaseModel;
+use App\Modules\Companies\Enums\CompanyTypeEnum;
 use Illuminate\Support\Facades\Storage;
 
 class Company extends BaseModel
@@ -22,6 +23,15 @@ class Company extends BaseModel
         'name',
         'logo',
         'info',
+    ];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'type' => CompanyTypeEnum::COMMERCIAL,
     ];
 
     /**

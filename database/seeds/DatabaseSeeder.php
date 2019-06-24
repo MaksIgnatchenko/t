@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
 //         $this->call(AddReferralCodesToCurrentUsersSeeder::class);
 //        $this->call(CalculateTotalRewardsForCurrentUsersSeeder::class);
 //        $this->call(ResetUsersPasswordsSeeder::class);
-        $this->call(FixCountryNameSeeder::class);
+//        $this->call(FixCountryNameSeeder::class);
+        $this->call(ArchieveCompanySeeder::class);
 
 //         factory(\App\Modules\Challenges\Models\Challenge::class, 200)->create();
     }
