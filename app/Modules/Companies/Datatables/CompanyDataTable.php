@@ -11,6 +11,7 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Html\Builder as YajraBuilder;
+use App\Modules\Companies\Helpers\CompanyViewHelper;
 
 class CompanyDataTable extends DataTable
 {
@@ -25,10 +26,14 @@ class CompanyDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
         return $dataTable
             ->addColumn('action', 'company.datatables_actions')
+            ->editColumn('type', function ($query) {
+                $badgeClass = CompanyViewHelper::getTypeContainerClass($query->type);
+                return "<span class='badge " . $badgeClass . "'>$query->type</span>";
+            })
             ->editColumn('logo', function ($query) {
                 return ($query->logo ? ("<img height='50' src=" . $query->logo) . " />" : (''));
             })
-            ->rawColumns(['logo', 'action']);
+            ->rawColumns(['logo', 'type', 'action']);
     }
 
     /**
@@ -72,6 +77,12 @@ class CompanyDataTable extends DataTable
                 'name' => 'name',
                 'data' => 'name',
                 'title' => 'Name',
+                'width' => '20%',
+            ],
+            [
+                'name' => 'type',
+                'data' => 'type',
+                'title' => 'Type',
                 'width' => '20%',
             ],
             [
