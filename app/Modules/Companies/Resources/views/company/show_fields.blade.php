@@ -16,11 +16,20 @@
     </p>
 </div>
 
-
 <!-- Info field -->
 <div class="form-group">
     <p>
         {{ Form::label('description', 'Description ') }}
         {{ $company->info }}
+    </p>
+</div>
+
+<!-- Join Code field -->
+<div class="form-group">
+    <p>
+        {{ Form::label('join_code', 'Code for join ') }}
+        <span class="{{ $company->join_code ? '' : 'text-danger' }}">
+            {{ $company->join_code ?? 'Empty' }}
+        </span>
     </p>
 </div>

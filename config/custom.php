@@ -18,4 +18,5 @@ return [
     'results_count_per_page' => 20,
     'referral_code_length' => 32,
     'rating_results_count_per_page' => 1000,
+    'company_join_code_length' => 16,
 ];
