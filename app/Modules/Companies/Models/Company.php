@@ -8,6 +8,7 @@ namespace App\Modules\Challenges\Models;
 
 use App\Models\BaseModel;
 use App\Modules\Companies\Enums\CompanyTypeEnum;
+use App\Modules\Users\User\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class Company extends BaseModel
@@ -33,6 +34,11 @@ class Company extends BaseModel
     protected $attributes = [
         'type' => CompanyTypeEnum::COMMERCIAL,
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 
     /**
      * @return string
@@ -64,11 +70,11 @@ class Company extends BaseModel
 
     /**
      * @param string $joinCode
-     * @return Company|null
+     * @return Company
      */
-    public function getCompanyByJoinCode(string $joinCode) : ?Company
+    public function getCompanyByJoinCode(?string $joinCode) : Company
     {
-        return $this->where('join_code', $joinCode)->first();
+        return $this->whereNotNull('join_code')->where('join_code', $joinCode)->first() ?? $this;
     }
 
     public function generateUniqueJoinPassword(): void

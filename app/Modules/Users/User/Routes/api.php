@@ -16,6 +16,7 @@ Route::group([
     Route::post('start', 'RegisterController@startVerification');
     Route::post('verify', 'RegisterController@verifyCode');
     Route::post('profile', 'RegisterController@updateProfile')->middleware('auth:api');
+    Route::post('me/company', 'CompanyParticipationController')->middleware('auth:api');
 });
 
 Route::get('user/{user}', 'UserController@show')->middleware('auth:api');

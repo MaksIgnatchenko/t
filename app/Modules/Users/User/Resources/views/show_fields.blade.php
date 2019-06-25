@@ -56,8 +56,14 @@
 <div class="form-group">
     <p>
         <label for="name">Company:</label>
-        <span class="{{$user->company ? '' : 'text-danger'}}">
-        {{ $user->company ?? 'Empty'}}
+        @if($user->company)
+            <a href="{{ route('company.show', $user->company->id) }}">
+                {{ $user->company->name }}
+            </a>
+        @else
+        <span class="text-danger">
+            Empty
         </span>
+        @endif
     </p>
 </div>

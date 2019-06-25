@@ -70,7 +70,19 @@
         "company": null,
         "full_name": "deg",
         "coins": 100,
-        "referral_code": "J5R6vPcN0eJgtQ15TTonE5pLsAAU7KEO"
+        "referral_code": "J5R6vPcN0eJgtQ15TTonE5pLsAAU7KEO",
+        "total_reward": 0,
+        "company": {
+            "id": 20,
+            "name": "TestComp",
+            "logo": "http://localhost/storage/companies//4FqhWJdGBIUBp7w9p2mTHZAXbPi3KJSpbZFDyHnD.jpg",
+            "info": "Test company",
+            "created_at": "2019-06-25 14:43:37",
+            "updated_at": "2019-06-25 14:43:37",
+            "type": "commercial",
+            "join_code": "7LkN6ahI8INWqhh8"
+            }
+        }
     }
 }
 ###
@@ -179,7 +191,6 @@ HTTP/1.1 200 OK
 @apiParam {String} [sex] Max 50.
 @apiParam {String} country Max 50
 @apiParam {String} [city] Max 50.
-@apiParam {String} [company] Max 50
 @apiParam {String} [email] Max 50. Must be unique
 
 @apiSuccessExample Success-Response:

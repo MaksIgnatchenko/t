@@ -5,6 +5,7 @@ namespace App\Modules\Users\User\Models;
 use App\Modules\Challenges\Enums\CountryEnum;
 use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Models\Challenge;
+use App\Modules\Challenges\Models\Company;
 use App\Modules\Challenges\Models\Proof;
 use App\Modules\Files\Services\ImageService;
 use App\Modules\Users\Services\ApiRatingData\Rankable;
@@ -64,7 +65,6 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         'country',
         'city',
         'coins',
-        'company',
         'referral_code',
     ];
 
@@ -86,6 +86,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         'facebook_id',
         'email_verified_at',
         'pivot',
+        'company_id',
     ];
 
     /**
@@ -184,6 +185,14 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     public function proofs()
     {
         return $this->hasMany(Proof::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     /**

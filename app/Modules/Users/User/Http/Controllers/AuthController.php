@@ -3,6 +3,7 @@
 namespace App\Modules\Users\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Users\User\Models\User;
 use App\Services\ResponseBuilder\ApiCode;
 use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +45,8 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return CustomResponseBuilder::success(auth()->user());
+        $user = User::with('company')->find(auth()->id());
+        return CustomResponseBuilder::success($user);
     }
 
     /**
