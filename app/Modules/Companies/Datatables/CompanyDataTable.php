@@ -44,7 +44,7 @@ class CompanyDataTable extends DataTable
      */
     public function query(Company $model): Builder
     {
-        return $model->newQuery();
+        return $model->newQuery()->withCount('users');
     }
 
     /**
@@ -83,7 +83,12 @@ class CompanyDataTable extends DataTable
                 'name' => 'type',
                 'data' => 'type',
                 'title' => 'Type',
-                'width' => '20%',
+                'width' => '15%',
+            ],            [
+                'name' => 'users_count',
+                'data' => 'users_count',
+                'title' => 'Users',
+                'width' => '15%',
             ],
             [
                 'name' => 'logo',
@@ -97,7 +102,7 @@ class CompanyDataTable extends DataTable
                 'name' => 'info',
                 'data' => 'info',
                 'title' => 'Info',
-                'width' => '50%',
+                'width' => '20%',
                 'orderable' => false,
                 'searchable' => false,
             ],
