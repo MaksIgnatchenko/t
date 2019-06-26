@@ -256,6 +256,7 @@ return [
          */
         'ActiveLink' => App\Helpers\ActiveLink::class,
         'VideoThumbnail' => Pawlox\VideoThumbnail\Facade\VideoThumbnail::class,
+        'CompanyViewHelper' => \App\Modules\Companies\Helpers\CompanyViewHelper::class,
 
     ],
 

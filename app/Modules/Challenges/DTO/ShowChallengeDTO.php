@@ -96,6 +96,28 @@ class ShowChallengeDTO
     }
 
     /**
+     * @return string|null
+     */
+    public function getCompanyType(): ?string
+    {
+        if ($company = $this->challenge->company) {
+            return $company->type;
+        }
+        return null;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCompanyId(): ?int
+    {
+        if ($company = $this->challenge->company) {
+            return $company->id;
+        }
+        return null;
+    }
+
+    /**
      * @return string
      */
     public function getProofType(): string

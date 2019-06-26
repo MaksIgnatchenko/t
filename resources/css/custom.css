@@ -105,3 +105,8 @@
     display: none;
     color: black !important;
 }
+
+.company-type-label {
+    font-size: 14px;
+    color: white;
+}

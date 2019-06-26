@@ -18,10 +18,20 @@
                     <div class="col-md-4">Link</div>
                     <div class="col-md-8">{{ Html::link($dto->getLink(), 'Click here') }}</div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">Company</div>
-                    <div class="col-md-8">{{ $dto->getCompanyName() }}</div>
-                </div>
+
+                @if($dto->getCompanyName())
+                    <div class="row">
+                        <div class="col-md-4">Company</div>
+                        <div class="col-md-8">
+                            <span class="badge {{ CompanyViewHelper::getTypeContainerClass($dto->getCompanyType()) }} ">
+                                <a href="{{ route('company.show', $dto->getCompanyId()) }}" class="company-type-label">
+                                    {{ $dto->getCompanyName() }}
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="row">
                     <div class="col-md-4">Status</div>
                     <div class="col-md-8">{{ $dto->getStatus() }}</div>
