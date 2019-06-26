@@ -35,9 +35,22 @@ class Company extends BaseModel
         'type' => CompanyTypeEnum::COMMERCIAL,
     ];
 
+    protected const DEFAULT_MODEL_TYPE = CompanyTypeEnum::ARCHIEVE;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function challenges()
+    {
+        return $this->hasMany(Challenge::class);
     }
 
     /**
@@ -81,8 +94,29 @@ class Company extends BaseModel
     {
         do {
             $randomCode = str_random(config('custom.company_join_code_length'));
-        } while ($this->getCompanyByJoinCode($randomCode));
-        $this->attributes['join_code'] = str_random(config('custom.company_join_code_length'));
+        } while ($this->getCompanyByJoinCode($randomCode)->exists);
+        $this->attributes['join_code'] = $randomCode;
     }
 
+    public function detachCompanies(): void
+    {
+        $this->challenges()->update([
+            'company_id' => $this->getDefaultCompanyId(),
+        ]);
+    }
+
+    /**
+     * @return int
+     */
+    public function getDefaultCompanyId(): int
+    {
+        return $this->where('type', self::DEFAULT_MODEL_TYPE)->first(['id'])->id;
+    }
+
+    public function detachUsers(): void
+    {
+        $this->users()->update([
+            'company_id' => null,
+        ]);
+    }
 }

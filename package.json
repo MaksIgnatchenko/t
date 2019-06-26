@@ -44,6 +44,7 @@
         "material-design-icons-webfont": "^1.0.0",
         "modernizr": "^3.6.0",
         "scrollto": "^1.0.1",
+        "sweetalert2": "^8.13.0",
         "tether": "^1.4.5",
         "waves.js": "0.0.7-13"
     }

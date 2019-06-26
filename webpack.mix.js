@@ -23,6 +23,7 @@ mix.js([
         'resources/js/custom/dropzones.js',
         'resources/js/custom/challenges.js',
         'resources/js/custom/proofs.js',
+        'resources/js/custom/sweet-alert.init.js',
     ], 'public/build/js/app.js')
     .sass('resources/sass/app.scss', 'public/build/css/vendor.css')
     .styles([
@@ -32,6 +33,7 @@ mix.js([
         'resources/css/custom.css',
         'resources/css/datepicker.min.scss',
         'node_modules/js-datepicker/datepicker.css',
+        'node_modules/sweetalert2/dist/sweetalert2.css',
     ], 'public/build/css/app.css')
     .copyDirectory('resources/images', 'public/build/images')
     .copyDirectory('resources/fonts', 'public/build/fonts');

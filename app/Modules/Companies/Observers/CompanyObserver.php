@@ -19,4 +19,15 @@ class CompanyObserver
     {
         $company->generateUniqueJoinPassword();
     }
+
+    /**
+     * Handle the Company "deleting" event.
+     *
+     * @param Company $company
+     */
+    public function deleting(Company $company)
+    {
+        $company->detachCompanies();
+        $company->detachUsers();
+    }
 }

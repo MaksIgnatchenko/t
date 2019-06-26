@@ -8,6 +8,7 @@
 require('./bootstrap');
 require('./custom/datepicker');
 require('./dropzone');
+window.Swal = require('../../node_modules/sweetalert2');
 
 // window.Vue = require('vue');
 

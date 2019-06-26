@@ -1,5 +1,6 @@
 <div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
         Actions
     </button>
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -9,8 +10,10 @@
         <a href="{{ route('company.edit', $id) }}" class='dropdown-item'>
             Edit
         </a>
-        <a href="{{ route('company.destroy', $id) }}" class='dropdown-item'>
+        <button      class='dropdown-item delete-company-button'
+                data-target-location="{{ route('company.index') }}"
+                data-url="{{ route('company.destroy', $id) }}">
             Delete
-        </a>
+        </button>
     </div>
 </div>

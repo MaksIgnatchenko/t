@@ -11,6 +11,7 @@ use App\Modules\Challenges\Models\Company;
 use App\Modules\Companies\Datatables\CompanyDataTable;
 use App\Modules\Content\Http\Requests\Admin\StoreCompanyRequest;
 use App\Modules\Content\Http\Requests\Admin\UpdateCompanyRequest;
+use App\Services\ResponseBuilder\CustomResponseBuilder;
 use Laracasts\Flash\Flash;
 
 class CompanyController extends Controller
@@ -55,9 +56,9 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        $category = app()[Company::class];
-        $category->fill($request->all());
-        $category->save();
+        $company = app()[Company::class];
+        $company->fill($request->all());
+        $company->save();
         Flash::success('Company created successfully.');
 
         return redirect()->route('company.index');
@@ -85,8 +86,16 @@ class CompanyController extends Controller
         return redirect()->route('company.index');
     }
 
-    public function destroy()
+    /**
+     * @param Company $company
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
+     */
+    public function destroy(Company $company)
     {
-        // TODO
+        $company->delete();
+        Flash::success('Company deleted successfully.');
+
+        return CustomResponseBuilder::success();
     }
 }

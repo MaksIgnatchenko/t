@@ -51,7 +51,7 @@ class CompanyDataTable extends DataTable
      */
     public function query(Company $model): Builder
     {
-        return $model->newQuery()->withCount('users');
+        return $model->newQuery()->withCount(['users', 'challenges']);
     }
 
     /**
@@ -69,6 +69,11 @@ class CompanyDataTable extends DataTable
                 'dom'     => 'frtip',
                 'order'   => [[0, 'desc']],
                 'responsive' => true,
+                'drawCallback' => '
+                    function() {
+                        $.SweetAlert.init();
+
+                    }',
             ]);
     }
 
@@ -91,11 +96,20 @@ class CompanyDataTable extends DataTable
                 'data' => 'type',
                 'title' => 'Type',
                 'width' => '15%',
-            ],            [
+            ],
+            [
+                'name' => 'challenges_count',
+                'data' => 'challenges_count',
+                'title' => 'Challenges',
+                'width' => '10%',
+                'searchable' => false,
+            ],
+            [
                 'name' => 'users_count',
                 'data' => 'users_count',
                 'title' => 'Users',
-                'width' => '15%',
+                'width' => '10%',
+                'searchable' => false,
             ],
             [
                 'name' => 'logo',
