@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Modules\Challenges\Models\Company;
 use App\Modules\Companies\Datatables\CompanyDataTable;
 use App\Modules\Content\Http\Requests\Admin\StoreCompanyRequest;
+use App\Modules\Content\Http\Requests\Admin\UpdateCompanyRequest;
 use Laracasts\Flash\Flash;
 
 class CompanyController extends Controller
@@ -60,5 +61,32 @@ class CompanyController extends Controller
         Flash::success('Company created successfully.');
 
         return redirect()->route('company.index');
+    }
+
+    /**
+     * @param Company $company
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(Company $company)
+    {
+        return view('company.edit', ['company' => $company]);
+    }
+
+    /**
+     * @param UpdateCompanyRequest $request
+     * @param Company $company
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateCompanyRequest $request, Company $company)
+    {
+        $company->update($request->all());
+        Flash::success('Company updated successfully.');
+
+        return redirect()->route('company.index');
+    }
+
+    public function destroy()
+    {
+        // TODO
     }
 }

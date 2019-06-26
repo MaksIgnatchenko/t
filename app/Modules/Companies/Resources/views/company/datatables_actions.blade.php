@@ -1,5 +1,13 @@
-<div class='btn-group'>
-    <a href="{{ route('company.show', $id) }}" class='btn btn-primary'>
-        <i class="glyphicon glyphicon-eye-open"></i>
-    </a>
+<div class="btn-group" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Actions
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <a href="{{ route('company.show', $id) }}" class='dropdown-item'>
+            Show
+        </a>
+        <a href="{{ route('company.edit', $id) }}" class='dropdown-item'>
+            Edit
+        </a>
+    </div>
 </div>
