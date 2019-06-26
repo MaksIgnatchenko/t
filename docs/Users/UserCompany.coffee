@@ -34,7 +34,7 @@
   "data": {
     "messages": {
       "company_join_code": [
-        1012
+        1014
       ]
     }
   }
