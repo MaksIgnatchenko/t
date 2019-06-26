@@ -10,6 +10,7 @@ use App\Helpers\PrettyNameHelper;
 use App\Modules\Challenges\Enums\ProofStatusEnum;
 use App\Modules\Challenges\Helpers\ChallengeStatusClassHelper;
 use App\Modules\Challenges\Models\Challenge;
+use App\Modules\Companies\Helpers\CompanyViewHelper;
 use Carbon\Carbon;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
@@ -32,6 +33,11 @@ class ChallengeDataTable extends DataTable
             ->editColumn('image', function ($query) {
                 return ($query->image ? ("<img height='50' src=" . $query->image) . " />" : (''));
             })
+            ->editColumn('company.name', function ($query) {
+                $badgeClass = CompanyViewHelper::getTypeContainerClass($query->company->type);
+                $companyName = substr($query->company->name, 0, 50);
+                return "<span class='badge " . $badgeClass . "'>$companyName</span>";
+            })
             ->editColumn('status', function($query) {
                 $className = ChallengeStatusClassHelper::getClassName($query->status);
                 $name = PrettyNameHelper::transform($query->status);
@@ -43,7 +49,7 @@ class ChallengeDataTable extends DataTable
             ->editColumn('end_date', function($query) {
                 return Carbon::parse($query->end_date)->format('Y-m-d H:i');
             })
-            ->rawColumns(['image', 'action', 'status']);
+            ->rawColumns(['image', 'company.name', 'action', 'status']);
     }
 
     /**
@@ -56,7 +62,7 @@ class ChallengeDataTable extends DataTable
     {
         return $model->withCount(['proofs as pending_proofs' => function ($query) {
             $query->where('status', ProofStatusEnum::PENDING);
-        }]);
+        }])->with('company');
     }
 
     /**
@@ -94,8 +100,14 @@ class ChallengeDataTable extends DataTable
             [
                 'data' => 'pending_proofs',
                 'title' => 'Pending proofs',
-                'width' => '15%',
+                'width' => '10%',
                 'searchable' => false,
+            ],
+            [
+                'name' => 'company.name',
+                'data' => 'company.name',
+                'title' => 'Company',
+                'width' => '10%',
             ],
             [
                 'name' => 'image',
@@ -109,7 +121,7 @@ class ChallengeDataTable extends DataTable
                 'name' => 'status',
                 'data' => 'status',
                 'title' => 'Status',
-                'width' => '15%',
+                'width' => '10%',
             ],
             [
                 'name' => 'country',

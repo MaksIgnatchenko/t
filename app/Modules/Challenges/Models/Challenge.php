@@ -141,9 +141,16 @@ class Challenge extends BaseModel implements AbleToContainProofs
         return $this->hasMany(Proof::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class)
+            ->withDefault([
+                'name' => null,
+                'type' => 'none',
+            ]);
     }
 
     /**
