@@ -9,5 +9,8 @@
         <a href="{{ route('company.edit', $id) }}" class='dropdown-item'>
             Edit
         </a>
+        <a href="{{ route('company.destroy', $id) }}" class='dropdown-item'>
+            Delete
+        </a>
     </div>
 </div>

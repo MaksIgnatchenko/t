@@ -7,6 +7,7 @@
 namespace App\Modules\Companies\Datatables;
 
 use App\Modules\Challenges\Models\Company;
+use Illuminate\Support\Str;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Database\Eloquent\Builder;
@@ -30,10 +31,16 @@ class CompanyDataTable extends DataTable
                 $badgeClass = CompanyViewHelper::getTypeContainerClass($query->type);
                 return "<span class='badge " . $badgeClass . "'>$query->type</span>";
             })
+            ->editColumn('name', function ($query) {
+                return CompanyViewHelper::getPrettyShortName($query->name);
+            })
             ->editColumn('logo', function ($query) {
                 return ($query->logo ? ("<img height='50' src=" . $query->logo) . " />" : (''));
             })
-            ->rawColumns(['logo', 'type', 'action']);
+            ->editColumn('info', function ($query) {
+                return CompanyViewHelper::getPrettyShortInfo($query->info);
+            })
+            ->rawColumns(['name', 'logo', 'type', 'info', 'action']);
     }
 
     /**

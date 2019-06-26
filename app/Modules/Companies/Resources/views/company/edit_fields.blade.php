@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group dropzone company-logo-dropzone dz-clickable"></div>
                 <div class="form-group" hidden>
-                    {!! Form::text('logo', old('logo'), ['class' => 'form-control']) !!}
+                    {!! Form::text('logo', $company->getOriginal('logo'), ['class' => 'form-control']) !!}
                 </div>
                 <!-- Info Field -->
                 <div class="form-group">

@@ -7,6 +7,7 @@
 namespace App\Modules\Companies\Helpers;
 
 use App\Modules\Companies\Enums\CompanyTypeEnum;
+use Illuminate\Support\Str;
 
 class CompanyViewHelper
 {
@@ -20,5 +21,23 @@ class CompanyViewHelper
             default :
                 return 'badge-dark';
         }
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public static function getPrettyShortName(string $name): string
+    {
+        return Str::limit($name, 20, ' ...');
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public static function getPrettyShortInfo(string $name): string
+    {
+        return Str::limit($name, 40, ' ...');
     }
 }
