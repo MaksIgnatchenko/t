@@ -276,12 +276,29 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     /**
      * @return int
      */
-    public function getCurrentPosition(): int
+    public function getCountryScopeCurrentPosition(): int
     {
         $groupsCount = DB::table($this->table)
             ->select(DB::raw('count(*) as count, total_reward'))
             ->where('is_registration_completed', true)
             ->where('total_reward', '>', $this->total_reward)
+            ->myCountry()
+            ->groupBy('total_reward')
+            ->get()
+            ->count();
+        return $groupsCount + 1;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCompanyScopeCurrentPosition(): int
+    {
+        $groupsCount = DB::table($this->table)
+            ->select(DB::raw('count(*) as count, total_reward'))
+            ->where('is_registration_completed', true)
+            ->where('total_reward', '>', $this->total_reward)
+            ->myCompany()
             ->groupBy('total_reward')
             ->get()
             ->count();
@@ -291,7 +308,7 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     /**
      * @return AbstractPaginator
      */
-    public function getRating(): AbstractPaginator
+    public function getCountryScopeRating(): AbstractPaginator
     {
         // The total_reward field is used for denormalization to improve performance.
         return $this
@@ -301,6 +318,25 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
                 DB::raw('DENSE_RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
                 'avatar'
             )
+            ->myCountry()
+            ->completedRegistration()
+            ->paginate(config('custom.rating_results_count_per_page'));
+    }
+
+    /**
+     * @return AbstractPaginator
+     */
+    public function getCompanyScopeRating(): AbstractPaginator
+    {
+        // The total_reward field is used for denormalization to improve performance.
+        return $this
+            ->select(
+                'id',
+                'full_name',
+                DB::raw('DENSE_RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
+                'avatar'
+            )
+            ->myCompany()
             ->completedRegistration()
             ->paginate(config('custom.rating_results_count_per_page'));
     }
@@ -308,12 +344,26 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     /**
      * @return array
      */
-    public function getMyPositionFormattedData(): array
+    public function getMyCountryPositionFormattedData(): array
     {
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,
-            'position' => $this->getCurrentPosition(),
+            'position' => $this->getCountryScopeCurrentPosition(),
+            'total_reward' => $this->total_reward,
+            'avatar' => $this->avatar,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getMyCompanyPositionFormattedData(): array
+    {
+        return [
+            'id' => $this->id,
+            'full_name' => $this->full_name,
+            'position' => $this->getCompanyScopeCurrentPosition(),
             'total_reward' => $this->total_reward,
             'avatar' => $this->avatar,
         ];
@@ -328,6 +378,24 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         return $query->where('is_registration_completed', true);
     }
 
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeMyCountry($query): Builder
+    {
+        return $query->where('country', $this->country);
+    }
+
+    /**
+     * @param $query
+     * @return Builder
+     */
+    public function scopeMyCompany($query): Builder
+    {
+        return $query->where('company_id', $this->companyId);
+    }
+
     public function resetCoinsAndRatingForAllUsers() : void
     {
         DB::table($this->table)->update([
@@ -335,4 +403,21 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
             'total_reward' => 0,
         ]);
     }
+
+    public function getCurrentPosition(): int
+    {
+        // TODO: Implement getCurrentPosition() method.
+    }
+
+    public function getMyPositionFormattedData(): array
+    {
+        // TODO: Implement getMyPositionFormattedData() method.
+    }
+
+    public function getRating(): AbstractPaginator
+    {
+        // TODO: Implement getRating() method.
+    }
+
+
 }
