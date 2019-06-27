@@ -69,9 +69,9 @@ class ShowChallengeDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
         return $this->challenge->country;
     }

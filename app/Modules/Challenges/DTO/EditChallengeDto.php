@@ -80,9 +80,9 @@ class EditChallengeDto extends CreateChallengeDTO
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrentCountry() : string
+    public function getCurrentCountry() : ?string
     {
         return $this->challenge->country;
     }

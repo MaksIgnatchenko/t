@@ -57,11 +57,11 @@
             <div class="card-block">
                 <div class="row">
                     <div class="col-md-4">Country</div>
-                    <div class="col-md-8">{{ $dto->getCountry() }}</div>
+                    <div class="col-md-8">{{ $dto->getCountry() ?? 'Empty' }}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">City</div>
-                    <div class="col-md-8">{{ $dto->getCity() }}</div>
+                    <div class="col-md-8">{{ $dto->getCity() ?? 'Empty' }}</div>
                 </div>
             </div>
         </div>

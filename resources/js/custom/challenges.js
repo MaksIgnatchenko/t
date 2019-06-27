@@ -10,4 +10,22 @@ $(document).ready(function () {
             $("#video-duration-section").find( "[name='video_duration']").val("");
         }
     });
+    
+    if($('select[name=company_id]').val()) {
+        $('#country-component').hide();
+        $('#city-component').hide();
+    }
+
+    $('select[name=company_id]').change(function() {
+        if( $(this).val() ) {
+            $('#country-component').hide();
+            $('#country-component').find("option").removeAttr('selected');
+            $('#country-component').find("select").val("");
+            $('#city-component').hide();
+            $('#city-component').find("input").val('');
+        } else {
+            $('#country-component').show();
+            $('#city-component').show();
+        }
+    });
 });

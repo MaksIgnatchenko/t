@@ -18,6 +18,26 @@
     <div class="col-md-6">
         <div class="box">
             <div class="box-body">
+                <!-- Company Field -->
+                <div class="form-group">
+                    <p>
+                        {{ Form::label('company_id', 'Company: ') }}
+                        {!! Form::select('company_id', $dto->getCompanies(), $dto->getCurrentCompany(), ['placeholder' => 'Select company', 'class' => 'form-control']) !!}
+                    </p>
+                    @if ($errors->has('company_id'))
+                        <div class="text-red">{{ $errors->first('company_id') }}</div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row form-justify-container">
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-body">
                 <!-- Link Field -->
                 <div class="form-group">
                     <p>
@@ -31,26 +51,7 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="row form-justify-container">
-    <div class="col-md-6">
-        <div class="box">
-            <div class="box-body">
-                <!-- City Field -->
-                <div class="form-group">
-                    <p>
-                        {{ Form::label('city', 'City: ') }}
-                        {!! Form::text('city', $dto->getCurrentCity(), ['class' => 'form-control', 'maxlength' => 50]) !!}
-                    </p>
-                    @if ($errors->has('city'))
-                        <div class="text-red">{{ $errors->first('city') }}</div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
+    <div class="col-md-6" id="country-component">
         <div class="box">
             <div class="box-body">
                 <!-- Country Field -->
@@ -85,17 +86,17 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" id="city-component">
         <div class="box">
             <div class="box-body">
-                <!-- Company Field -->
+                <!-- City Field -->
                 <div class="form-group">
                     <p>
-                        {{ Form::label('company_id', 'Company: ') }}
-                        {!! Form::select('company_id', $dto->getCompanies(), $dto->getCurrentCompany(), ['placeholder' => 'Select company', 'class' => 'form-control']) !!}
+                        {{ Form::label('city', 'City: ') }}
+                        {!! Form::text('city', $dto->getCurrentCity(), ['class' => 'form-control', 'maxlength' => 50]) !!}
                     </p>
-                    @if ($errors->has('company_id'))
-                        <div class="text-red">{{ $errors->first('company_id') }}</div>
+                    @if ($errors->has('city'))
+                        <div class="text-red">{{ $errors->first('city') }}</div>
                     @endif
                 </div>
             </div>

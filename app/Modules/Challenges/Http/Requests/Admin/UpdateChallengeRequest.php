@@ -46,7 +46,7 @@ class UpdateChallengeRequest extends FormRequest
             'description' => 'required|string|max:1000',
             'link' => 'required|url|max:255',
             'country' => [
-                'required',
+                'nullable',
                 'string',
                 'max:100',
                 Rule::in(CountryEnum::getAll())
