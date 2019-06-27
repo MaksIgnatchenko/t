@@ -22,7 +22,7 @@
                 <div class="form-group">
                     <p>
                         {{ Form::label('company_id', 'Company: ') }}
-                        {!! Form::select('company_id', $dto->getCompanies(), null, ['placeholder' => 'Select company', 'class' => 'form-control']) !!}
+                        {!! Form::select('company_id', $dto->getCompanies(), $dto->getSelectedCompanyId(), ['placeholder' => 'Select company', 'class' => 'form-control']) !!}
                     </p>
                     @if ($errors->has('company_id'))
                         <div class="text-red">{{ $errors->first('company_id') }}</div>

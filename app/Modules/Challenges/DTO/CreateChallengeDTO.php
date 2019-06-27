@@ -32,18 +32,25 @@ class CreateChallengeDTO
     private $videoLengthTypes;
 
     /**
+     * @var int|null
+     */
+    private $selectedCompanyId;
+
+    /**
      * CreateChallengeDTO constructor.
      * @param array $companies
      * @param array $countries
      * @param array $proofTypes
      * @param array $videoLengthTypes
+     * @param int|null $selectedCompanyId
      */
-    public function __construct(array $companies, array $countries, array $proofTypes, array $videoLengthTypes)
+    public function __construct(array $companies, array $countries, array $proofTypes, array $videoLengthTypes, ?int $selectedCompanyId = null)
     {
         $this->companies = $companies;
         $this->countries = $countries;
         $this->proofTypes = $proofTypes;
         $this->videoLengthTypes = $videoLengthTypes;
+        $this->selectedCompanyId = $selectedCompanyId;
     }
 
     /**
@@ -78,5 +85,13 @@ class CreateChallengeDTO
     public function getVideoLengthTypes(): array
     {
         return $this->videoLengthTypes;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSelectedCompanyId() : ?int
+    {
+        return $this->selectedCompanyId;
     }
 }

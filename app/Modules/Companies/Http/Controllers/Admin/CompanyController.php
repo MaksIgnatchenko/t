@@ -7,6 +7,8 @@
 namespace App\Modules\Companies\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Challenges\Datatables\CompanyChallengeDataTable;
+use App\Modules\Challenges\Datatables\CompanyChallengeDataTableScope;
 use App\Modules\Challenges\Models\Company;
 use App\Modules\Companies\Datatables\CompanyDataTable;
 use App\Modules\Content\Http\Requests\Admin\StoreCompanyRequest;
@@ -30,12 +32,15 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param CompanyChallengeDataTable $dataTable
      * @param Company $company
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Company $company)
+    public function show(CompanyChallengeDataTable $dataTable, Company $company)
     {
-        return view('company.show', ['company' => $company]);
+        return $dataTable
+            ->addScope(new CompanyChallengeDataTableScope($company->id))
+            ->render('company.show', ['company' => $company]);
     }
 
     /**

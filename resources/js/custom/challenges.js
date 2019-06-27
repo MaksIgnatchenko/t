@@ -10,7 +10,7 @@ $(document).ready(function () {
             $("#video-duration-section").find( "[name='video_duration']").val("");
         }
     });
-    
+
     if($('select[name=company_id]').val()) {
         $('#country-component').hide();
         $('#city-component').hide();

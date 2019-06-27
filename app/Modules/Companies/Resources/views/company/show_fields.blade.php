@@ -33,3 +33,8 @@
         </span>
     </p>
 </div>
+
+
+<div class="form-group">
+    <a href="{{route('challenge.create', ['companyId' => $company->id])}}" class="btn btn-primary create-article">New challenge</a>
+</div>

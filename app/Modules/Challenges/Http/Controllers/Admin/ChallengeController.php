@@ -14,11 +14,11 @@ use App\Modules\Challenges\DTO\ShowChallengeDTO;
 use App\Modules\Challenges\Enums\CountryEnum;
 use App\Modules\Challenges\Enums\ProofTypeEnum;
 use App\Modules\Challenges\Enums\VideoLengthEnum;
+use App\Modules\Challenges\Http\Requests\Admin\CreateChallengeRequest;
 use App\Modules\Challenges\Http\Requests\Admin\StoreChallengeRequest;
 use App\Modules\Challenges\Http\Requests\Admin\UpdateChallengeRequest;
 use App\Modules\Challenges\Models\Challenge;
 use App\Modules\Challenges\Models\Company;
-use Illuminate\Support\Carbon;
 use Laracasts\Flash\Flash;
 
 class ChallengeController extends Controller
@@ -50,11 +50,15 @@ class ChallengeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param CreateChallengeRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(CreateChallengeRequest $request)
     {
-        $dto = $this->getCreateDto();
+        $options = [
+            'companyId' => $request->query('companyId'),
+        ];
+        $dto = $this->getCreateDto($options);
         return view('challenge.create', ['dto' => $dto]);
     }
 
@@ -98,15 +102,17 @@ class ChallengeController extends Controller
     }
 
     /**
+     * @param array $options
      * @return CreateChallengeDTO
      */
-    private function getCreateDto() : CreateChallengeDTO
+    private function getCreateDto(array $options = []) : CreateChallengeDTO
     {
         $companies = Company::all()->pluck('name', 'id')->toArray();
         $countries = array_combine(CountryEnum::getAll(), CountryEnum::getAll());
         $proofTypes = array_combine(ProofTypeEnum::getAll(), ProofTypeEnum::getAll());
         $videoLengthTypes = array_combine(VideoLengthEnum::getAll(), VideoLengthEnum::getAll());
-        return new CreateChallengeDTO($companies, $countries, $proofTypes, $videoLengthTypes);
+        $selectedCompanyId = $options['companyId'];
+        return new CreateChallengeDTO($companies, $countries, $proofTypes, $videoLengthTypes, $selectedCompanyId);
     }
 
     /**
