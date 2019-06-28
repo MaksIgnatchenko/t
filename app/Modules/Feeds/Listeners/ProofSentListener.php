@@ -23,6 +23,7 @@ class ProofSentListener
         $feed->type = $this->getFeedType();
         $feed->proof_id = $event->getProofId();
         $feed->country = $event->getCountry();
+        $feed->company_id = $event->getCompanyId();
         $feed->save();
     }
 

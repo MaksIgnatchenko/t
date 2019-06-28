@@ -27,13 +27,24 @@ class ProofSentEvent
     /**
      * @return int
      */
-    public function getProofId() : int
+    public function getProofId(): int
     {
         return $this->proof->id;
     }
 
-    public function getCountry()
+    /**
+     * @return null|string
+     */
+    public function getCountry(): ?string
     {
         return $this->proof->challenge->country;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCompanyId(): ?int
+    {
+        return $this->proof->challenge->company_id;
     }
 }
