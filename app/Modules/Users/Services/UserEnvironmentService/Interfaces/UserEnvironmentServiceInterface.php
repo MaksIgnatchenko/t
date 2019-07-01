@@ -12,9 +12,11 @@ use Illuminate\Support\Collection;
 interface UserEnvironmentServiceInterface
 {
     /**
+     * @param null|string $search
+     * @param int|null $limit
      * @return AbstractPaginator
      */
-    public function getChallengesList(): AbstractPaginator;
+    public function getChallengesList(?string $search, ?int $limit): AbstractPaginator;
 
     /**
      * @return Collection

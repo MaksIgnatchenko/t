@@ -10,6 +10,8 @@ use App\Modules\Challenges\Models\Proof;
 use App\Modules\Files\Services\ImageService;
 use App\Modules\Users\Services\ApiRatingData\Rankable;
 use App\Modules\Users\Services\ReferralCodeService\ReferralAble;
+use App\Modules\Users\Services\UserEnvironmentService\Enums\UserEnvironmentEnum;
+use App\Modules\Users\Services\UserEnvironmentService\Interfaces\EnvironmentAble;
 use App\Modules\Users\User\Mails\ResetPasswordMail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
@@ -20,8 +22,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
-class User extends Authenticatable implements JWTSubject, ReferralAble, CanGenerateJwtToken, Rankable
+class User extends Authenticatable implements JWTSubject, ReferralAble, CanGenerateJwtToken, Rankable, EnvironmentAble
 {
     /**
      * The table associated with the model.
@@ -172,6 +175,29 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     }
 
     /**
+     * @return int
+     */
+    public function getTotalRewardAttribute(): int
+    {
+        $query = $this->proofs();
+
+        switch ($this->getCurrentEnvironment()) {
+            case UserEnvironmentEnum::COUNTRY:
+                $query->whereHas('challenge', function($query){
+                    $query->where('country', $this->country);
+                });
+                break;
+            case UserEnvironmentEnum::COMPANY:
+                $query->whereHas('challenge', function($query){
+                    $query->where('company_id', $this->company_id);
+                });
+                break;
+        }
+
+        return $query->accepted()->sum('reward');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function challenges()
@@ -274,15 +300,36 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     }
 
     /**
+     * @return AbstractPaginator
+     */
+    public function getRating(): AbstractPaginator
+    {
+        $sub = $this->getRewardsSubqueryForEnvironment();
+        return $this::joinSub($sub, 'rewards', function($join) {
+            $join->on('users.id', '=', 'rewards.user_id');
+        })
+            ->select([
+                'id',
+                'full_name',
+                'avatar',
+                'rewards.total_reward',
+                DB::raw('DENSE_RANK() OVER(ORDER BY rewards.total_reward DESC) AS Position, rewards.total_reward')
+            ])
+            ->paginate(config('custom.rating_results_count_per_page'));
+    }
+
+    /**
      * @return int
      */
-    public function getCountryScopeCurrentPosition(): int
+    public function getCurrentPosition(): int
     {
-        $groupsCount = DB::table($this->table)
+        $sub = $this->getRewardsSubqueryForEnvironment();
+        $groupsCount = $this::joinSub($sub, 'rewards', function($join) {
+            $join->on('users.id', '=', 'rewards.user_id');
+        })
             ->select(DB::raw('count(*) as count, total_reward'))
             ->where('is_registration_completed', true)
             ->where('total_reward', '>', $this->total_reward)
-            ->myCountry()
             ->groupBy('total_reward')
             ->get()
             ->count();
@@ -290,80 +337,39 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
     }
 
     /**
-     * @return int
+     * @return Builder
      */
-    public function getCompanyScopeCurrentPosition(): int
+    protected function getRewardsSubqueryForEnvironment(): QueryBuilder
     {
-        $groupsCount = DB::table($this->table)
-            ->select(DB::raw('count(*) as count, total_reward'))
-            ->where('is_registration_completed', true)
-            ->where('total_reward', '>', $this->total_reward)
-            ->myCompany()
-            ->groupBy('total_reward')
-            ->get()
-            ->count();
-        return $groupsCount + 1;
-    }
+        $sub = DB::query()->select([
+            DB::raw('sum(proofs.reward) as total_reward'),
+            'proofs.user_id',
+        ])
+            ->from('challenges')
+            ->where('proofs.status', 'accepted');
 
-    /**
-     * @return AbstractPaginator
-     */
-    public function getCountryScopeRating(): AbstractPaginator
-    {
-        // The total_reward field is used for denormalization to improve performance.
-        return $this
-            ->select(
-                'id',
-                'full_name',
-                DB::raw('DENSE_RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
-                'avatar'
-            )
-            ->myCountry()
-            ->completedRegistration()
-            ->paginate(config('custom.rating_results_count_per_page'));
-    }
+        switch ($this->getCurrentEnvironment()) {
+            case UserEnvironmentEnum::COUNTRY:
+                $sub->where('challenges.country', $this->country);
+                break;
+            case UserEnvironmentEnum::COMPANY:
+                $sub->where('challenges.company_id', $this->company_id);
+                break;
+        }
 
-    /**
-     * @return AbstractPaginator
-     */
-    public function getCompanyScopeRating(): AbstractPaginator
-    {
-        // The total_reward field is used for denormalization to improve performance.
-        return $this
-            ->select(
-                'id',
-                'full_name',
-                DB::raw('DENSE_RANK() OVER(ORDER BY total_reward DESC) AS Position, total_reward'),
-                'avatar'
-            )
-            ->myCompany()
-            ->completedRegistration()
-            ->paginate(config('custom.rating_results_count_per_page'));
+        return $sub->join('proofs', 'challenges.id', '=', 'proofs.challenge_id')
+            ->groupBy('proofs.user_id');
     }
 
     /**
      * @return array
      */
-    public function getMyCountryPositionFormattedData(): array
+    public function getMyPositionFormattedData(): array
     {
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,
-            'position' => $this->getCountryScopeCurrentPosition(),
-            'total_reward' => $this->total_reward,
-            'avatar' => $this->avatar,
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getMyCompanyPositionFormattedData(): array
-    {
-        return [
-            'id' => $this->id,
-            'full_name' => $this->full_name,
-            'position' => $this->getCompanyScopeCurrentPosition(),
+            'position' => $this->getCurrentPosition(),
             'total_reward' => $this->total_reward,
             'avatar' => $this->avatar,
         ];
@@ -404,19 +410,15 @@ class User extends Authenticatable implements JWTSubject, ReferralAble, CanGener
         ]);
     }
 
-    public function getCurrentPosition(): int
+    /**
+     * @return string
+     */
+    public function getCurrentEnvironment(): string
     {
-        // TODO: Implement getCurrentPosition() method.
-    }
-
-    public function getMyPositionFormattedData(): array
-    {
-        // TODO: Implement getMyPositionFormattedData() method.
-    }
-
-    public function getRating(): AbstractPaginator
-    {
-        // TODO: Implement getRating() method.
+        if ($this->company_id) {
+            return UserEnvironmentEnum::COMPANY;
+        }
+        return UserEnvironmentEnum::COUNTRY;
     }
 
 

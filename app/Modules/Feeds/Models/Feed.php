@@ -51,8 +51,18 @@ class Feed extends BaseModel
      * @param $userCountry
      * @return Builder
      */
-    public function scopeLocal($query, $userCountry) : Builder
+    public function scopeCountry($query, $userCountry) : Builder
     {
         return $query->where('country', $userCountry);
+    }
+
+    /**
+     * @param $query
+     * @param $company_id
+     * @return Builder
+     */
+    public function scopeCompany($query, $company_id) : Builder
+    {
+        return $query->where('company_id', $company_id);
     }
 }

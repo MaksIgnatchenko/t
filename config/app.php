@@ -197,6 +197,7 @@ return [
         App\Modules\Feeds\Providers\FeedsEventServiceProvider::class,
         Pawlox\VideoThumbnail\VideoThumbnailServiceProvider::class,
         App\Modules\Companies\Providers\CompanyServiceProvider::class,
+        App\Modules\Users\User\Providers\UserEnvironmentServiceProvider::class,
     ],
 
     /*

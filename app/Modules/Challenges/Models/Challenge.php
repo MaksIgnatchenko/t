@@ -183,10 +183,28 @@ class Challenge extends BaseModel implements AbleToContainProofs
      * @param int|null $limit
      * @return iterable
      */
-    public static function search(User $user, ?string $search, ?int $limit): iterable
+    public static function searchForCountryEnvironment(User $user, ?string $search, ?int $limit): iterable
     {
         $query = self::orderBy('start_date', 'DESC')
             ->where('country', '=', $user->country);
+
+        if ($search) {
+            $query = $query::where('name', 'like', "%{$search}%");
+        }
+
+        return $query->paginate($limit ?? self::DEFAULT_LIMIT);
+    }
+
+    /**
+     * @param User $user
+     * @param string|null $search
+     * @param int|null $limit
+     * @return iterable
+     */
+    public static function searchForCompanyEnvironment(User $user, ?string $search, ?int $limit): iterable
+    {
+        $query = self::orderBy('start_date', 'DESC')
+            ->where('company_id', '=', $user->company_id);
 
         if ($search) {
             $query = $query::where('name', 'like', "%{$search}%");
